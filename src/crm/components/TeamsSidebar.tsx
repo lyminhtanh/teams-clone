@@ -19,7 +19,13 @@ const SidebarContainer = styled(Box)(({ theme }) => ({
   },
 }));
 
-export default function TeamsSidebar() {
+interface TeamsSidebarProps {
+  onMobileClose?: () => void;
+}
+
+export default function TeamsSidebar({
+  onMobileClose,
+}: TeamsSidebarProps = {}) {
   const location = useLocation();
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState("activity");
@@ -57,7 +63,10 @@ export default function TeamsSidebar() {
         onSectionChange={handleSectionChange}
       />
       {showSecondarySidebar && (
-        <TeamsSecondarySidebar activeSection={activeSection} />
+        <TeamsSecondarySidebar
+          activeSection={activeSection}
+          onMobileClose={onMobileClose}
+        />
       )}
     </SidebarContainer>
   );
