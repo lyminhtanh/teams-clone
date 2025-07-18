@@ -45,7 +45,7 @@ const RailButton = styled(IconButton, {
   width: 48,
   height: 56,
   margin: theme.spacing(0.125, 0),
-  borderRadius: 8,
+  borderRadius: active ? 0 : 8,
   backgroundColor: "rgba(0, 0, 0, 0)",
   color: active ? "rgb(91, 95, 199)" : "rgb(36, 36, 36)",
   border: "none",
