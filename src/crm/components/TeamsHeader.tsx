@@ -464,7 +464,7 @@ const ArrowRightIcon = () => (
 const officeApps = [
   { name: "Outlook", icon: "📧", color: "#0078d4" },
   { name: "OneDrive", icon: "☁️", color: "#0078d4" },
-  { name: "Word", icon: "📄", color: "#185abd" },
+  { name: "Word", icon: "����", color: "#185abd" },
   { name: "Excel", icon: "📊", color: "#107c41" },
   { name: "PowerPoint", icon: "📽️", color: "#d24726" },
   { name: "OneNote", icon: "📝", color: "#7719aa" },
@@ -906,9 +906,10 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
             )}
           </LeftSection>
 
-          {/* Center Section - Search */}
+                    {/* Center Section - Search */}
           <CenterSection ref={searchRef}>
-            <SearchContainer onClick={handleSearchToggle}>
+            {!isMobile || mobileSearchExpanded ? (
+              <SearchContainer onClick={handleSearchToggle}>
               <Box
                 component="form"
                 role="search"
@@ -1223,7 +1224,7 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
                 <HeaderButton
                   type="button"
                   aria-haspopup="menu"
-                  aria-label="Cài đặt và tùy chọn khác"
+                  aria-label="Cài đặt và tùy ch���n khác"
                 >
                   <span
                     style={{
