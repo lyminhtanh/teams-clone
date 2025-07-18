@@ -388,10 +388,10 @@ export default function ChatActionBar() {
                 aria-label="Xem thêm tùy chọn"
                 onClick={handleMobileMenuOpen}
               >
-                <Megaphone size={20} />
+                                <Megaphone size={20} />
               </ActionButton>
 
-              <Popover
+                            <Menu
                 open={mobileMenuOpen}
                 anchorEl={mobileMenuAnchorEl}
                 onClose={handleMobileMenuClose}
@@ -403,8 +403,12 @@ export default function ChatActionBar() {
                   vertical: "top",
                   horizontal: "right",
                 }}
+                slotProps={{
+                  paper: {
+                    sx: { minWidth: 180 }
+                  }
+                }}
               >
-                <MenuList>
                   <MenuItem onClick={handleMobileMenuClose}>
                     <List size={16} style={{ marginRight: 8 }} />
                     Chi tiết cuộc họp
