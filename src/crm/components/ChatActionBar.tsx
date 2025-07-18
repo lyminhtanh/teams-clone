@@ -376,7 +376,7 @@ export default function ChatActionBar() {
                   aria-haspopup="menu"
                   aria-label="Xem thêm tùy chọn trò chuyện"
                 >
-                  <MoreHorizontal size={20} />
+                  <Megaphone size={20} />
                 </ActionButton>
               </Box>
             </>
