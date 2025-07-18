@@ -291,8 +291,8 @@ export default function TeamsIconRail({
               hasOverflowItems
                 ? `More apps (${overflowItems.length})`
                 : "Menu Settings"
-            }
-                    >
+                        }
+          >
             <Badge
               badgeContent={hasOverflowItems ? overflowItems.length : null}
               color="primary"
