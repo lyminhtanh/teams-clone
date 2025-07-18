@@ -148,11 +148,14 @@ export default function NewSideMenu({ config, className }: SideMenuProps) {
 
   return (
     <StyledDrawer
-      variant="persistent"
+      variant={isMobile ? "temporary" : "persistent"}
       anchor="left"
       open={isOpen}
       isOpen={isOpen}
       className={className}
+      ModalProps={{
+        keepMounted: true, // Better open performance on mobile
+      }}
     >
       <Slide
         direction="right"
