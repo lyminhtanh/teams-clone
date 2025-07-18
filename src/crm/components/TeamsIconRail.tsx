@@ -292,8 +292,25 @@ export default function TeamsIconRail({
                 ? `More apps (${overflowItems.length})`
                 : "Menu Settings"
             }
-          >
-            <RailButton
+                    >
+            <Badge
+              badgeContent={hasOverflowItems ? overflowItems.length : null}
+              color="primary"
+              overlap="circular"
+              sx={{
+                "& .MuiBadge-badge": {
+                  fontSize: "0.625rem",
+                  height: 16,
+                  minWidth: 16,
+                  right: 8,
+                  top: 8,
+                  backgroundColor: "rgb(91, 95, 199)",
+                  color: "white",
+                  fontWeight: 600,
+                },
+              }}
+            >
+              <RailButton
               onClick={handleMoreMenuClick}
               sx={{
                 display: "inline-flex",
