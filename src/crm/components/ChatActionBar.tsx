@@ -1,5 +1,15 @@
 import React, { useState } from "react";
-import { Box, IconButton, Button, Typography, Divider } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  Button,
+  Typography,
+  Divider,
+  useMediaQuery,
+  Popover,
+  MenuItem,
+  MenuList,
+} from "@mui/material";
 import {
   Calendar,
   Search,
@@ -9,7 +19,7 @@ import {
   PanelRightOpen,
   Plus,
 } from "lucide-react";
-import { styled } from "@mui/material/styles";
+import { styled, useTheme } from "@mui/material/styles";
 
 const ActionBarContainer = styled(Box)(({ theme }) => ({
   height: "61px",
@@ -47,19 +57,24 @@ const LogoContainer = styled(Box)(({ theme }) => ({
   minWidth: "32px",
 }));
 
-const LogoIcon = styled(Calendar)(({ theme }) => ({
+const LogoIcon = styled(Calendar, {
+  shouldForwardProp: (prop) => prop !== "isMobile",
+})<{ isMobile?: boolean }>(({ theme, isMobile }) => ({
   backgroundColor: "rgb(197, 203, 250)",
   borderRadius: "50%",
   color: "rgb(91, 95, 199)",
-  padding: "6px",
-  fontSize: "32px",
+  padding: isMobile ? "4px" : "6px",
+  fontSize: isMobile ? "20px" : "32px",
 }));
 
-const TitleSection = styled(Box)(({ theme }) => ({
+const TitleSection = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "isMobile",
+})<{ isMobile?: boolean }>(({ theme, isMobile }) => ({
   display: "flex",
   height: "100%",
   width: "100%",
-  flexDirection: "column",
+  flexDirection: isMobile ? "row" : "column",
+  alignItems: isMobile ? "center" : "initial",
   "@media (max-width: 640px)": {
     alignItems: "flex-start",
     flexDirection: "column",
@@ -78,10 +93,12 @@ const TitleContainer = styled(Box)(({ theme }) => ({
   },
 }));
 
-const TitleText = styled(Typography)(({ theme }) => ({
+const TitleText = styled(Typography, {
+  shouldForwardProp: (prop) => prop !== "isMobile",
+})<{ isMobile?: boolean }>(({ theme, isMobile }) => ({
   fontWeight: 700,
-  fontSize: "18px",
-  lineHeight: "26px",
+  fontSize: isMobile ? "12px" : "18px",
+  lineHeight: isMobile ? "16px" : "26px",
   marginLeft: "2px",
   overflow: "hidden",
   textOverflow: "ellipsis",
@@ -146,7 +163,9 @@ const TabContent = styled(Box)(({ theme }) => ({
   whiteSpace: "nowrap",
 }));
 
-const ActionsContainer = styled(Box)(({ theme }) => ({
+const ActionsContainer = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "isMobile",
+})<{ isMobile?: boolean }>(({ theme, isMobile }) => ({
   display: "flex",
   alignItems: "center",
   marginLeft: "auto",
@@ -228,143 +247,240 @@ const tabs = [
 
 export default function ChatActionBar() {
   const [activeTab, setActiveTab] = useState("chat");
+  const [mobileMenuAnchorEl, setMobileMenuAnchorEl] =
+    useState<null | HTMLElement>(null);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setMobileMenuAnchorEl(event.currentTarget);
+  };
+
+  const handleMobileMenuClose = () => {
+    setMobileMenuAnchorEl(null);
+  };
+
+  const mobileMenuOpen = Boolean(mobileMenuAnchorEl);
 
   return (
     <ActionBarContainer>
       <ActionBarContent>
         {/* Left Section */}
         <LeftSection>
-          <LogoContainer>
-            <LogoIcon size={20} />
-          </LogoContainer>
-          <TitleSection>
-            <TitleContainer>
-              <Box
-                sx={{
-                  fontWeight: 700,
-                  maxWidth: "fit-content",
-                  overflow: "hidden",
-                }}
-              >
-                <Box sx={{ display: "flex", fontWeight: 700 }}>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                    }}
-                  >
-                    <TitleText component="h2" aria-hidden="true">
-                      <Box
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          whiteSpace: "nowrap",
-                        }}
-                      >
-                        <span title="ESP/ESS - Stand up">
-                          <p>Hop dong chu dau tu tu</p>
-                        </span>
-                      </Box>
-                    </TitleText>
-                  </Box>
-                  <Box
-                    component="ul"
-                    role="list"
-                    aria-label="Người dự cuộc trò chuyện"
-                    sx={{
-                      borderRadius: "4px",
-                      color: "rgb(66, 66, 66)",
-                      display: "flex",
-                      fontWeight: 700,
-                      lineHeight: "23px",
-                      minHeight: "24px",
-                      zIndex: 1000,
-                      border: "1px solid rgba(0, 0, 0, 0)",
-                    }}
-                  />
-                </Box>
-              </Box>
-            </TitleContainer>
-          </TitleSection>
-        </LeftSection>
-
-        {/* Center Section - Tabs */}
-        <TabsContainer>
           <Box
             sx={{
               display: "flex",
-              flexBasis: "0%",
-              flexGrow: 1,
-              maxWidth: "100%",
-              minWidth: "241px",
-              width: "100%",
-              flexDirection: "column",
+              flexDirection: isMobile ? "column" : "row",
+              alignItems: isMobile ? "flex-start" : "center",
             }}
           >
-            <TabList
-              role="tablist"
-              aria-orientation="horizontal"
-              sx={{ margin: "9px 0 0 98px" }}
-            >
-              {tabs.map((tab) => (
-                <Tab
-                  key={tab.id}
-                  role="tab"
-                  type="button"
-                  aria-selected={activeTab === tab.id}
-                  active={activeTab === tab.id}
-                  onClick={() => setActiveTab(tab.id)}
+            <LogoContainer>
+              <LogoIcon size={isMobile ? 16 : 20} isMobile={isMobile} />
+            </LogoContainer>
+            <TitleSection isMobile={isMobile}>
+              <TitleContainer>
+                <Box
+                  sx={{
+                    fontWeight: 700,
+                    maxWidth: "fit-content",
+                    overflow: "hidden",
+                  }}
                 >
-                  <TabContent>{tab.label}</TabContent>
-                </Tab>
-              ))}
-            </TabList>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      fontWeight: 700,
+                      flexDirection: isMobile ? "column" : "row",
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                      }}
+                    >
+                      <TitleText
+                        component="h2"
+                        aria-hidden="true"
+                        isMobile={isMobile}
+                      >
+                        <Box
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          <span title="ESP/ESS - Stand up">
+                            <p>Hop dong chu dau tu tu</p>
+                          </span>
+                        </Box>
+                      </TitleText>
+                    </Box>
+                    <Box
+                      component="ul"
+                      role="list"
+                      aria-label="Người dự cuộc trò chuyện"
+                      sx={{
+                        borderRadius: "4px",
+                        color: "rgb(66, 66, 66)",
+                        display: "flex",
+                        fontWeight: 700,
+                        lineHeight: "23px",
+                        minHeight: "24px",
+                        zIndex: 1000,
+                        border: "1px solid rgba(0, 0, 0, 0)",
+                      }}
+                    />
+                  </Box>
+                </Box>
+              </TitleContainer>
+            </TitleSection>
           </Box>
-        </TabsContainer>
+        </LeftSection>
+
+        {/* Center Section - Tabs */}
+        {!isMobile && (
+          <TabsContainer>
+            <Box
+              sx={{
+                display: "flex",
+                flexBasis: "0%",
+                flexGrow: 1,
+                maxWidth: "100%",
+                minWidth: "241px",
+                width: "100%",
+                flexDirection: "column",
+              }}
+            >
+              <TabList
+                role="tablist"
+                aria-orientation="horizontal"
+                sx={{ margin: "9px 0 0 98px" }}
+              >
+                {tabs.map((tab) => (
+                  <Tab
+                    key={tab.id}
+                    role="tab"
+                    type="button"
+                    aria-selected={activeTab === tab.id}
+                    active={activeTab === tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                  >
+                    <TabContent>{tab.label}</TabContent>
+                  </Tab>
+                ))}
+              </TabList>
+            </Box>
+          </TabsContainer>
+        )}
 
         {/* Right Section - Actions */}
-        <ActionsContainer role="toolbar" aria-label="Hành động trò chuyện">
-          <Box
-            sx={{ display: "flex", alignItems: "center", marginRight: "8px" }}
-          />
+        <ActionsContainer
+          role="toolbar"
+          aria-label="Hành động trò chuyện"
+          isMobile={isMobile}
+        >
+          {!isMobile ? (
+            <>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginRight: "8px",
+                }}
+              />
 
-          <ActionButton type="button" aria-label="Chi tiết cuộc họp">
-            <List size={20} />
-          </ActionButton>
+              <ActionButton type="button" aria-label="Chi tiết cuộc họp">
+                <List size={20} />
+              </ActionButton>
 
-          <Box
-            role="presentation"
-            aria-label="Tính năng Ngăn bên"
-            sx={{ display: "flex" }}
-          >
-            <ActionButton
-              type="button"
-              aria-label="Tìm trong cuộc trò chuyện (⌘ F)"
-              aria-keyshortcuts="⌘ F"
-            >
-              <Search size={20} />
-            </ActionButton>
+              <Box
+                role="presentation"
+                aria-label="Tính năng Ngăn bên"
+                sx={{ display: "flex" }}
+              >
+                <ActionButton
+                  type="button"
+                  aria-label="Tìm trong cuộc trò chuyện (⌘ F)"
+                  aria-keyshortcuts="⌘ F"
+                >
+                  <Search size={20} />
+                </ActionButton>
 
-            <ActionButton
-              type="button"
-              aria-label="Mở chi tiết cuộc trò chuyện (⌃ ⌘ E)"
-              aria-keyshortcuts="⌃ ⌘ E"
-            >
-              <PanelRightOpen size={20} />
-            </ActionButton>
-          </Box>
+                <ActionButton
+                  type="button"
+                  aria-label="Mở chi tiết cuộc trò chuyện (⌃ ⌘ E)"
+                  aria-keyshortcuts="⌃ ⌘ E"
+                >
+                  <PanelRightOpen size={20} />
+                </ActionButton>
+              </Box>
 
-          <Box sx={{ position: "relative" }}>
-            <ActionButton
-              type="button"
-              aria-haspopup="menu"
-              aria-label="Xem thêm tùy chọn trò chuyện"
-            >
-              <MoreHorizontal size={20} />
-            </ActionButton>
-          </Box>
+              <Box sx={{ position: "relative" }}>
+                <ActionButton
+                  type="button"
+                  aria-haspopup="menu"
+                  aria-label="Xem thêm tùy chọn trò chuyện"
+                >
+                  <MoreHorizontal size={20} />
+                </ActionButton>
+              </Box>
+            </>
+          ) : (
+            <Box sx={{ position: "relative" }}>
+              <ActionButton
+                type="button"
+                aria-haspopup="menu"
+                aria-label="Xem thêm tùy chọn"
+                onClick={handleMobileMenuOpen}
+              >
+                <MoreHorizontal size={20} />
+              </ActionButton>
+
+              <Popover
+                open={mobileMenuOpen}
+                anchorEl={mobileMenuAnchorEl}
+                onClose={handleMobileMenuClose}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "right",
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+              >
+                <MenuList>
+                  <MenuItem onClick={handleMobileMenuClose}>
+                    <List size={16} style={{ marginRight: 8 }} />
+                    Chi tiết cuộc họp
+                  </MenuItem>
+                  <MenuItem onClick={handleMobileMenuClose}>
+                    <Search size={16} style={{ marginRight: 8 }} />
+                    Tìm trong cuộc trò chuyện
+                  </MenuItem>
+                  <MenuItem onClick={handleMobileMenuClose}>
+                    <PanelRightOpen size={16} style={{ marginRight: 8 }} />
+                    Mở chi tiết cuộc trò chuyện
+                  </MenuItem>
+                  {tabs.map((tab) => (
+                    <MenuItem
+                      key={tab.id}
+                      onClick={() => {
+                        setActiveTab(tab.id);
+                        handleMobileMenuClose();
+                      }}
+                    >
+                      {tab.label}
+                    </MenuItem>
+                  ))}
+                </MenuList>
+              </Popover>
+            </Box>
+          )}
         </ActionsContainer>
       </ActionBarContent>
     </ActionBarContainer>
