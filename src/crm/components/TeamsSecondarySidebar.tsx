@@ -18,14 +18,14 @@ import {
   Fade,
 } from "@mui/material";
 import {
-  SearchRounded,
-  AddRounded,
-  MoreVertRounded,
-  FiberManualRecordRounded,
-  VideocamRounded,
-  CallRounded,
-  FilterListRounded,
-} from "@mui/icons-material";
+  Search,
+  Plus,
+  MoreVertical,
+  Circle,
+  Video,
+  Phone,
+  Filter,
+} from "lucide-react";
 import { styled } from "@mui/material/styles";
 import { useMenu } from "../context/MenuContext";
 
@@ -70,12 +70,6 @@ const SearchField = styled(TextField)(({ theme }) => ({
       border: `2px solid ${theme.palette.primary.main}`,
     },
   },
-}));
-
-const StatusDot = styled(FiberManualRecordRounded)(({ theme }) => ({
-  fontSize: 8,
-  color: "#6bb700",
-  marginRight: theme.spacing(0.5),
 }));
 
 const conversationData = [
@@ -168,13 +162,13 @@ export default function TeamsSecondarySidebar({
             </Typography>
             <Box sx={{ display: "flex", gap: 0.5 }}>
               <IconButton size="small">
-                <AddRounded />
+                <Plus size={16} />
               </IconButton>
               <IconButton size="small">
-                <FilterListRounded />
+                <Filter size={16} />
               </IconButton>
               <IconButton size="small">
-                <MoreVertRounded />
+                <MoreVertical size={16} />
               </IconButton>
             </Box>
           </Box>
@@ -186,7 +180,7 @@ export default function TeamsSecondarySidebar({
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <SearchRounded fontSize="small" />
+                  <Search size={16} />
                 </InputAdornment>
               ),
             }}
@@ -235,7 +229,9 @@ export default function TeamsSecondarySidebar({
                     <Box
                       sx={{ display: "flex", alignItems: "center", gap: 0.5 }}
                     >
-                      {conversation.status === "online" && <StatusDot />}
+                      {conversation.status === "online" && (
+                        <Circle size={8} fill="#6bb700" color="#6bb700" />
+                      )}
                       <Typography variant="body2" sx={{ fontWeight: 500 }}>
                         {conversation.name}
                       </Typography>
@@ -268,7 +264,7 @@ export default function TeamsSecondarySidebar({
                     {conversation.time}
                   </Typography>
                   {conversation.type === "meeting" && (
-                    <VideocamRounded fontSize="small" color="primary" />
+                    <Video size={16} color="#5b5fc7" />
                   )}
                 </Box>
               </ListItemButton>
@@ -295,7 +291,7 @@ export default function TeamsSecondarySidebar({
               Customers
             </Typography>
             <IconButton size="small">
-              <AddRounded />
+              <Plus size={16} />
             </IconButton>
           </Box>
 
@@ -306,7 +302,7 @@ export default function TeamsSecondarySidebar({
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <SearchRounded fontSize="small" />
+                  <Search size={16} />
                 </InputAdornment>
               ),
             }}
