@@ -80,7 +80,7 @@ export default function TeamsDashboard() {
                   sx={{ zIndex: theme.zIndex.drawer - 1 }}
                 />
                 <Drawer
-                  anchor="right"
+                  anchor="left"
                   open={mobileMenuOpen}
                   onClose={handleMobileMenuClose}
                   variant="temporary"
