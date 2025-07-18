@@ -361,7 +361,7 @@ export default function TeamsIconRail({
                     pointerEvents: "none",
                   }}
                 >
-                  Settings
+                  {hasOverflowItems ? "More" : "Settings"}
                 </Box>
               </Box>
             </RailButton>
