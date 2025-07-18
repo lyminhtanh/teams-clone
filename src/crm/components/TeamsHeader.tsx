@@ -296,8 +296,10 @@ const SearchPopover = styled(Paper, {
   top: isMobile ? "48px" : "100%",
   left: 0,
   right: 0,
+  bottom: isMobile ? 0 : "auto",
   marginTop: isMobile ? "0" : "2px",
-  maxHeight: "400px",
+  maxHeight: isMobile ? "calc(100vh - 48px)" : "400px",
+  height: isMobile ? "calc(100vh - 48px)" : "auto",
   backgroundColor: "rgb(255, 255, 255)",
   borderRadius: isMobile ? "0" : "4px",
   boxShadow:
@@ -1050,22 +1052,10 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
               {/* Search Popover */}
               {searchOpen && (
                 <>
-                  {isMobile && (
-                    <Box
-                      sx={{
-                        position: "fixed",
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        backgroundColor: "rgba(0, 0, 0, 0.5)",
-                        zIndex: 1009,
-                      }}
-                      onClick={() => setSearchOpen(false)}
-                    />
-                  )}
                   <SearchPopover isMobile={isMobile}>
-                    <Box sx={{ padding: "16px" }}>
+                    <Box
+                      sx={{ padding: "16px", height: "100%", overflow: "auto" }}
+                    >
                       {/* Search Categories */}
                       <Box sx={{ marginBottom: "16px" }}>
                         <Box
