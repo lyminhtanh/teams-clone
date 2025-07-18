@@ -523,10 +523,8 @@ interface TeamsHeaderProps {
   onMobileMenuToggle?: () => void;
 }
 
-export default function TeamsHeader({
-  isMobile = false,
-  onMobileMenuToggle,
-}: TeamsHeaderProps = {}) {
+export default function TeamsHeader(props: TeamsHeaderProps = {}) {
+  const { isMobile = false, onMobileMenuToggle } = props;
   const [appLauncherOpen, setAppLauncherOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
