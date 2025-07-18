@@ -1047,9 +1047,24 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
                 <button type="submit" hidden style={{ display: "none" }} />
               </Box>
 
-              {/* Search Popover */}
+                            {/* Search Popover */}
               {searchOpen && (
-                <SearchPopover isMobile={isMobile}>
+                <>
+                  {isMobile && (
+                    <Box
+                      sx={{
+                        position: "fixed",
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        backgroundColor: "rgba(0, 0, 0, 0.5)",
+                        zIndex: 1009,
+                      }}
+                      onClick={() => setSearchOpen(false)}
+                    />
+                  )}
+                  <SearchPopover isMobile={isMobile}>
                   <Box sx={{ padding: "16px" }}>
                     {/* Search Categories */}
                     <Box sx={{ marginBottom: "16px" }}>
