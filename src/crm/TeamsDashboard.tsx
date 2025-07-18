@@ -94,7 +94,7 @@ export default function TeamsDashboard() {
                     },
                   }}
                 >
-                  <TeamsSidebar />
+                  <TeamsSidebar onMobileClose={handleMobileMenuClose} />
                 </Drawer>
               </>
             )}
