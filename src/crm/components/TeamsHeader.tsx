@@ -541,8 +541,14 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
   };
 
   const handleSearchToggle = () => {
-    setSearchOpen(!searchOpen);
-    setAppLauncherOpen(false);
+    if (isMobile && !mobileSearchExpanded) {
+      // On mobile, first click expands the search bar
+      setMobileSearchExpanded(true);
+    } else {
+      // Second click or desktop behavior opens the search popover
+      setSearchOpen(!searchOpen);
+      setAppLauncherOpen(false);
+    }
   };
 
   const handleClickAway = () => {
