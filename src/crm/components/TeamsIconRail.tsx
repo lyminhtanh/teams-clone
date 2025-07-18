@@ -109,6 +109,12 @@ export default function TeamsIconRail({
   } = useMenuItems();
   const menuStats = useMenuStats(menuItems);
 
+  // Maximum items to show in main rail
+  const MAX_VISIBLE_ITEMS = 6;
+  const visibleItems = enabledMenuItems.slice(0, MAX_VISIBLE_ITEMS);
+  const overflowItems = enabledMenuItems.slice(MAX_VISIBLE_ITEMS);
+  const hasOverflowItems = overflowItems.length > 0;
+
   // Menu configuration dialog state
   const [configDialogOpen, setConfigDialogOpen] = useState(false);
   const [moreMenuAnchor, setMoreMenuAnchor] = useState<null | HTMLElement>(
