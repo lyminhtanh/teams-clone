@@ -31,6 +31,7 @@ const RailContainer = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   alignItems: "center",
   padding: theme.spacing(1, 0),
+  marginTop: theme.spacing(1),
   position: "sticky",
   top: 48,
   zIndex: theme.zIndex.drawer + 1,
@@ -45,9 +46,10 @@ const RailButton = styled(IconButton, {
   height: 56,
   margin: theme.spacing(0.125, 0),
   borderRadius: 8,
-  backgroundColor: active ? "rgb(91, 95, 199)" : "rgba(0, 0, 0, 0)",
-  color: active ? "white" : "rgb(36, 36, 36)",
+  backgroundColor: "rgba(0, 0, 0, 0)",
+  color: active ? "rgb(91, 95, 199)" : "rgb(36, 36, 36)",
   border: "none",
+  borderLeft: active ? "3px solid rgb(91, 95, 199)" : "3px solid transparent",
   position: "relative",
   flexDirection: "column",
   fontSize: "10px",
@@ -64,22 +66,8 @@ const RailButton = styled(IconButton, {
     "background 0.1s cubic-bezier(0.33, 0, 0.67, 1), border 0.1s cubic-bezier(0.33, 0, 0.67, 1), color 0.1s cubic-bezier(0.33, 0, 0.67, 1)",
 
   "&:hover": {
-    backgroundColor: active ? "rgb(91, 95, 199)" : "rgba(0, 0, 0, 0.04)",
+    backgroundColor: "rgba(0, 0, 0, 0.04)",
   },
-
-  "&:before": active
-    ? {
-        content: '""',
-        position: "absolute",
-        left: -8,
-        top: "50%",
-        transform: "translateY(-50%)",
-        width: 3,
-        height: 20,
-        backgroundColor: "rgb(91, 95, 199)",
-        borderRadius: "0 2px 2px 0",
-      }
-    : {},
 }));
 
 const railItems = [
@@ -236,7 +224,9 @@ export default function TeamsIconRail({
                       marginRight: "7px",
                       alignItems: "center",
                       color:
-                        activeSection === item.id ? "white" : "rgb(97, 97, 97)",
+                        activeSection === item.id
+                          ? "rgb(91, 95, 199)"
+                          : "rgb(97, 97, 97)",
                       pointerEvents: "none",
                     }}
                   >
