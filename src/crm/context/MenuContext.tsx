@@ -16,9 +16,19 @@ interface MenuProviderProps {
 }
 
 export function MenuProvider({ children }: MenuProviderProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const responsive = useResponsiveMenu();
+  const [isOpen, setIsOpen] = useState(responsive.defaultOpen);
   const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
   const [activeItem, setActiveItem] = useState<string | null>(null);
+
+  // Auto-manage menu state based on screen size
+  useEffect(() => {
+    if (responsive.isMobile) {
+      setIsOpen(false);
+    } else if (responsive.isDesktop && !isOpen) {
+      setIsOpen(true);
+    }
+  }, [responsive.isMobile, responsive.isDesktop, isOpen]);
 
   const toggleMenu = useCallback(() => {
     setIsOpen((prev) => !prev);
