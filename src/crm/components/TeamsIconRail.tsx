@@ -148,6 +148,11 @@ export default function TeamsIconRail({
     handleMoreMenuClose();
   };
 
+  const handleOverflowItemClick = (itemId: string) => {
+    onSectionChange(itemId);
+    handleMoreMenuClose();
+  };
+
   return (
     <RailContainer>
       <Box
