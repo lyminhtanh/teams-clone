@@ -30,6 +30,8 @@ export default function TeamsSidebar({
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState("activity");
   const { isOpen } = useMenu();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const { toggleMenu, openMenu, closeMenu } = useMenu();
 
