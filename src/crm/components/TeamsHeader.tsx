@@ -465,7 +465,7 @@ const officeApps = [
 const searchCategories = [
   "Tin nhắn",
   "Tệp",
-  "Cuộc trò chuyện Nhóm",
+  "Cuộc trò chuyện Nh��m",
   "Teams và Kênh",
 ];
 
@@ -512,6 +512,7 @@ const recentSearches = [
 export default function TeamsHeader() {
   const [appLauncherOpen, setAppLauncherOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
   const appLauncherRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);
 
@@ -1240,7 +1241,7 @@ export default function TeamsHeader() {
                 >
                   <ProfileButton
                     type="button"
-                    aria-label="Hồ sơ của bạn, trạng thái Tr��c tuyến"
+                    aria-label="Hồ sơ của bạn, trạng thái Trực tuyến"
                     role="button"
                     tabIndex={0}
                     aria-expanded="false"
