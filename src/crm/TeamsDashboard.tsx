@@ -113,6 +113,9 @@ export default function TeamsDashboard() {
                   duration: theme.transitions.duration.leavingScreen,
                 }),
                 marginTop: "15px",
+                width: isMobile ? "100vw" : "auto",
+                maxWidth: isMobile ? "100vw" : "none",
+                height: isMobile ? "calc(100vh - 48px)" : "auto",
               })}
             >
               <Routes>
