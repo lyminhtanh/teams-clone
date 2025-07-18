@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import NewCrmDashboard from "./crm/NewCrmDashboard";
+import TeamsDashboard from "./crm/TeamsDashboard";
 
 function NotFound() {
   return (
