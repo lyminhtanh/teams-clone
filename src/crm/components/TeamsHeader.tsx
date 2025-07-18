@@ -542,20 +542,28 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
   };
 
   const handleSearchToggle = () => {
-    if (isMobile && !mobileSearchExpanded) {
-      // On mobile, first click expands the search bar
-      setMobileSearchExpanded(true);
-      // Auto-focus the input after expansion
-      setTimeout(() => {
-        const searchInput = document.querySelector(
-          'input[type="search"]',
-        ) as HTMLInputElement;
-        if (searchInput) {
-          searchInput.focus();
-        }
-      }, 100);
+    if (isMobile) {
+      if (!mobileSearchExpanded) {
+        // First click: expand search bar and open popover
+        setMobileSearchExpanded(true);
+        setSearchOpen(true);
+        setAppLauncherOpen(false);
+        // Auto-focus the input after expansion
+        setTimeout(() => {
+          const searchInput = document.querySelector(
+            'input[type="search"]',
+          ) as HTMLInputElement;
+          if (searchInput) {
+            searchInput.focus();
+          }
+        }, 100);
+      } else {
+        // Click back icon: close popover and collapse search bar
+        setSearchOpen(false);
+        setMobileSearchExpanded(false);
+      }
     } else {
-      // Second click or desktop behavior opens the search popover
+      // Desktop behavior: toggle search popover
       setSearchOpen(!searchOpen);
       setAppLauncherOpen(false);
     }
