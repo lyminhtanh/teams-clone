@@ -321,9 +321,7 @@ export default function TeamsIconRail({
                   color: "rgb(97, 97, 97)",
                   pointerEvents: "none",
                 }}
-              >
-                {/* Empty span for More apps - no text in actual Teams */}
-              </Box>
+              ></Box>
             </Box>
           </RailButton>
 
