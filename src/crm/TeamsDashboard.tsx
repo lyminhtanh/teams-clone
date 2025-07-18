@@ -28,6 +28,7 @@ import {
   datePickersCustomizations,
   treeViewCustomizations,
 } from "../dashboard/theme/customizations";
+import "./styles/teamsEnhanced.css";
 
 const xThemeComponents = {
   ...chartsCustomizations,
