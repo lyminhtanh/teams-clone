@@ -109,12 +109,6 @@ export default function TeamsIconRail({
   } = useMenuItems();
   const menuStats = useMenuStats(menuItems);
 
-  // Maximum items to show in main rail
-  const MAX_VISIBLE_ITEMS = 6;
-  const visibleItems = enabledMenuItems.slice(0, MAX_VISIBLE_ITEMS);
-  const overflowItems = enabledMenuItems.slice(MAX_VISIBLE_ITEMS);
-  const hasOverflowItems = overflowItems.length > 0;
-
   // Menu configuration dialog state
   const [configDialogOpen, setConfigDialogOpen] = useState(false);
   const [moreMenuAnchor, setMoreMenuAnchor] = useState<null | HTMLElement>(
@@ -148,11 +142,6 @@ export default function TeamsIconRail({
     handleMoreMenuClose();
   };
 
-  const handleOverflowItemClick = (itemId: string) => {
-    onSectionChange(itemId);
-    handleMoreMenuClose();
-  };
-
   return (
     <RailContainer>
       <Box
@@ -165,7 +154,7 @@ export default function TeamsIconRail({
           width: "100%",
         }}
       >
-        {visibleItems.map((item) => {
+        {enabledMenuItems.map((item) => {
           const IconComponent = item.icon;
           return (
             <Box
@@ -286,31 +275,8 @@ export default function TeamsIconRail({
             width: "100%",
           }}
         >
-          <Tooltip
-            title={
-              hasOverflowItems
-                ? `More apps (${overflowItems.length})`
-                : "Menu Settings"
-                        }
-          >
-            <Badge
-              badgeContent={hasOverflowItems ? overflowItems.length : null}
-              color="primary"
-              overlap="circular"
-              sx={{
-                "& .MuiBadge-badge": {
-                  fontSize: "0.625rem",
-                  height: 16,
-                  minWidth: 16,
-                  right: 8,
-                  top: 8,
-                  backgroundColor: "rgb(91, 95, 199)",
-                  color: "white",
-                  fontWeight: 600,
-                },
-              }}
-            >
-              <RailButton
+          <Tooltip title="Menu Settings">
+            <RailButton
               onClick={handleMoreMenuClick}
               sx={{
                 display: "inline-flex",
@@ -332,11 +298,7 @@ export default function TeamsIconRail({
                 width: "68px",
               }}
               aria-haspopup="menu"
-              aria-label={
-                hasOverflowItems
-                  ? `More apps (${overflowItems.length})`
-                  : "Menu settings"
-              }
+              aria-label="Menu settings"
               aria-expanded={moreMenuOpen ? "true" : undefined}
               tabIndex={0}
             >
@@ -378,7 +340,7 @@ export default function TeamsIconRail({
                     pointerEvents: "none",
                   }}
                 >
-                  {hasOverflowItems ? "More" : "Settings"}
+                  Settings
                 </Box>
               </Box>
             </RailButton>
