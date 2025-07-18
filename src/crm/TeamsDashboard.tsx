@@ -4,12 +4,15 @@ import type {} from "@mui/x-date-pickers/themeAugmentation";
 import type {} from "@mui/x-charts/themeAugmentation";
 import type {} from "@mui/x-data-grid-pro/themeAugmentation";
 import type {} from "@mui/x-tree-view/themeAugmentation";
-import { alpha } from "@mui/material/styles";
+import { alpha, useTheme } from "@mui/material/styles";
+import { useMediaQuery, Drawer, IconButton, Backdrop } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
+import { ChartNoAxesGantt } from "lucide-react";
 import TeamsHeader from "./components/TeamsHeader";
 import TeamsSidebar from "./components/TeamsSidebar";
+import ChatActionBar from "./components/ChatActionBar";
 import CrmMainDashboard from "./components/CrmMainDashboard";
 import TeamsCalendarView from "./components/TeamsCalendarView";
 import TeamsActivityView from "./components/TeamsActivityView";
@@ -40,18 +43,61 @@ const xThemeComponents = {
 };
 
 export default function TeamsDashboard() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+
+  const handleMobileMenuToggle = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  const handleMobileMenuClose = () => {
+    setMobileMenuOpen(false);
+  };
+
   return (
     <AppTheme themeComponents={xThemeComponents}>
       <MenuProvider>
         <CssBaseline enableColorScheme />
         <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
           {/* Teams Header */}
-          <TeamsHeader />
+          <TeamsHeader
+            isMobile={isMobile}
+            onMobileMenuToggle={handleMobileMenuToggle}
+          />
 
           {/* Main Layout */}
           <Box sx={{ display: "flex", flex: 1, overflow: "hidden" }}>
-            {/* Teams Sidebar */}
-            <TeamsSidebar />
+            {/* Desktop Sidebar */}
+            {!isMobile && <TeamsSidebar />}
+
+            {/* Mobile Floating Sidebar */}
+            {isMobile && (
+              <>
+                <Backdrop
+                  open={mobileMenuOpen}
+                  onClick={handleMobileMenuClose}
+                  sx={{ zIndex: theme.zIndex.drawer - 1 }}
+                />
+                <Drawer
+                  anchor="left"
+                  open={mobileMenuOpen}
+                  onClose={handleMobileMenuClose}
+                  variant="temporary"
+                  sx={{
+                    "& .MuiDrawer-paper": {
+                      top: "48px",
+                      height: "calc(100vh - 48px)",
+                      width: "auto",
+                      border: "none",
+                      boxShadow: theme.shadows[8],
+                    },
+                  }}
+                >
+                  <TeamsSidebar onMobileClose={handleMobileMenuClose} />
+                </Drawer>
+              </>
+            )}
 
             {/* Main content */}
             <Box
@@ -66,30 +112,162 @@ export default function TeamsDashboard() {
                   easing: theme.transitions.easing.sharp,
                   duration: theme.transitions.duration.leavingScreen,
                 }),
+                marginTop: "15px",
+                width: isMobile ? "100vw" : "auto",
+                maxWidth: isMobile ? "100vw" : "none",
+                height: isMobile ? "calc(100vh - 48px)" : "auto",
               })}
             >
-              <Stack
-                spacing={2}
-                sx={{
-                  alignItems: "center",
-                  mx: 3,
-                  pb: 5,
-                  pt: 2,
-                }}
-              >
-                <Routes>
-                  <Route index element={<TeamsActivityView />} />
-                  <Route path="activity" element={<TeamsActivityView />} />
-                  <Route path="chat" element={<div>Chat Interface</div>} />
-                  <Route path="calendar" element={<TeamsCalendarView />} />
-                  <Route path="calls" element={<div>Calls History</div>} />
-                  <Route path="customers" element={<Customers />} />
-                  <Route path="files" element={<div>File Manager</div>} />
-                  <Route path="reports" element={<Reports />} />
-                  <Route path="settings" element={<Settings />} />
-                </Routes>
-                <Outlet />
-              </Stack>
+              <Routes>
+                <Route
+                  index
+                  element={
+                    <Stack
+                      spacing={2}
+                      sx={{
+                        alignItems: "center",
+                        mx: 3,
+                        pb: 5,
+                        pt: 2,
+                      }}
+                    >
+                      <TeamsActivityView />
+                    </Stack>
+                  }
+                />
+                <Route
+                  path="activity"
+                  element={
+                    <Stack
+                      spacing={2}
+                      sx={{
+                        alignItems: "center",
+                        mx: 3,
+                        pb: 5,
+                        pt: 2,
+                      }}
+                    >
+                      <TeamsActivityView />
+                    </Stack>
+                  }
+                />
+                <Route
+                  path="chat"
+                  element={
+                    <>
+                      <ChatActionBar />
+                      <Stack
+                        spacing={2}
+                        sx={{
+                          alignItems: "center",
+                          mx: 3,
+                          pb: 5,
+                          pt: 2,
+                        }}
+                      >
+                        <div>Chat Interface</div>
+                      </Stack>
+                    </>
+                  }
+                />
+                <Route
+                  path="calendar"
+                  element={
+                    <Stack
+                      spacing={2}
+                      sx={{
+                        alignItems: "center",
+                        mx: 3,
+                        pb: 5,
+                        pt: 2,
+                      }}
+                    >
+                      <TeamsCalendarView />
+                    </Stack>
+                  }
+                />
+                <Route
+                  path="calls"
+                  element={
+                    <Stack
+                      spacing={2}
+                      sx={{
+                        alignItems: "center",
+                        mx: 3,
+                        pb: 5,
+                        pt: 2,
+                      }}
+                    >
+                      <div>Calls History</div>
+                    </Stack>
+                  }
+                />
+                <Route
+                  path="customers"
+                  element={
+                    <Stack
+                      spacing={2}
+                      sx={{
+                        alignItems: "center",
+                        mx: 3,
+                        pb: 5,
+                        pt: 2,
+                      }}
+                    >
+                      <Customers />
+                    </Stack>
+                  }
+                />
+                <Route
+                  path="files"
+                  element={
+                    <Stack
+                      spacing={2}
+                      sx={{
+                        alignItems: "center",
+                        mx: 3,
+                        pb: 5,
+                        pt: 2,
+                      }}
+                    >
+                      <div>File Manager</div>
+                    </Stack>
+                  }
+                />
+                <Route
+                  path="reports"
+                  element={
+                    <Stack
+                      spacing={2}
+                      sx={{
+                        alignItems: "center",
+                        mx: 3,
+                        pb: 5,
+                        pt: 2,
+                      }}
+                    >
+                      <Reports />
+                    </Stack>
+                  }
+                />
+                <Route
+                  path="settings"
+                  element={
+                    <Stack
+                      spacing={2}
+                      sx={{
+                        alignItems: "center",
+                        mx: 3,
+                        pb: 5,
+                        pt: 2,
+                      }}
+                    >
+                      <Settings />
+                    </Stack>
+                  }
+                />
+              </Routes>
+              <Outlet />
             </Box>
           </Box>
         </Box>

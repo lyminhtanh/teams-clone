@@ -16,6 +16,7 @@ import {
   Divider,
   IconButton,
   Fade,
+  useMediaQuery,
 } from "@mui/material";
 import {
   Search,
@@ -26,7 +27,7 @@ import {
   Phone,
   Filter,
 } from "lucide-react";
-import { styled } from "@mui/material/styles";
+import { styled, useTheme } from "@mui/material/styles";
 import { useMenu } from "../context/MenuContext";
 
 const SECONDARY_WIDTH = 320;
@@ -47,6 +48,13 @@ const SecondaryContainer = styled(Box, {
   }),
   position: "sticky",
   top: 48,
+  [theme.breakpoints.down("md")]: {
+    width: isVisible ? "100vw" : 0,
+    height: "100%",
+    position: "relative",
+    top: 0,
+    borderRight: "none",
+  },
 }));
 
 const SectionHeader = styled(Box)(({ theme }) => ({
@@ -138,12 +146,23 @@ const customerData = [
 
 interface TeamsSecondarySidebarProps {
   activeSection: string;
+  onMobileClose?: () => void;
 }
 
 export default function TeamsSecondarySidebar({
   activeSection,
+  onMobileClose,
 }: TeamsSecondarySidebarProps) {
-  const { isOpen } = useMenu();
+  const { isOpen, closeMenu } = useMenu();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  const handleMobileItemClick = () => {
+    if (isMobile) {
+      closeMenu();
+      onMobileClose?.();
+    }
+  };
 
   const renderChatContent = () => (
     <Fade in={true} timeout={300}>
@@ -197,6 +216,7 @@ export default function TeamsSecondarySidebar({
           {conversationData.map((conversation) => (
             <ListItem key={conversation.id} disablePadding>
               <ListItemButton
+                onClick={handleMobileItemClick}
                 sx={{
                   borderRadius: 1,
                   mb: 0.5,
@@ -312,7 +332,10 @@ export default function TeamsSecondarySidebar({
         <List sx={{ flex: 1, overflow: "auto", p: 1 }}>
           {customerData.map((customer) => (
             <ListItem key={customer.id} disablePadding>
-              <ListItemButton sx={{ borderRadius: 1, mb: 0.5 }}>
+              <ListItemButton
+                onClick={handleMobileItemClick}
+                sx={{ borderRadius: 1, mb: 0.5 }}
+              >
                 <ListItemAvatar>
                   <Avatar
                     sx={{
