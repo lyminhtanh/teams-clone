@@ -607,7 +607,7 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
                 whiteSpace: "nowrap",
               }}
             >
-              {isMobile ? (
+                            {isMobile ? (
                 <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                   <AppLauncherButton
                     onClick={onMobileMenuToggle}
@@ -933,9 +933,9 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
             )}
           </LeftSection>
 
-          {/* Center Section - Search */}
-          <CenterSection ref={searchRef}>
-            {(!isMobile || mobileSearchExpanded) && (
+                              {/* Center Section - Search */}
+          {(!isMobile || mobileSearchExpanded) && (
+            <CenterSection ref={searchRef}>
               <SearchContainer onClick={handleSearchToggle}>
                 <Box
                   component="form"
@@ -1205,7 +1205,7 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
                     </SearchPopover>
                   </>
                 )}
-              </SearchContainer>
+                            </SearchContainer>
             )}
           </CenterSection>
 
