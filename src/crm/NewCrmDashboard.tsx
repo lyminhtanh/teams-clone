@@ -79,11 +79,11 @@ export default function NewCrmDashboard() {
                   <Route path="customers/*" element={<Customers />} />
                   <Route
                     path="customers/individual"
-                    element={<div>Individual Customers Page</div>}
+                    element={<CustomersIndividual />}
                   />
                   <Route
                     path="customers/corporate"
-                    element={<div>Corporate Customers Page</div>}
+                    element={<CustomersCorporate />}
                   />
                   <Route path="deals/*" element={<Deals />} />
                   <Route
