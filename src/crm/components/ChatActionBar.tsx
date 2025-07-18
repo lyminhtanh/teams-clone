@@ -264,7 +264,7 @@ export default function ChatActionBar() {
                         }}
                       >
                         <span title="ESP/ESS - Stand up">
-                          ESP/ESS - Stand up
+                          <p>Hop dong chu dau tu tu</p>
                         </span>
                       </Box>
                     </TitleText>
@@ -297,13 +297,17 @@ export default function ChatActionBar() {
               display: "flex",
               flexBasis: "0%",
               flexGrow: 1,
-              height: "100%",
               maxWidth: "100%",
               minWidth: "241px",
               width: "100%",
+              flexDirection: "column",
             }}
           >
-            <TabList role="tablist" aria-orientation="horizontal">
+            <TabList
+              role="tablist"
+              aria-orientation="horizontal"
+              sx={{ margin: "9px 0 0 98px" }}
+            >
               {tabs.map((tab) => (
                 <Tab
                   key={tab.id}
@@ -316,17 +320,6 @@ export default function ChatActionBar() {
                   <TabContent>{tab.label}</TabContent>
                 </Tab>
               ))}
-              <Tab
-                role="tab"
-                type="button"
-                aria-label="3 tab khác."
-                aria-haspopup="menu"
-              >
-                +3
-              </Tab>
-              <Tab role="tab" type="button" aria-label="Thêm tab">
-                <Plus size={20} />
-              </Tab>
             </TabList>
           </Box>
         </TabsContainer>
@@ -335,48 +328,11 @@ export default function ChatActionBar() {
         <ActionsContainer role="toolbar" aria-label="Hành động trò chuyện">
           <Box
             sx={{ display: "flex", alignItems: "center", marginRight: "8px" }}
-          >
-            <JoinButton>
-              <span>Tham gia</span>
-            </JoinButton>
-          </Box>
-
-          <ParticipantButton
-            type="button"
-            aria-haspopup="true"
-            aria-label="Xem và thêm người dự, 19 người dự"
-            role="button"
-            aria-expanded="false"
-          >
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                height: "20px",
-                justifyContent: "center",
-                marginRight: "2px",
-                width: "20px",
-              }}
-            >
-              <Users size={20} />
-            </Box>
-            <span>19</span>
-          </ParticipantButton>
+          />
 
           <ActionButton type="button" aria-label="Chi tiết cuộc họp">
             <List size={20} />
           </ActionButton>
-
-          <Divider
-            orientation="vertical"
-            sx={{
-              alignSelf: "center",
-              height: "24px",
-              minHeight: "20px",
-              width: "16px",
-              padding: "0 8px",
-            }}
-          />
 
           <Box
             role="presentation"
