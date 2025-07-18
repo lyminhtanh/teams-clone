@@ -20,6 +20,7 @@ import {
   ChevronRight,
   Grip,
   ChartNoAxesGantt,
+  Megaphone,
 } from "lucide-react";
 import { styled } from "@mui/material/styles";
 
