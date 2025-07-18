@@ -12,6 +12,11 @@ const SidebarContainer = styled(Box)(({ theme }) => ({
   position: "sticky",
   top: 48,
   zIndex: theme.zIndex.drawer,
+  [theme.breakpoints.down("md")]: {
+    height: "100%",
+    position: "relative",
+    top: 0,
+  },
 }));
 
 export default function TeamsSidebar() {
