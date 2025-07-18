@@ -15,7 +15,7 @@ import {
   Globe,
   Zap,
   BookOpen,
-  Tool,
+  Wrench,
   Target,
   Award,
   Briefcase,
