@@ -10,6 +10,8 @@ import {
   IconButton,
   Slide,
   Fade,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { MoreVertRounded, PersonRounded } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
