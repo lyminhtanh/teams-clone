@@ -4,8 +4,6 @@ import {
   Toolbar,
   Box,
   IconButton,
-  Drawer,
-  Popover,
   Paper,
   List,
   ListItem,
@@ -37,7 +35,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  paddingLeft: "8px",
+  paddingLeft: "0px",
   paddingRight: "8px",
   minHeight: 48,
   height: 48,
@@ -47,6 +45,14 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   whiteSpace: "nowrap",
   backgroundColor: "rgb(235, 235, 235)",
   borderBottom: "1px solid rgba(0, 0, 0, 0.06)",
+}));
+
+const LeftSection = styled(Box)(({ theme }) => ({
+  alignItems: "center",
+  display: "flex",
+  height: "100%",
+  paddingLeft: "0px",
+  position: "relative",
 }));
 
 const AppLauncherButton = styled(IconButton)(({ theme }) => ({
@@ -59,6 +65,8 @@ const AppLauncherButton = styled(IconButton)(({ theme }) => ({
   fontFamily:
     '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
   fontWeight: 600,
+  gridArea: "primary",
+  gridRow: "primary",
   justifyContent: "center",
   lineHeight: "20px",
   marginLeft: "2px",
@@ -67,12 +75,17 @@ const AppLauncherButton = styled(IconButton)(({ theme }) => ({
   minWidth: "32px",
   overflowX: "hidden",
   overflowY: "hidden",
-  paddingBottom: "8px",
+  paddingBottom: "12px",
   paddingLeft: "8px",
   paddingRight: "8px",
-  paddingTop: "8px",
+  paddingTop: "13px",
   textAlign: "center",
   textWrap: "nowrap",
+  transformOrigin: "0% 50%",
+  transitionBehavior: "allow-discrete",
+  transitionDuration: "0.25s",
+  transitionProperty: "transform, visibility",
+  transitionTimingFunction: "cubic-bezier(0.8, 0, 0.78, 1)",
   userSelect: "none",
   verticalAlign: "middle",
   whiteSpace: "nowrap",
@@ -87,6 +100,19 @@ const AppLauncherButton = styled(IconButton)(({ theme }) => ({
   },
 }));
 
+const CenterSection = styled(Box)(({ theme }) => ({
+  alignItems: "center",
+  display: "flex",
+  flexGrow: 1,
+  justifyContent: "center",
+  maxWidth: "676px",
+  marginLeft: "auto",
+  marginRight: "auto",
+  paddingLeft: "16px",
+  paddingRight: "16px",
+  position: "relative",
+}));
+
 const SearchContainer = styled(Box)(({ theme }) => ({
   backgroundColor: "rgb(250, 250, 250)",
   borderRadius: "4px",
@@ -98,7 +124,7 @@ const SearchContainer = styled(Box)(({ theme }) => ({
   justifyContent: "space-between",
   marginLeft: "auto",
   marginRight: "auto",
-  maxWidth: "600px",
+  maxWidth: "824px",
   outline: "rgb(224, 224, 224) solid 1px",
   position: "relative",
   textAlign: "left",
@@ -106,8 +132,6 @@ const SearchContainer = styled(Box)(({ theme }) => ({
   userSelect: "none",
   whiteSpace: "nowrap",
   width: "100%",
-  marginTop: 0,
-  marginBottom: 0,
   cursor: "pointer",
 }));
 
@@ -120,7 +144,6 @@ const SearchButton = styled(IconButton)(({ theme }) => ({
   color: "rgb(97, 97, 97)",
   cursor: "pointer",
   display: "flex",
-  fill: "rgb(91, 95, 199)",
   fontSize: "16px",
   height: "100%",
   justifyContent: "center",
@@ -137,6 +160,15 @@ const SearchButton = styled(IconButton)(({ theme }) => ({
   "&:focus": {
     outline: "none",
   },
+}));
+
+const RightSection = styled(Box)(({ theme }) => ({
+  alignItems: "center",
+  display: "flex",
+  height: "100%",
+  justifyContent: "flex-end",
+  marginLeft: "3px",
+  paddingRight: "0px",
 }));
 
 const HeaderButton = styled(IconButton)(({ theme }) => ({
@@ -278,8 +310,25 @@ const TeamsLogo = () => (
     style={{
       marginLeft: "4px",
       verticalAlign: "middle",
+      gridArea: "secondary",
+      gridRow: "secondary",
       color: "rgb(91, 95, 199)",
       fill: "rgb(91, 95, 199)",
+      fontFamily:
+        '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+      fontSize: "20px",
+      height: "1em",
+      lineHeight: "0px",
+      textAlign: "left",
+      textWrap: "nowrap",
+      transformOrigin: "0% 50%",
+      transitionBehavior: "allow-discrete",
+      transitionDuration: "0.25s",
+      transitionProperty: "visibility, width",
+      transitionTimingFunction: "cubic-bezier(0.8, 0, 0.78, 1)",
+      userSelect: "none",
+      whiteSpace: "nowrap",
+      width: "1em",
     }}
   >
     <path
@@ -316,25 +365,225 @@ const TeamsLogo = () => (
   </svg>
 );
 
-// App Launcher Icon (3x3 grid of dots)
-const AppLauncherIcon = () => (
-  <svg
-    fontSize="20px"
-    fill="currentColor"
-    aria-hidden="true"
-    width="1em"
-    height="1em"
-    viewBox="0 0 20 20"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M5.25 4a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0Zm12 12a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0ZM16 11.25a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM17.25 4a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0ZM10 17.25a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM11.25 10a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0ZM10 5.25a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM5.25 16a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0ZM4 11.25a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5Z"
+// App Launcher Icon with states (filled/regular)
+const AppLauncherIcon = ({ isOpen }: { isOpen: boolean }) => (
+  <>
+    {/* Filled state when open */}
+    <svg
+      fontSize="20px"
       fill="currentColor"
-    />
-  </svg>
+      aria-hidden="true"
+      width="1em"
+      height="1em"
+      viewBox="0 0 20 20"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{
+        display: isOpen ? "block" : "none",
+        borderColor: "rgb(36, 36, 36)",
+        color: "rgb(36, 36, 36)",
+        cursor: "default",
+        fill: "rgb(36, 36, 36)",
+        fontFamily:
+          '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+        fontSize: "20px",
+        fontWeight: 600,
+        height: "1em",
+        lineHeight: "0px",
+        textAlign: "center",
+        textWrap: "nowrap",
+        userSelect: "none",
+        whiteSpace: "nowrap",
+        width: "1em",
+      }}
+    >
+      <path
+        d="M5.75 4a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0Zm0 6a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0ZM4 17.75a1.75 1.75 0 1 0 0-3.5 1.75 1.75 0 0 0 0 3.5ZM11.75 4a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0ZM10 11.75a1.75 1.75 0 1 0 0-3.5 1.75 1.75 0 0 0 0 3.5ZM11.75 16a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0ZM16 5.75a1.75 1.75 0 1 0 0-3.5 1.75 1.75 0 0 0 0 3.5ZM17.75 10a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0ZM16 17.75a1.75 1.75 0 1 0 0-3.5 1.75 1.75 0 0 0 0 3.5Z"
+        fill="currentColor"
+      />
+    </svg>
+    {/* Regular state when closed */}
+    <svg
+      fontSize="20px"
+      fill="currentColor"
+      aria-hidden="true"
+      width="1em"
+      height="1em"
+      viewBox="0 0 20 20"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{
+        display: isOpen ? "none" : "block",
+        borderColor: "rgb(36, 36, 36)",
+        color: "rgb(36, 36, 36)",
+        cursor: "default",
+        fill: "rgb(36, 36, 36)",
+        fontFamily:
+          '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+        fontSize: "20px",
+        fontWeight: 600,
+        height: "1em",
+        lineHeight: "0px",
+        textAlign: "center",
+        textWrap: "nowrap",
+        userSelect: "none",
+        whiteSpace: "nowrap",
+        width: "1em",
+      }}
+    >
+      <path
+        d="M5.25 4a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0Zm12 12a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0ZM16 11.25a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM17.25 4a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0ZM10 17.25a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM11.25 10a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0ZM10 5.25a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM5.25 16a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0ZM4 11.25a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5Z"
+        fill="currentColor"
+      />
+    </svg>
+  </>
 );
 
-// Microsoft Office Apps data
+// Close Icon for app launcher
+const CloseIcon = () => (
+  <>
+    {/* Filled state when close button is hovered/focused */}
+    <svg
+      fontSize="20px"
+      fill="currentColor"
+      aria-hidden="true"
+      width="1em"
+      height="1em"
+      viewBox="0 0 20 20"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{
+        display: "none",
+        borderColor: "rgb(36, 36, 36)",
+        color: "rgb(36, 36, 36)",
+        cursor: "default",
+        fill: "rgb(36, 36, 36)",
+        fontFamily:
+          '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+        fontSize: "20px",
+        fontWeight: 600,
+        height: "1em",
+        lineHeight: "0px",
+        textAlign: "center",
+        textWrap: "nowrap",
+        userSelect: "none",
+        whiteSpace: "nowrap",
+        width: "1em",
+      }}
+    >
+      <path
+        d="M5.75 4a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0Zm0 6a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0ZM4 17.75a1.75 1.75 0 1 0 0-3.5 1.75 1.75 0 0 0 0 3.5ZM11.75 4a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0ZM10 11.75a1.75 1.75 0 1 0 0-3.5 1.75 1.75 0 0 0 0 3.5ZM11.75 16a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0ZM16 5.75a1.75 1.75 0 1 0 0-3.5 1.75 1.75 0 0 0 0 3.5ZM17.75 10a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0ZM16 17.75a1.75 1.75 0 1 0 0-3.5 1.75 1.75 0 0 0 0 3.5Z"
+        fill="currentColor"
+      />
+    </svg>
+    {/* Regular state by default */}
+    <svg
+      fontSize="20px"
+      fill="currentColor"
+      aria-hidden="true"
+      width="1em"
+      height="1em"
+      viewBox="0 0 20 20"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{
+        display: "block",
+        borderColor: "rgb(36, 36, 36)",
+        color: "rgb(36, 36, 36)",
+        cursor: "default",
+        fill: "rgb(36, 36, 36)",
+        fontFamily:
+          '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+        fontSize: "20px",
+        fontWeight: 600,
+        height: "1em",
+        lineHeight: "0px",
+        textAlign: "center",
+        textWrap: "nowrap",
+        userSelect: "none",
+        whiteSpace: "nowrap",
+        width: "1em",
+      }}
+    >
+      <path
+        d="M5.25 4a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0Zm12 12a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0ZM16 11.25a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM17.25 4a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0ZM10 17.25a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM11.25 10a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0ZM10 5.25a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM5.25 16a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0ZM4 11.25a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5Z"
+        fill="currentColor"
+      />
+    </svg>
+  </>
+);
+
+// Arrow Right Icon with states
+const ArrowRightIcon = () => (
+  <>
+    {/* Filled state for hover */}
+    <svg
+      fontSize="16px"
+      fill="currentColor"
+      aria-hidden="true"
+      width="1em"
+      height="1em"
+      viewBox="0 0 20 20"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{
+        display: "none",
+        borderColor: "rgb(79, 82, 178)",
+        color: "rgb(79, 82, 178)",
+        cursor: "pointer",
+        fill: "rgb(79, 82, 178)",
+        fontFamily:
+          '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+        fontSize: "16px",
+        height: "1em",
+        lineHeight: "0px",
+        marginBottom: "8px",
+        marginLeft: "8px",
+        marginRight: "8px",
+        marginTop: "8px",
+        textAlign: "left",
+        userSelect: "text",
+        width: "1em",
+      }}
+    >
+      <path
+        d="M11.27 3.2a.75.75 0 0 0-1.04 1.1l5.24 4.95H2.75a.75.75 0 0 0 0 1.5h12.73l-5.25 4.96a.75.75 0 1 0 1.04 1.09l6.41-6.07a1 1 0 0 0 0-1.46l-6.41-6.06Z"
+        fill="currentColor"
+      />
+    </svg>
+    {/* Regular state by default */}
+    <svg
+      fontSize="16px"
+      fill="currentColor"
+      aria-hidden="true"
+      width="1em"
+      height="1em"
+      viewBox="0 0 20 20"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{
+        display: "block",
+        borderColor: "rgb(79, 82, 178)",
+        color: "rgb(79, 82, 178)",
+        cursor: "pointer",
+        fill: "rgb(79, 82, 178)",
+        fontFamily:
+          '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+        fontSize: "16px",
+        height: "1em",
+        lineHeight: "0px",
+        marginBottom: "8px",
+        marginLeft: "8px",
+        marginRight: "8px",
+        marginTop: "8px",
+        textAlign: "left",
+        userSelect: "text",
+        width: "1em",
+      }}
+    >
+      <path
+        d="M10.84 3.13a.5.5 0 0 0-.68.74l6.17 5.63H2.5a.5.5 0 0 0 0 1h13.83l-6.17 5.63a.5.5 0 0 0 .68.74l6.91-6.32a.75.75 0 0 0 0-1.1l-6.91-6.32Z"
+        fill="currentColor"
+      />
+    </svg>
+  </>
+);
+
+// Microsoft Office Apps data with actual Office icons
 const officeApps = [
   { name: "Outlook", icon: "📧", color: "#0078d4" },
   { name: "OneDrive", icon: "☁️", color: "#0078d4" },
@@ -354,35 +603,42 @@ const searchCategories = [
   "Cuộc trò chuyện Nhóm",
   "Teams và Kênh",
 ];
+
 const recentSearches = [
   {
     type: "TL",
-    content: "mysql -u root -p",
+    content: "Tanh (Bạn): mysql -u root -p",
     time: "02:04 PM",
     user: "Neha Malhotra",
   },
-  { type: "TL", content: "yes", time: "01:55 PM", user: "Neha Malhotra" },
+  {
+    type: "TL",
+    content: "Tanh (Bạn): yes",
+    time: "01:55 PM",
+    user: "Neha Malhotra",
+  },
   {
     type: "NM",
-    content: "you can guide me what steps I need to perform",
+    content: "Neha: you can guide me what steps I need to perform",
     time: "01:54 PM",
     user: "Tanh Minh Ly",
   },
   {
     type: "NM",
-    content: "can i call please",
+    content: "Neha: can i call please",
     time: "01:54 PM",
     user: "Tanh Minh Ly",
   },
   {
     type: "TL",
-    content: "I think there's no constraint left for IDPConfigurationAdmin ?",
+    content:
+      "Tanh (Bạn): I think there's no constraint left for IDPConfigurationAdmin ?",
     time: "01:54 PM",
     user: "Neha Malhotra",
   },
   {
     type: "NM",
-    content: "can I call you ?",
+    content: "Neha: can I call you ?",
     time: "01:54 PM",
     user: "Tanh Minh Ly",
   },
@@ -427,26 +683,59 @@ export default function TeamsHeader() {
       <StyledAppBar>
         <StyledToolbar>
           {/* Left Section */}
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 1,
-              height: "100%",
-              position: "relative",
-            }}
-            ref={appLauncherRef}
-          >
-            <AppLauncherButton
-              onClick={handleAppLauncherToggle}
-              aria-expanded={appLauncherOpen}
-              aria-label={
-                appLauncherOpen ? "Close app launcher" : "Open app launcher"
-              }
+          <LeftSection ref={appLauncherRef}>
+            <Box
+              sx={{
+                alignItems: "center",
+                borderColor: "rgb(255, 255, 255)",
+                color: "rgb(255, 255, 255)",
+                display: "grid",
+                fontFamily:
+                  '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                gridTemplate: '"primary secondary" auto / auto auto',
+                gridTemplateAreas: '"primary secondary"',
+                gridTemplateRows: "auto",
+                justifyContent: "space-evenly",
+                position: "relative",
+                textAlign: "left",
+                textWrap: "nowrap",
+                userSelect: "none",
+                whiteSpace: "nowrap",
+              }}
             >
-              <AppLauncherIcon />
-            </AppLauncherButton>
-            <TeamsLogo />
+              <AppLauncherButton
+                onClick={handleAppLauncherToggle}
+                aria-expanded={appLauncherOpen}
+                aria-label={
+                  appLauncherOpen ? "Close app launcher" : "Open app launcher"
+                }
+              >
+                <span
+                  style={{
+                    alignItems: "center",
+                    borderColor: "rgb(36, 36, 36)",
+                    color: "rgb(36, 36, 36)",
+                    cursor: "default",
+                    display: "flex",
+                    fontFamily:
+                      '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                    fontSize: "20px",
+                    fontWeight: 600,
+                    height: "20px",
+                    justifyContent: "center",
+                    lineHeight: "20px",
+                    textAlign: "center",
+                    textWrap: "nowrap",
+                    userSelect: "none",
+                    whiteSpace: "nowrap",
+                    width: "20px",
+                  }}
+                >
+                  <AppLauncherIcon isOpen={appLauncherOpen} />
+                </span>
+              </AppLauncherButton>
+              <TeamsLogo />
+            </Box>
 
             {/* App Launcher Drawer */}
             {appLauncherOpen && (
@@ -458,61 +747,147 @@ export default function TeamsHeader() {
                     justifyContent: "space-between",
                     alignItems: "center",
                     height: "64px",
-                    paddingX: "16px",
-                    borderBottom: "1px solid rgb(240, 240, 240)",
+                    width: "320px",
                   }}
                 >
                   <IconButton
                     onClick={() => setAppLauncherOpen(false)}
+                    aria-label="Close office app launcher"
                     sx={{
+                      alignItems: "center",
+                      appearance: "button",
+                      backgroundColor: "rgb(255, 255, 255)",
+                      borderColor: "rgb(36, 36, 36)",
                       color: "rgb(36, 36, 36)",
-                      padding: "5px",
+                      cursor: "default",
+                      display: "flex",
+                      fontFamily:
+                        '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                      fontWeight: 600,
+                      justifyContent: "center",
+                      lineHeight: "20px",
+                      marginBottom: "16px",
+                      marginLeft: "16px",
+                      marginRight: "16px",
+                      marginTop: "16px",
+                      maxWidth: "32px",
+                      minWidth: "32px",
+                      paddingBottom: "5px",
+                      paddingLeft: "8px",
+                      paddingRight: "8px",
+                      paddingTop: "5px",
+                      textAlign: "center",
+                      transitionDuration: "0.1s",
+                      transitionProperty: "background, border, color",
+                      transitionTimingFunction:
+                        "cubic-bezier(0.33, 0, 0.67, 1)",
+                      verticalAlign: "middle",
+                      border: "none",
                       "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.04)" },
                     }}
                   >
-                    <X size={20} />
+                    <span
+                      style={{
+                        alignItems: "center",
+                        borderColor: "rgb(36, 36, 36)",
+                        color: "rgb(36, 36, 36)",
+                        cursor: "default",
+                        display: "flex",
+                        fontFamily:
+                          '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                        fontSize: "20px",
+                        fontWeight: 600,
+                        height: "20px",
+                        justifyContent: "center",
+                        lineHeight: "20px",
+                        textAlign: "center",
+                        textWrap: "nowrap",
+                        userSelect: "none",
+                        whiteSpace: "nowrap",
+                        width: "20px",
+                      }}
+                    >
+                      <CloseIcon />
+                    </span>
                   </IconButton>
                   <Box
                     component="a"
-                    href="https://m365.cloud.microsoft/"
+                    href="https://m365.cloud.microsoft/?auth=2&home=1&from=ShellLogo&username=tanhminh.ly@automicgroup.com.au&login_hint=tanhminh.ly@automicgroup.com.au"
+                    tabIndex={0}
                     sx={{
-                      display: "flex",
                       alignItems: "center",
-                      justifyContent: "space-between",
+                      borderColor: "rgb(79, 82, 178)",
                       color: "rgb(79, 82, 178)",
-                      textDecoration: "none",
+                      cursor: "pointer",
+                      display: "flex",
+                      fontFamily:
+                        '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                      justifyContent: "space-between",
+                      lineHeight: "20px",
+                      paddingBottom: "1px",
                       paddingRight: "16px",
+                      textAlign: "left",
+                      textDecoration: "underline 1px solid rgba(0, 0, 0, 0)",
+                      textDecorationColor: "rgba(0, 0, 0, 0)",
+                      textDecorationLine: "underline",
+                      textDecorationThickness: "1px",
+                      userSelect: "text",
                       "&:hover": { textDecoration: "underline" },
                     }}
                   >
                     <span>Microsoft 365</span>
-                    <ChevronRight size={16} />
+                    <ArrowRightIcon />
                   </Box>
                 </Box>
 
-                {/* Title */}
-                <Typography
-                  variant="h6"
+                {/* Title Section */}
+                <Box
                   sx={{
-                    fontSize: "18px",
-                    fontWeight: 400,
-                    paddingLeft: "28px",
-                    paddingTop: "16px",
-                    paddingBottom: "8px",
+                    borderColor: "rgb(36, 36, 36)",
                     color: "rgb(36, 36, 36)",
+                    display: "flex",
+                    fontFamily:
+                      '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                    lineHeight: "20px",
+                    marginBottom: "-3px",
+                    marginTop: "-2px",
+                    textAlign: "left",
                   }}
                 >
-                  Apps
-                </Typography>
+                  <Typography
+                    component="h2"
+                    sx={{
+                      borderColor: "rgb(36, 36, 36)",
+                      color: "rgb(36, 36, 36)",
+                      fontFamily:
+                        '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                      fontSize: "18px",
+                      lineHeight: "20px",
+                      marginBottom: "14.94px",
+                      marginTop: "16px",
+                      paddingLeft: "28px",
+                      textAlign: "left",
+                    }}
+                  >
+                    Ứng dụng
+                  </Typography>
+                </Box>
 
                 {/* Apps Grid */}
                 <Box
                   sx={{
+                    borderColor: "rgb(36, 36, 36)",
+                    color: "rgb(36, 36, 36)",
                     display: "flex",
+                    flexFlow: "row wrap",
                     flexWrap: "wrap",
-                    paddingX: "16px",
-                    paddingBottom: "16px",
+                    fontFamily:
+                      '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                    lineHeight: "20px",
                     minHeight: "240px",
+                    paddingLeft: "16px",
+                    paddingRight: "16px",
+                    textAlign: "left",
                     width: "320px",
                   }}
                 >
@@ -520,24 +895,32 @@ export default function TeamsHeader() {
                     <Box
                       key={app.name}
                       sx={{
+                        borderColor: "rgb(36, 36, 36)",
+                        color: "rgb(36, 36, 36)",
                         display: "flex",
                         flexDirection: "column",
+                        flexFlow: "column nowrap",
+                        fontFamily:
+                          '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
                         height: "48px",
                         justifyContent: "space-between",
-                        width: "50%",
+                        lineHeight: "20px",
+                        textAlign: "left",
                       }}
                     >
                       <Box
                         component="button"
+                        role="link"
                         sx={{
                           alignItems: "center",
                           appearance: "button",
                           backgroundColor: "rgb(255, 255, 255)",
                           border: "none",
                           color: "rgb(36, 36, 36)",
-                          cursor: "pointer",
+                          cursor: "default",
                           display: "flex",
-                          fontFamily: "inherit",
+                          fontFamily:
+                            '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
                           justifyContent: "flex-start",
                           lineHeight: "16px",
                           minHeight: "48px",
@@ -551,30 +934,41 @@ export default function TeamsHeader() {
                           transitionProperty: "background, border, color",
                           transitionTimingFunction:
                             "cubic-bezier(0.33, 0, 0.67, 1)",
+                          verticalAlign: "middle",
                           "&:hover": {
                             backgroundColor: "rgba(0, 0, 0, 0.04)",
                           },
                         }}
                       >
-                        <Box
-                          sx={{
+                        <span
+                          style={{
                             alignItems: "center",
+                            borderColor: "rgb(36, 36, 36)",
+                            color: "rgb(36, 36, 36)",
+                            cursor: "default",
                             display: "flex",
-                            fontSize: "28px",
+                            fontFamily:
+                              '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                            fontSize: "20px",
                             height: "28px",
                             justifyContent: "center",
+                            lineHeight: "16px",
                             marginRight: "12px",
+                            textAlign: "center",
                             width: "28px",
                           }}
                         >
                           {app.icon}
-                        </Box>
+                        </span>
                         <span
                           style={{
+                            borderColor: "rgb(36, 36, 36)",
                             color: "rgb(36, 36, 36)",
-                            fontSize: "14px",
+                            cursor: "default",
+                            fontFamily:
+                              '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
                             lineHeight: "16px",
-                            textAlign: "left",
+                            textAlign: "center",
                           }}
                         >
                           {app.name}
@@ -585,53 +979,161 @@ export default function TeamsHeader() {
                 </Box>
               </AppLauncherDrawer>
             )}
-          </Box>
+          </LeftSection>
 
           {/* Center Section - Search */}
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              flexGrow: 1,
-              justifyContent: "center",
-              maxWidth: "600px",
-              marginX: "16px",
-              position: "relative",
-            }}
-            ref={searchRef}
-          >
+          <CenterSection ref={searchRef}>
             <SearchContainer onClick={handleSearchToggle}>
-              <SearchButton>
-                <Search size={20} />
-              </SearchButton>
               <Box
+                component="form"
+                role="search"
                 sx={{
-                  display: "flex",
                   alignItems: "center",
-                  height: "100%",
+                  borderRadius: "4px",
+                  color: "rgb(66, 66, 66)",
+                  display: "flex",
+                  fontFamily:
+                    '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                  textAlign: "left",
+                  textWrap: "nowrap",
+                  userSelect: "none",
+                  whiteSpace: "nowrap",
                   width: "100%",
-                  paddingLeft: "8px",
-                  paddingRight: "8px",
                 }}
               >
-                <input
-                  placeholder="Search"
-                  style={{
-                    appearance: "textfield",
-                    border: "none",
+                <SearchButton aria-hidden="true" type="button" tabIndex={-1}>
+                  <Search size={20} />
+                </SearchButton>
+                <Box
+                  sx={{
+                    borderColor: "rgb(36, 36, 36)",
                     color: "rgb(36, 36, 36)",
-                    cursor: "pointer",
                     display: "flex",
-                    fontFamily: "inherit",
+                    fontFamily:
+                      '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
                     height: "100%",
-                    lineHeight: "16.1px",
-                    outline: "none",
+                    overflowX: "hidden",
+                    overflowY: "auto",
+                    textAlign: "left",
+                    textWrap: "nowrap",
+                    userSelect: "none",
+                    whiteSpace: "nowrap",
                     width: "100%",
-                    backgroundColor: "transparent",
-                    fontSize: "14px",
                   }}
-                  readOnly
-                />
+                >
+                  <Box
+                    sx={{
+                      borderColor: "rgb(36, 36, 36)",
+                      color: "rgb(36, 36, 36)",
+                      display: "flex",
+                      fontFamily:
+                        '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                      overflowX: "hidden",
+                      overflowY: "auto",
+                      textAlign: "left",
+                      textWrap: "nowrap",
+                      userSelect: "none",
+                      whiteSpace: "nowrap",
+                      width: "100%",
+                    }}
+                  >
+                    <Box
+                      role="presentation"
+                      sx={{
+                        alignItems: "center",
+                        borderColor: "rgb(36, 36, 36)",
+                        color: "rgb(36, 36, 36)",
+                        display: "flex",
+                        flexBasis: "0px",
+                        flexGrow: 1,
+                        fontFamily:
+                          '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                        justifyContent: "center",
+                        position: "relative",
+                        textAlign: "left",
+                        textWrap: "nowrap",
+                        userSelect: "none",
+                        whiteSpace: "nowrap",
+                        width: "100%",
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          borderColor: "rgb(36, 36, 36)",
+                          color: "rgb(36, 36, 36)",
+                          display: "flex",
+                          fontFamily:
+                            '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                          height: "100%",
+                          textAlign: "left",
+                          textWrap: "nowrap",
+                          userSelect: "none",
+                          whiteSpace: "nowrap",
+                          width: "100%",
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            borderColor: "rgb(36, 36, 36)",
+                            color: "rgb(36, 36, 36)",
+                            fontFamily:
+                              '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                            overflowX: "auto",
+                            overflowY: "hidden",
+                            position: "relative",
+                            scrollbarWidth: "none",
+                            textAlign: "left",
+                            textWrap: "nowrap",
+                            userSelect: "none",
+                            whiteSpace: "nowrap",
+                            width: "100%",
+                          }}
+                        >
+                          <input
+                            aria-autocomplete="list"
+                            aria-expanded="false"
+                            aria-haspopup="listbox"
+                            aria-required="false"
+                            autoComplete="off"
+                            maxLength={150}
+                            placeholder="Tìm kiếm (⌥ ⌘ E)"
+                            role="combobox"
+                            type="search"
+                            spellCheck="false"
+                            defaultValue=""
+                            style={{
+                              appearance: "textfield",
+                              border: "none",
+                              color: "rgb(36, 36, 36)",
+                              cursor: "text",
+                              display: "flex",
+                              fontFamily:
+                                '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                              height: "100%",
+                              lineHeight: "16.1px",
+                              outline: "none",
+                              outlineOffset: "-2px",
+                              overflowX: "clip",
+                              overflowY: "clip",
+                              paddingBottom: "8px",
+                              paddingLeft: "8px",
+                              paddingRight: "2px",
+                              paddingTop: "8px",
+                              textWrap: "nowrap",
+                              userSelect: "none",
+                              whiteSpace: "nowrap",
+                              width: "100%",
+                              zIndex: 2,
+                              backgroundColor: "transparent",
+                            }}
+                            readOnly
+                          />
+                        </Box>
+                      </Box>
+                    </Box>
+                  </Box>
+                </Box>
+                <button type="submit" hidden style={{ display: "none" }} />
               </Box>
 
               {/* Search Popover */}
@@ -672,7 +1174,7 @@ export default function TeamsHeader() {
                         textTransform: "uppercase",
                       }}
                     >
-                      Suggested for you
+                      Thứ được đề xuất
                     </Typography>
 
                     <List sx={{ padding: 0 }}>
@@ -739,68 +1241,306 @@ export default function TeamsHeader() {
                 </SearchPopover>
               )}
             </SearchContainer>
-          </Box>
+          </CenterSection>
 
           {/* Right Section */}
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 0.5,
-              height: "100%",
-            }}
-          >
-            <HeaderButton>
-              <MoreHorizontal size={20} />
-            </HeaderButton>
-
-            <ProfileButton>
+          <RightSection>
+            <Box
+              sx={{
+                borderColor: "rgb(255, 255, 255)",
+                color: "rgb(255, 255, 255)",
+                display: "flex",
+                fontFamily:
+                  '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                textAlign: "left",
+                textWrap: "nowrap",
+                userSelect: "none",
+                whiteSpace: "nowrap",
+              }}
+            />
+            <Box
+              sx={{
+                alignItems: "center",
+                borderColor: "rgb(255, 255, 255)",
+                color: "rgb(255, 255, 255)",
+                display: "flex",
+                fontFamily:
+                  '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                overflowX: "hidden",
+                overflowY: "auto",
+                textAlign: "left",
+                textWrap: "nowrap",
+                transformOrigin: "0% 50%",
+                transitionBehavior: "allow-discrete",
+                transitionDuration: "0.25s",
+                transitionProperty: "visibility, width",
+                transitionTimingFunction: "cubic-bezier(0.8, 0, 0.78, 1)",
+                userSelect: "none",
+                whiteSpace: "nowrap",
+              }}
+            >
               <Box
                 sx={{
-                  position: "relative",
-                  width: "28px",
-                  height: "28px",
+                  borderColor: "rgb(255, 255, 255)",
+                  color: "rgb(255, 255, 255)",
+                  fontFamily:
+                    '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                  textAlign: "left",
+                  textWrap: "nowrap",
+                  userSelect: "none",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                <HeaderButton
+                  type="button"
+                  aria-haspopup="menu"
+                  aria-label="Cài đặt và tùy chọn khác"
+                >
+                  <span
+                    style={{
+                      alignItems: "center",
+                      borderColor: "rgb(97, 97, 97)",
+                      color: "rgb(97, 97, 97)",
+                      cursor: "default",
+                      display: "flex",
+                      fontFamily:
+                        '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                      fontSize: "20px",
+                      fontWeight: 600,
+                      height: "20px",
+                      justifyContent: "center",
+                      lineHeight: "20px",
+                      textAlign: "center",
+                      textWrap: "nowrap",
+                      userSelect: "none",
+                      whiteSpace: "nowrap",
+                      width: "20px",
+                    }}
+                  >
+                    <span
+                      style={{
+                        borderColor: "rgb(97, 97, 97)",
+                        color: "rgb(97, 97, 97)",
+                        cursor: "default",
+                        display: "flex",
+                        fontFamily:
+                          '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                        fontSize: "20px",
+                        fontWeight: 600,
+                        lineHeight: "20px",
+                        textAlign: "center",
+                        textWrap: "nowrap",
+                        userSelect: "none",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      <MoreHorizontal size={20} />
+                    </span>
+                  </span>
+                </HeaderButton>
+              </Box>
+              <Box
+                sx={{
+                  borderColor: "rgb(255, 255, 255)",
+                  color: "rgb(255, 255, 255)",
+                  fontFamily:
+                    '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                  textAlign: "left",
+                  textWrap: "nowrap",
+                  userSelect: "none",
+                  whiteSpace: "nowrap",
+                }}
+              />
+              <Box
+                sx={{
+                  borderColor: "rgb(255, 255, 255)",
+                  color: "rgb(255, 255, 255)",
+                  fontFamily:
+                    '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                  textAlign: "left",
+                  textWrap: "nowrap",
+                  userSelect: "none",
+                  whiteSpace: "nowrap",
                 }}
               >
                 <Box
                   sx={{
-                    width: "100%",
-                    height: "100%",
-                    borderRadius: "50%",
-                    backgroundColor: "rgb(230, 230, 230)",
-                    color: "rgb(97, 97, 97)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "12px",
-                    fontWeight: 600,
+                    borderColor: "rgb(255, 255, 255)",
+                    color: "rgb(255, 255, 255)",
+                    fontFamily:
+                      '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                    textAlign: "left",
+                    textWrap: "nowrap",
+                    userSelect: "none",
+                    whiteSpace: "nowrap",
                   }}
                 >
-                  TL
-                </Box>
-                {/* Status indicator */}
-                <Box
-                  sx={{
-                    position: "absolute",
-                    bottom: 0,
-                    right: 0,
-                    width: "10px",
-                    height: "10px",
-                    borderRadius: "50%",
-                    backgroundColor: "rgb(19, 161, 14)",
-                    border: "2px solid white",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <svg width="6" height="6" viewBox="0 0 10 10" fill="white">
-                    <path d="M5 10A5 5 0 1 0 5 0a5 5 0 0 0 0 10Zm2.1-5.9L4.85 6.35a.5.5 0 0 1-.7 0l-1-1a.5.5 0 0 1 .7-.7l.65.64 1.9-1.9a.5.5 0 0 1 .7.71Z" />
-                  </svg>
+                  <ProfileButton
+                    type="button"
+                    aria-label="Hồ sơ của bạn, trạng thái Trực tuyến"
+                    role="button"
+                    tabIndex={0}
+                    aria-expanded="false"
+                  >
+                    <span
+                      role="img"
+                      aria-label="Ảnh hồ sơ của Tanh Minh Ly."
+                      style={{
+                        borderRadius: "50%",
+                        borderColor: "rgb(66, 66, 66)",
+                        color: "rgb(66, 66, 66)",
+                        cursor: "default",
+                        flexShrink: 0,
+                        fontFamily:
+                          '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                        fontSize: "12px",
+                        fontWeight: 600,
+                        height: "28px",
+                        lineHeight: "20px",
+                        position: "relative",
+                        textAlign: "center",
+                        textWrap: "nowrap",
+                        userSelect: "none",
+                        verticalAlign: "middle",
+                        whiteSpace: "nowrap",
+                        width: "28px",
+                      }}
+                    >
+                      <span
+                        style={{
+                          alignItems: "center",
+                          backgroundColor: "rgb(230, 230, 230)",
+                          borderRadius: "50%",
+                          color: "rgb(97, 97, 97)",
+                          cursor: "default",
+                          display: "flex",
+                          fontFamily:
+                            '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                          fontSize: "12px",
+                          fontWeight: 600,
+                          height: "100%",
+                          justifyContent: "center",
+                          left: "0px",
+                          lineHeight: "20px",
+                          mask: "radial-gradient(circle at right 5px bottom 5px, rgba(0, 0, 0, 0) calc(5.75px), rgb(255, 255, 255) calc(6.25px))",
+                          maskImage:
+                            "radial-gradient(circle at right 5px bottom 5px, rgba(0, 0, 0, 0) calc(5.75px), rgb(255, 255, 255) calc(6.25px))",
+                          position: "absolute",
+                          textAlign: "center",
+                          textWrap: "nowrap",
+                          top: "0px",
+                          userSelect: "none",
+                          whiteSpace: "nowrap",
+                          width: "100%",
+                        }}
+                      >
+                        TL
+                      </span>
+                      <Box
+                        aria-label="available"
+                        role="img"
+                        sx={{
+                          alignItems: "center",
+                          backgroundClip: "content-box",
+                          backgroundColor: "rgb(255, 255, 255)",
+                          borderRadius: "50%",
+                          borderColor: "rgb(19, 161, 14)",
+                          bottom: "0px",
+                          color: "rgb(19, 161, 14)",
+                          cursor: "default",
+                          display: "flex",
+                          fontFamily:
+                            '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                          fontSize: "12px",
+                          fontWeight: 600,
+                          justifyContent: "center",
+                          lineHeight: "20px",
+                          paddingBottom: "1px",
+                          paddingLeft: "1px",
+                          paddingRight: "1px",
+                          paddingTop: "1px",
+                          position: "absolute",
+                          right: "0px",
+                          textAlign: "center",
+                          textWrap: "nowrap",
+                          userSelect: "none",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        <span
+                          style={{
+                            borderColor: "rgb(19, 161, 14)",
+                            color: "rgb(19, 161, 14)",
+                            cursor: "default",
+                            display: "flex",
+                            fontFamily:
+                              '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                            fontSize: "12px",
+                            fontWeight: 600,
+                            lineHeight: "20px",
+                            marginBottom: "-1px",
+                            marginLeft: "-1px",
+                            marginRight: "-1px",
+                            marginTop: "-1px",
+                            textAlign: "center",
+                            textWrap: "nowrap",
+                            userSelect: "none",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          <svg
+                            fill="currentColor"
+                            aria-hidden="true"
+                            width="10"
+                            height="10"
+                            viewBox="0 0 10 10"
+                            xmlns="http://www.w3.org/2000/svg"
+                            style={{
+                              borderColor: "rgb(19, 161, 14)",
+                              color: "rgb(19, 161, 14)",
+                              cursor: "default",
+                              fill: "rgb(19, 161, 14)",
+                              fontFamily:
+                                '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                              fontSize: "12px",
+                              fontWeight: 600,
+                              height: "10px",
+                              lineHeight: "0px",
+                              textAlign: "center",
+                              textWrap: "nowrap",
+                              userSelect: "none",
+                              whiteSpace: "nowrap",
+                              width: "10px",
+                            }}
+                          >
+                            <path
+                              d="M5 10A5 5 0 1 0 5 0a5 5 0 0 0 0 10Zm2.1-5.9L4.85 6.35a.5.5 0 0 1-.7 0l-1-1a.5.5 0 0 1 .7-.7l.65.64 1.9-1.9a.5.5 0 0 1 .7.71Z"
+                              fill="currentColor"
+                            />
+                          </svg>
+                        </span>
+                      </Box>
+                    </span>
+                  </ProfileButton>
                 </Box>
               </Box>
-            </ProfileButton>
-          </Box>
+            </Box>
+            <Box
+              sx={{
+                borderColor: "rgb(255, 255, 255)",
+                color: "rgb(255, 255, 255)",
+                display: "flex",
+                fontFamily:
+                  '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                height: "100%",
+                marginLeft: "3px",
+                textAlign: "left",
+                textWrap: "nowrap",
+                userSelect: "none",
+                whiteSpace: "nowrap",
+              }}
+            />
+          </RightSection>
         </StyledToolbar>
       </StyledAppBar>
     </ClickAwayListener>
