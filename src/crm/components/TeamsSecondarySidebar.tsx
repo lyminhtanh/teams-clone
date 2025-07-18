@@ -49,9 +49,11 @@ const SecondaryContainer = styled(Box, {
   position: "sticky",
   top: 48,
   [theme.breakpoints.down("md")]: {
+    width: isVisible ? "100vw" : 0,
     height: "100%",
     position: "relative",
     top: 0,
+    borderRight: "none",
   },
 }));
 
