@@ -607,7 +607,7 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
                 whiteSpace: "nowrap",
               }}
             >
-                            {isMobile ? (
+              {isMobile ? (
                 <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                   <AppLauncherButton
                     onClick={onMobileMenuToggle}
@@ -933,7 +933,7 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
             )}
           </LeftSection>
 
-                    {/* Center Section - Search */}
+          {/* Center Section - Search */}
           <CenterSection ref={searchRef}>
             {(!isMobile || mobileSearchExpanded) && (
               <SearchContainer onClick={handleSearchToggle}>
@@ -1206,23 +1206,6 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
                   </>
                 )}
               </SearchContainer>
-            ) : (
-              // Mobile compact search - just search icon
-              <IconButton
-                onClick={handleSearchToggle}
-                sx={{
-                  width: 32,
-                  height: 32,
-                  borderRadius: "4px",
-                  backgroundColor: "rgb(250, 250, 250)",
-                  border: "1px solid rgb(224, 224, 224)",
-                  "&:hover": {
-                    backgroundColor: "rgba(0, 0, 0, 0.04)",
-                  },
-                }}
-              >
-                <Search size={20} color="rgb(97, 97, 97)" />
-              </IconButton>
             )}
           </CenterSection>
 
