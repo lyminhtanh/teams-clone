@@ -42,15 +42,37 @@ export default function TeamsSidebar({
   }, [location.pathname]);
 
   const handleSectionChange = (sectionId: string) => {
-    if (activeSection === sectionId && isOpen) {
-      // If clicking the same section and sidebar is open, close it
-      setActiveSection("");
+    if (isMobile) {
+      // Mobile behavior: close primary menu and show secondary or navigate
+      onMobileClose?.();
       closeMenu();
+
+      // Check if this section has a secondary menu
+      const hasSecondaryMenu = ["chat", "customers", "deals", "files"].includes(
+        sectionId,
+      );
+
+      if (hasSecondaryMenu) {
+        // For sections with secondary menu, set active and open secondary
+        setActiveSection(sectionId);
+        openMenu();
+      } else {
+        // For sections without secondary menu, navigate to the page
+        navigate(`/${sectionId}`);
+        setActiveSection(sectionId);
+      }
     } else {
-      // Otherwise, navigate to the new section and open menu
-      navigate(`/${sectionId}`);
-      setActiveSection(sectionId);
-      openMenu();
+      // Desktop behavior: existing logic
+      if (activeSection === sectionId && isOpen) {
+        // If clicking the same section and sidebar is open, close it
+        setActiveSection("");
+        closeMenu();
+      } else {
+        // Otherwise, navigate to the new section and open menu
+        navigate(`/${sectionId}`);
+        setActiveSection(sectionId);
+        openMenu();
+      }
     }
   };
 
