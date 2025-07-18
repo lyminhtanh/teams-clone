@@ -268,76 +268,28 @@ export default function ChatActionBar() {
       <ActionBarContent>
         {/* Left Section */}
         <LeftSection>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: isMobile ? "column" : "row",
-              alignItems: isMobile ? "flex-start" : "center",
-            }}
-          >
-            <LogoContainer>
-              <LogoIcon size={isMobile ? 16 : 20} isMobile={isMobile} />
-            </LogoContainer>
-            <TitleSection isMobile={isMobile}>
-              <TitleContainer>
-                <Box
-                  sx={{
-                    fontWeight: 700,
-                    maxWidth: "fit-content",
-                    overflow: "hidden",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      fontWeight: 700,
-                      flexDirection: isMobile ? "column" : "row",
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                      }}
-                    >
-                      <TitleText
-                        component="h2"
-                        aria-hidden="true"
-                        isMobile={isMobile}
-                      >
-                        <Box
-                          sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            whiteSpace: "nowrap",
-                          }}
-                        >
-                          Hop dong chu dau tu tu
-                        </Box>
-                      </TitleText>
-                    </Box>
-                    <Box
-                      component="ul"
-                      role="list"
-                      aria-label="Người dự cuộc trò chuyện"
-                      sx={{
-                        borderRadius: "4px",
-                        color: "rgb(66, 66, 66)",
-                        display: "flex",
-                        fontWeight: 700,
-                        lineHeight: "23px",
-                        minHeight: "24px",
-                        zIndex: 1000,
-                        border: "1px solid rgba(0, 0, 0, 0)",
-                      }}
-                    />
-                  </Box>
-                </Box>
-              </TitleContainer>
-            </TitleSection>
-          </Box>
+          {!isMobile ? (
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <LogoContainer>
+                <LogoIcon size={20} isMobile={false} />
+              </LogoContainer>
+              <TitleSection isMobile={false}>
+                <TitleContainer>
+                  <TitleText component="h2" isMobile={false}>
+                    Hop dong chu dau tu tu
+                  </TitleText>
+                </TitleContainer>
+              </TitleSection>
+            </Box>
+          ) : (
+            <TitleText
+              component="h2"
+              isMobile={true}
+              sx={{ fontSize: "20px", fontWeight: 700 }}
+            >
+              Chat
+            </TitleText>
+          )}
         </LeftSection>
 
         {/* Center Section - Tabs */}
@@ -459,7 +411,7 @@ export default function ChatActionBar() {
                   </MenuItem>
                   <MenuItem onClick={handleMobileMenuClose}>
                     <Search size={16} style={{ marginRight: 8 }} />
-                    Tìm trong cuộc trò chuyện
+                    Tìm trong cuộc tr�� chuyện
                   </MenuItem>
                   <MenuItem onClick={handleMobileMenuClose}>
                     <PanelRightOpen size={16} style={{ marginRight: 8 }} />
