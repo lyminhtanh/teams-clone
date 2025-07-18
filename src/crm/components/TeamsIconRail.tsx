@@ -479,52 +479,53 @@ export default function TeamsIconRail({
         }}
       >
         {/* Overflow Menu Items */}
-        {hasOverflowItems && (
-          <>
-            <Box sx={{ px: 2, py: 1, borderBottom: 1, borderColor: "divider" }}>
-              <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
-                More Apps
-              </Typography>
-              <Typography variant="caption" color="text.secondary">
-                {overflowItems.length} additional items
-              </Typography>
-            </Box>
+        {hasOverflowItems && [
+          <Box
+            key="overflow-header"
+            sx={{ px: 2, py: 1, borderBottom: 1, borderColor: "divider" }}
+          >
+            <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
+              More Apps
+            </Typography>
+            <Typography variant="caption" color="text.secondary">
+              {overflowItems.length} additional items
+            </Typography>
+          </Box>,
 
-            {overflowItems.map((item) => {
-              const IconComponent = item.icon;
-              return (
-                <MenuItem
-                  key={item.id}
-                  onClick={() => handleOverflowItemClick(item.id)}
-                  selected={activeSection === item.id}
-                >
-                  <ListItemIcon>
-                    <Badge
-                      badgeContent={item.badge}
-                      color="error"
-                      overlap="circular"
-                      sx={{
-                        "& .MuiBadge-badge": {
-                          fontSize: "0.5rem",
-                          height: 14,
-                          minWidth: 14,
-                        },
-                      }}
-                    >
-                      <IconComponent size={20} />
-                    </Badge>
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={item.label}
-                    secondary={item.description}
-                  />
-                </MenuItem>
-              );
-            })}
+          ...overflowItems.map((item) => {
+            const IconComponent = item.icon;
+            return (
+              <MenuItem
+                key={item.id}
+                onClick={() => handleOverflowItemClick(item.id)}
+                selected={activeSection === item.id}
+              >
+                <ListItemIcon>
+                  <Badge
+                    badgeContent={item.badge}
+                    color="error"
+                    overlap="circular"
+                    sx={{
+                      "& .MuiBadge-badge": {
+                        fontSize: "0.5rem",
+                        height: 14,
+                        minWidth: 14,
+                      },
+                    }}
+                  >
+                    <IconComponent size={20} />
+                  </Badge>
+                </ListItemIcon>
+                <ListItemText
+                  primary={item.label}
+                  secondary={item.description}
+                />
+              </MenuItem>
+            );
+          }),
 
-            <Divider />
-          </>
-        )}
+          <Divider key="overflow-divider" />,
+        ]}
 
         {/* Menu Configuration Section */}
         <Box sx={{ px: 2, py: 1, borderBottom: 1, borderColor: "divider" }}>
