@@ -152,6 +152,7 @@ export default function NewSideMenu({ config, className }: SideMenuProps) {
       anchor="left"
       open={isOpen}
       isOpen={isOpen}
+      menuWidth={menuWidth}
       className={className}
       ModalProps={{
         keepMounted: true, // Better open performance on mobile
