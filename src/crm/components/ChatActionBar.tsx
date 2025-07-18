@@ -388,7 +388,7 @@ export default function ChatActionBar() {
                 aria-label="Xem thêm tùy chọn"
                 onClick={handleMobileMenuOpen}
               >
-                <Megaphone size={20} />
+                <MoreHorizontal size={20} />
               </ActionButton>
 
               <Menu
