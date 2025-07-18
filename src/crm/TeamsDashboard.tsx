@@ -67,30 +67,39 @@ export default function TeamsDashboard() {
                   easing: theme.transitions.easing.sharp,
                   duration: theme.transitions.duration.leavingScreen,
                 }),
+                marginTop: "15px",
               })}
             >
-              <Stack
-                spacing={2}
-                sx={{
-                  alignItems: "center",
-                  mx: 3,
-                  pb: 5,
-                  pt: 2,
-                }}
-              >
-                <Routes>
-                  <Route index element={<TeamsActivityView />} />
-                  <Route path="activity" element={<TeamsActivityView />} />
-                  <Route path="chat" element={<div>Chat Interface</div>} />
-                  <Route path="calendar" element={<TeamsCalendarView />} />
-                  <Route path="calls" element={<div>Calls History</div>} />
-                  <Route path="customers" element={<Customers />} />
-                  <Route path="files" element={<div>File Manager</div>} />
-                  <Route path="reports" element={<Reports />} />
-                  <Route path="settings" element={<Settings />} />
-                </Routes>
-                <Outlet />
-              </Stack>
+              <Routes>
+                <Route index element={<TeamsActivityView />} />
+                <Route path="activity" element={<TeamsActivityView />} />
+                <Route
+                  path="chat"
+                  element={
+                    <>
+                      <ChatActionBar />
+                      <Stack
+                        spacing={2}
+                        sx={{
+                          alignItems: "center",
+                          mx: 3,
+                          pb: 5,
+                          pt: 2,
+                        }}
+                      >
+                        <div>Chat Interface</div>
+                      </Stack>
+                    </>
+                  }
+                />
+                <Route path="calendar" element={<TeamsCalendarView />} />
+                <Route path="calls" element={<div>Calls History</div>} />
+                <Route path="customers" element={<Customers />} />
+                <Route path="files" element={<div>File Manager</div>} />
+                <Route path="reports" element={<Reports />} />
+                <Route path="settings" element={<Settings />} />
+              </Routes>
+              <Outlet />
             </Box>
           </Box>
         </Box>
