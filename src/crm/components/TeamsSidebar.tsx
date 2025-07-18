@@ -43,20 +43,19 @@ export default function TeamsSidebar({
 
   const handleSectionChange = (sectionId: string) => {
     if (isMobile) {
-      // Mobile behavior: always hide primary menu first
-      onMobileClose?.();
-
       // Check if this section has a secondary menu
       const hasSecondaryMenu = ["chat", "customers", "deals", "files"].includes(
         sectionId,
       );
 
       if (hasSecondaryMenu) {
-        // For sections with secondary menu, set active and show secondary only
+        // For sections with secondary menu, set active and keep drawer open
         setActiveSection(sectionId);
         openMenu();
+        // Don't close the mobile drawer, just show secondary content
       } else {
-        // For sections without secondary menu, just navigate and hide all menus
+        // For sections without secondary menu, close drawer and navigate
+        onMobileClose?.();
         closeMenu();
         navigate(`/${sectionId}`);
         setActiveSection(sectionId);
