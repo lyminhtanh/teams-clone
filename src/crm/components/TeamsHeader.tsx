@@ -965,7 +965,8 @@ export default function TeamsHeader() {
                             role="combobox"
                             type="search"
                             spellCheck="false"
-                            defaultValue=""
+                            value={searchValue}
+                            onChange={(e) => setSearchValue(e.target.value)}
                             style={{
                               appearance: "textfield",
                               border: "none",
