@@ -314,9 +314,7 @@ export default function ChatActionBar() {
                             whiteSpace: "nowrap",
                           }}
                         >
-                          <span title="ESP/ESS - Stand up">
-                            <p>Hop dong chu dau tu tu</p>
-                          </span>
+                          Hop dong chu dau tu tu
                         </Box>
                       </TitleText>
                     </Box>
