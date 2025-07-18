@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { useLocation, useNavigate } from "react-router-dom";
 import TeamsIconRail from "./TeamsIconRail";
 import TeamsSecondarySidebar from "./TeamsSecondarySidebar";
 import { useMenu } from "../context/MenuContext";
@@ -14,10 +15,18 @@ const SidebarContainer = styled(Box)(({ theme }) => ({
 }));
 
 export default function TeamsSidebar() {
-  const [activeSection, setActiveSection] = useState("dashboard");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [activeSection, setActiveSection] = useState("activity");
   const { isOpen } = useMenu();
 
   const { toggleMenu, openMenu, closeMenu } = useMenu();
+
+  // Sync active section with current route
+  useEffect(() => {
+    const path = location.pathname.split("/").pop() || "activity";
+    setActiveSection(path);
+  }, [location.pathname]);
 
   const handleSectionChange = (sectionId: string) => {
     if (activeSection === sectionId && isOpen) {
@@ -25,7 +34,8 @@ export default function TeamsSidebar() {
       setActiveSection("");
       closeMenu();
     } else {
-      // Otherwise, open the new section
+      // Otherwise, navigate to the new section and open menu
+      navigate(`/${sectionId}`);
       setActiveSection(sectionId);
       openMenu();
     }
