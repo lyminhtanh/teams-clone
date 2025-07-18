@@ -17,6 +17,7 @@ import { MoreVertRounded, PersonRounded } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
 import { useMenu } from "../context/MenuContext";
 import { SideMenuProps } from "../types/menuTypes";
+import { useMenuWidth, useMenuAnimation } from "../hooks/useResponsiveMenu";
 import MenuItemComponent from "./MenuItem";
 
 const SIDEBAR_WIDTH = 320;
