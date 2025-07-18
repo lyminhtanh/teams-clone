@@ -554,6 +554,9 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
   const handleClickAway = () => {
     setAppLauncherOpen(false);
     setSearchOpen(false);
+    if (isMobile) {
+      setMobileSearchExpanded(false);
+    }
   };
 
   // Close popovers on escape key
