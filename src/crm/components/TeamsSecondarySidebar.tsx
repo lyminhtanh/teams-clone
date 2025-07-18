@@ -26,9 +26,20 @@ import {
   Video,
   Phone,
   Filter,
+  Home,
+  Folder,
+  Users,
+  Star,
+  Trash2,
+  User,
+  Calendar,
+  Image,
+  ChevronDown,
+  Upload,
 } from "lucide-react";
 import { styled, useTheme } from "@mui/material/styles";
 import { useMenu } from "../context/MenuContext";
+import { Button, Collapse } from "@mui/material";
 
 const SECONDARY_WIDTH = 320;
 
@@ -144,6 +155,80 @@ const customerData = [
   },
 ];
 
+const filesNavigationData = [
+  {
+    id: "home",
+    name: "Home",
+    icon: Home,
+    selected: false,
+  },
+  {
+    id: "my-files",
+    name: "My files",
+    icon: Folder,
+    selected: true,
+  },
+  {
+    id: "shared",
+    name: "Shared",
+    icon: Users,
+    selected: false,
+  },
+  {
+    id: "favorites",
+    name: "Favorites",
+    icon: Star,
+    selected: false,
+  },
+  {
+    id: "recycle-bin",
+    name: "Recycle bin",
+    icon: Trash2,
+    selected: false,
+  },
+];
+
+const browseByData = [
+  {
+    id: "people",
+    name: "People",
+    icon: User,
+  },
+  {
+    id: "meetings",
+    name: "Meetings",
+    icon: Calendar,
+  },
+  {
+    id: "media",
+    name: "Media",
+    icon: Image,
+  },
+];
+
+const quickAccessData = [
+  {
+    id: "customer-service",
+    name: "Customer Service Excellence",
+    pinned: false,
+  },
+  {
+    id: "automic-birthdays",
+    name: "Automic Group - Birthdays",
+    pinned: false,
+  },
+  {
+    id: "automic-group",
+    name: "Automic Group",
+    pinned: false,
+  },
+  {
+    id: "automic-it",
+    name: "Automic IT Team",
+    pinned: false,
+  },
+];
+
 interface TeamsSecondarySidebarProps {
   activeSection: string;
   onMobileClose?: () => void;
@@ -156,6 +241,7 @@ export default function TeamsSecondarySidebar({
   const { isOpen, closeMenu } = useMenu();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const [browseByExpanded, setBrowseByExpanded] = React.useState(true);
 
   const handleMobileItemClick = () => {
     if (isMobile) {
@@ -398,6 +484,285 @@ export default function TeamsSecondarySidebar({
     </Fade>
   );
 
+  const renderFilesContent = () => (
+    <Fade in={true} timeout={300}>
+      <Box
+        sx={{
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          backgroundColor: "rgb(250, 250, 250)",
+        }}
+      >
+        {/* Header */}
+        <Box sx={{ p: 2 }}>
+          <Typography
+            variant="h5"
+            sx={{ fontWeight: 700, fontSize: "18px", mb: 2.5 }}
+          >
+            OneDrive
+          </Typography>
+
+          {/* Create/Upload Button */}
+          <Button
+            variant="contained"
+            startIcon={<Plus size={16} />}
+            sx={{
+              backgroundColor: "rgb(91, 95, 199)",
+              color: "white",
+              fontWeight: 600,
+              borderRadius: 1,
+              mb: 2,
+              textTransform: "none",
+              "&:hover": {
+                backgroundColor: "rgb(71, 75, 179)",
+              },
+            }}
+          >
+            Create or upload
+          </Button>
+        </Box>
+
+        {/* Navigation */}
+        <Box
+          sx={{
+            flex: 1,
+            overflow: "auto",
+            px: 2,
+            pb: 2,
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          {/* Main Navigation */}
+          <List sx={{ mb: 2, p: 0 }}>
+            {filesNavigationData.map((item) => {
+              const IconComponent = item.icon;
+              return (
+                <ListItem key={item.id} disablePadding>
+                  <ListItemButton
+                    onClick={handleMobileItemClick}
+                    sx={{
+                      borderRadius: 1,
+                      mb: 0.5,
+                      minHeight: 36,
+                      pl: 1,
+                      backgroundColor: item.selected
+                        ? "rgba(61, 62, 102, 0.1)"
+                        : "transparent",
+                      "&:hover": {
+                        backgroundColor: "rgba(0, 0, 0, 0.04)",
+                      },
+                    }}
+                  >
+                    <ListItemIcon sx={{ minWidth: 28, mr: 1 }}>
+                      <IconComponent
+                        size={20}
+                        color={
+                          item.selected ? "rgb(61, 62, 102)" : "rgb(66, 66, 66)"
+                        }
+                      />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            fontWeight: item.selected ? 600 : 400,
+                            color: item.selected
+                              ? "rgb(61, 62, 102)"
+                              : "rgb(66, 66, 66)",
+                            fontSize: "14px",
+                          }}
+                        >
+                          {item.name}
+                        </Typography>
+                      }
+                    />
+                  </ListItemButton>
+                </ListItem>
+              );
+            })}
+          </List>
+
+          {/* Browse By Section */}
+          <Box sx={{ mb: 2 }}>
+            <ListItemButton
+              onClick={() => setBrowseByExpanded(!browseByExpanded)}
+              sx={{
+                borderRadius: 1,
+                minHeight: 36,
+                pl: 1,
+                backgroundColor: "transparent",
+                "&:hover": {
+                  backgroundColor: "rgba(0, 0, 0, 0.04)",
+                },
+              }}
+            >
+              <ListItemText
+                primary={
+                  <Typography
+                    variant="body2"
+                    sx={{ fontWeight: 600, fontSize: "14px" }}
+                  >
+                    Browse by
+                  </Typography>
+                }
+              />
+              <ChevronDown
+                size={16}
+                style={{
+                  transform: browseByExpanded
+                    ? "rotate(0deg)"
+                    : "rotate(-90deg)",
+                  transition: "transform 0.15s",
+                }}
+              />
+            </ListItemButton>
+
+            <Collapse in={browseByExpanded}>
+              <List sx={{ pl: 0 }}>
+                {browseByData.map((item) => {
+                  const IconComponent = item.icon;
+                  return (
+                    <ListItem key={item.id} disablePadding>
+                      <ListItemButton
+                        onClick={handleMobileItemClick}
+                        sx={{
+                          borderRadius: 1,
+                          mb: 0.5,
+                          minHeight: 36,
+                          pl: 2,
+                          "&:hover": {
+                            backgroundColor: "rgba(0, 0, 0, 0.04)",
+                          },
+                        }}
+                      >
+                        <ListItemIcon sx={{ minWidth: 28, mr: 1 }}>
+                          <IconComponent size={20} color="rgb(66, 66, 66)" />
+                        </ListItemIcon>
+                        <ListItemText
+                          primary={
+                            <Typography
+                              variant="body2"
+                              sx={{ fontSize: "14px" }}
+                            >
+                              {item.name}
+                            </Typography>
+                          }
+                        />
+                      </ListItemButton>
+                    </ListItem>
+                  );
+                })}
+              </List>
+            </Collapse>
+          </Box>
+
+          {/* Quick Access Section */}
+          <Box>
+            <Typography
+              variant="body2"
+              sx={{
+                fontWeight: 600,
+                fontSize: "14px",
+                px: 1,
+                py: 1,
+                color: "rgb(66, 66, 66)",
+              }}
+            >
+              Quick access
+            </Typography>
+
+            <List sx={{ p: 0 }}>
+              {quickAccessData.map((item) => (
+                <ListItem key={item.id} disablePadding>
+                  <ListItemButton
+                    onClick={handleMobileItemClick}
+                    sx={{
+                      borderRadius: 1,
+                      mb: 0.5,
+                      minHeight: 36,
+                      pl: 1,
+                      "&:hover": {
+                        backgroundColor: "rgba(0, 0, 0, 0.04)",
+                      },
+                    }}
+                  >
+                    <ListItemIcon sx={{ minWidth: 28, mr: 1 }}>
+                      <Box
+                        sx={{
+                          width: 20,
+                          height: 20,
+                          backgroundColor: "rgb(91, 95, 199)",
+                          borderRadius: 1,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          fontSize: "10px",
+                          fontWeight: 600,
+                          color: "white",
+                        }}
+                      >
+                        {item.name.substring(0, 2).toUpperCase()}
+                      </Box>
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            fontSize: "14px",
+                            textOverflow: "ellipsis",
+                            overflow: "hidden",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {item.name}
+                        </Typography>
+                      }
+                    />
+                  </ListItemButton>
+                </ListItem>
+              ))}
+
+              {/* More locations link */}
+              <ListItem disablePadding>
+                <ListItemButton
+                  onClick={handleMobileItemClick}
+                  sx={{
+                    borderRadius: 1,
+                    minHeight: 36,
+                    pl: 1,
+                    "&:hover": {
+                      backgroundColor: "rgba(0, 0, 0, 0.04)",
+                    },
+                  }}
+                >
+                  <ListItemText
+                    primary={
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          fontSize: "12px",
+                          fontWeight: 600,
+                          color: "rgb(61, 62, 102)",
+                          pl: 0.5,
+                        }}
+                      >
+                        More locations...
+                      </Typography>
+                    }
+                  />
+                </ListItemButton>
+              </ListItem>
+            </List>
+          </Box>
+        </Box>
+      </Box>
+    </Fade>
+  );
+
   const renderDefaultContent = () => (
     <Fade in={true} timeout={300}>
       <Box sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
@@ -431,6 +796,8 @@ export default function TeamsSecondarySidebar({
         return renderChatContent();
       case "customers":
         return renderCustomersContent();
+      case "files":
+        return renderFilesContent();
       default:
         return renderDefaultContent();
     }
