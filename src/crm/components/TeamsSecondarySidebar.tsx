@@ -144,10 +144,12 @@ const customerData = [
 
 interface TeamsSecondarySidebarProps {
   activeSection: string;
+  onMobileClose?: () => void;
 }
 
 export default function TeamsSecondarySidebar({
   activeSection,
+  onMobileClose,
 }: TeamsSecondarySidebarProps) {
   const { isOpen, closeMenu } = useMenu();
   const theme = useTheme();
@@ -156,6 +158,7 @@ export default function TeamsSecondarySidebar({
   const handleMobileItemClick = () => {
     if (isMobile) {
       closeMenu();
+      onMobileClose?.();
     }
   };
 
