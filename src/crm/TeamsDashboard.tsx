@@ -30,6 +30,7 @@ import {
   treeViewCustomizations,
 } from "../dashboard/theme/customizations";
 import "./styles/teamsEnhanced.css";
+import "./styles/teamsExact.css";
 
 const xThemeComponents = {
   ...chartsCustomizations,
