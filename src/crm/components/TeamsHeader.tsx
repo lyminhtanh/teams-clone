@@ -1250,7 +1250,7 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
                 <HeaderButton
                   type="button"
                   aria-haspopup="menu"
-                  aria-label="Cài đặt và tùy ch���n khác"
+                  aria-label="Cài đặt và tùy ch����n khác"
                 >
                   <span
                     style={{
