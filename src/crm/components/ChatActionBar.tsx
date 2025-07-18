@@ -18,6 +18,7 @@ import {
   MoreHorizontal,
   PanelRightOpen,
   Plus,
+  Megaphone,
 } from "lucide-react";
 import { styled, useTheme } from "@mui/material/styles";
 
@@ -412,7 +413,7 @@ export default function ChatActionBar() {
 
                 <ActionButton
                   type="button"
-                  aria-label="Mở chi tiết cuộc trò chuyện (⌃ ⌘ E)"
+                  aria-label="Mở chi tiết cuộc trò chuy���n (⌃ ⌘ E)"
                   aria-keyshortcuts="⌃ ⌘ E"
                 >
                   <PanelRightOpen size={20} />
