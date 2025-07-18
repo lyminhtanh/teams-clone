@@ -531,6 +531,7 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
   const [appLauncherOpen, setAppLauncherOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [mobileSearchExpanded, setMobileSearchExpanded] = useState(false);
   const appLauncherRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);
 
