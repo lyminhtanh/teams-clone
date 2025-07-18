@@ -20,13 +20,13 @@ import {
 import { styled } from "@mui/material/styles";
 import { useMenu } from "../context/MenuContext";
 
-const RAIL_WIDTH = 64;
+const RAIL_WIDTH = 68;
 
 const RailContainer = styled(Box)(({ theme }) => ({
   width: RAIL_WIDTH,
   height: "calc(100vh - 48px)",
-  backgroundColor: theme.palette.mode === "dark" ? "#2b2b2b" : "#ebeaea",
-  borderRight: `1px solid ${theme.palette.divider}`,
+  backgroundColor: "rgb(235, 235, 235)",
+  borderRight: "1px solid rgba(0, 0, 0, 0.06)",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
@@ -34,6 +34,8 @@ const RailContainer = styled(Box)(({ theme }) => ({
   position: "sticky",
   top: 48,
   zIndex: theme.zIndex.drawer + 1,
+  fontFamily:
+    '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
 }));
 
 const RailButton = styled(IconButton, {
@@ -41,14 +43,10 @@ const RailButton = styled(IconButton, {
 })<{ active?: boolean }>(({ theme, active }) => ({
   width: 48,
   height: 56,
-  margin: theme.spacing(0.5, 0),
+  margin: theme.spacing(0.125, 0),
   borderRadius: 8,
-  backgroundColor: active ? "#5b5fc7" : "transparent",
-  color: active
-    ? "white"
-    : theme.palette.mode === "dark"
-      ? "#8a8a8a"
-      : "#616161",
+  backgroundColor: active ? "rgb(91, 95, 199)" : "rgba(0, 0, 0, 0)",
+  color: active ? "white" : "rgb(36, 36, 36)",
   border: "none",
   position: "relative",
   flexDirection: "column",
@@ -57,13 +55,16 @@ const RailButton = styled(IconButton, {
   textTransform: "none",
   lineHeight: 1.2,
   gap: 1,
+  fontFamily:
+    '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+  touchAction: "none",
+  userSelect: "none",
+  textAlign: "center",
+  transition:
+    "background 0.1s cubic-bezier(0.33, 0, 0.67, 1), border 0.1s cubic-bezier(0.33, 0, 0.67, 1), color 0.1s cubic-bezier(0.33, 0, 0.67, 1)",
 
   "&:hover": {
-    backgroundColor: active
-      ? "#5855c4"
-      : theme.palette.mode === "dark"
-        ? "rgba(255, 255, 255, 0.08)"
-        : "rgba(0, 0, 0, 0.04)",
+    backgroundColor: active ? "rgb(91, 95, 199)" : "rgba(0, 0, 0, 0.04)",
   },
 
   "&:before": active
@@ -75,7 +76,7 @@ const RailButton = styled(IconButton, {
         transform: "translateY(-50%)",
         width: 3,
         height: 20,
-        backgroundColor: "#5b5fc7",
+        backgroundColor: "rgb(91, 95, 199)",
         borderRadius: "0 2px 2px 0",
       }
     : {},
@@ -133,41 +134,82 @@ export default function TeamsIconRail({
 
   return (
     <RailContainer>
-      <Box sx={{ flex: 1, display: "flex", flexDirection: "column", gap: 0 }}>
+      <Box
+        sx={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          gap: 0,
+          alignItems: "center",
+          width: "100%",
+        }}
+      >
         {railItems.map((item) => (
-          <Tooltip key={item.id} title={item.label} placement="right">
-            <Box
+          <Box
+            key={item.id}
+            sx={{
+              position: "relative",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              width: "100%",
+            }}
+            role="none"
+            aria-label={item.label}
+          >
+            <Badge
+              badgeContent={item.badge}
+              color="error"
+              overlap="circular"
               sx={{
-                position: "relative",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
+                "& .MuiBadge-badge": {
+                  fontSize: "0.625rem",
+                  height: 16,
+                  minWidth: 16,
+                  right: 8,
+                  top: 8,
+                  backgroundColor: "rgb(204, 65, 37)",
+                  color: "white",
+                  fontWeight: 600,
+                },
               }}
             >
-              <Badge
-                badgeContent={item.badge}
-                color="error"
-                overlap="circular"
+              <RailButton
+                active={activeSection === item.id}
+                onClick={() => onSectionChange(item.id)}
+                aria-label={item.label}
+                aria-pressed={activeSection === item.id ? "true" : "false"}
+                role="button"
                 sx={{
-                  "& .MuiBadge-badge": {
-                    fontSize: "0.625rem",
-                    height: 16,
-                    minWidth: 16,
-                    right: 8,
-                    top: 8,
-                    backgroundColor: "#cc4125",
-                  },
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexDirection: "column",
+                  gap: 0.5,
+                  fontSize: "10px",
+                  textTransform: "none",
+                  maxWidth: "68px",
+                  minHeight: "56px",
+                  minWidth: "68px",
+                  overflowX: "hidden",
+                  overflowY: "hidden",
+                  paddingBottom: "1px",
+                  paddingLeft: 0,
+                  paddingRight: 0,
+                  paddingTop: 0,
+                  verticalAlign: "middle",
+                  width: "68px",
                 }}
               >
-                <RailButton
-                  active={activeSection === item.id}
-                  onClick={() => onSectionChange(item.id)}
+                <Box
                   sx={{
                     display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                     flexDirection: "column",
-                    gap: 0.5,
-                    fontSize: "10px",
-                    textTransform: "none",
+                    height: "56px",
+                    width: "68px",
+                    pointerEvents: "none",
                   }}
                 >
                   <Box
@@ -175,6 +217,7 @@ export default function TeamsIconRail({
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
+                      textAlign: "center",
                     }}
                   >
                     {item.icon}
@@ -182,119 +225,190 @@ export default function TeamsIconRail({
                   <Box
                     sx={{
                       fontSize: "10px",
-                      lineHeight: 1,
+                      lineHeight: "14px",
                       textAlign: "center",
                       width: "100%",
                       overflow: "hidden",
                       textOverflow: "ellipsis",
                       whiteSpace: "nowrap",
-                      maxWidth: 44,
+                      maxWidth: 60,
+                      marginLeft: "7px",
+                      marginRight: "7px",
+                      alignItems: "center",
+                      color:
+                        activeSection === item.id ? "white" : "rgb(97, 97, 97)",
+                      pointerEvents: "none",
                     }}
                   >
                     {item.label}
                   </Box>
-                </RailButton>
-              </Badge>
-            </Box>
-          </Tooltip>
+                </Box>
+              </RailButton>
+            </Badge>
+          </Box>
         ))}
 
         <Divider
-          sx={{
-            width: 32,
-            my: 1,
-            backgroundColor: (theme) =>
-              theme.palette.mode === "dark" ? "#444" : "#d1d1d1",
-          }}
+          sx={{ width: 32, my: 1, backgroundColor: "rgb(209, 209, 209)" }}
         />
 
-        <Tooltip title="More apps" placement="right">
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            width: "100%",
+          }}
+        >
           <RailButton
             sx={{
-              display: "flex",
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
               flexDirection: "column",
               gap: 0.5,
               fontSize: "10px",
               textTransform: "none",
+              maxWidth: "32px",
+              minWidth: "68px",
+              overflowX: "hidden",
+              overflowY: "hidden",
+              paddingBottom: "5px",
+              paddingLeft: 0,
+              paddingRight: 0,
+              paddingTop: 0,
+              verticalAlign: "middle",
+              width: "68px",
             }}
+            aria-haspopup="dialog"
+            aria-label="More apps"
+            tabIndex={0}
           >
             <Box
               sx={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                flexDirection: "column",
+                height: "56px",
+                width: "68px",
+                pointerEvents: "none",
               }}
             >
-              <MoreHorizontal size={24} />
-            </Box>
-            <Box
-              sx={{
-                fontSize: "10px",
-                lineHeight: 1,
-                textAlign: "center",
-                width: "100%",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                whiteSpace: "nowrap",
-                maxWidth: 44,
-              }}
-            >
-              More
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                }}
+              >
+                <MoreHorizontal size={24} />
+              </Box>
+              <Box
+                sx={{
+                  fontSize: "10px",
+                  lineHeight: "14px",
+                  textAlign: "center",
+                  width: "100%",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                  maxWidth: 60,
+                  marginLeft: "7px",
+                  marginRight: "7px",
+                  alignItems: "center",
+                  color: "rgb(97, 97, 97)",
+                  pointerEvents: "none",
+                }}
+              >
+                {/* Empty span for More apps - no text in actual Teams */}
+              </Box>
             </Box>
           </RailButton>
-        </Tooltip>
 
-        <Divider
-          sx={{
-            width: 32,
-            my: 1,
-            backgroundColor: (theme) =>
-              theme.palette.mode === "dark" ? "#444" : "#d1d1d1",
-          }}
-        />
-
-        <Tooltip title="Apps" placement="right">
           <RailButton
             sx={{
-              display: "flex",
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
               flexDirection: "column",
               gap: 0.5,
               fontSize: "10px",
               textTransform: "none",
+              maxWidth: "68px",
+              minHeight: "56px",
+              minWidth: "68px",
+              overflowX: "hidden",
+              overflowY: "hidden",
+              paddingBottom: "1px",
+              paddingLeft: 0,
+              paddingRight: 0,
+              paddingTop: 0,
+              verticalAlign: "middle",
+              width: "68px",
             }}
+            aria-label="Apps"
+            aria-pressed="false"
+            role="button"
           >
             <Box
               sx={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                flexDirection: "column",
+                height: "56px",
+                width: "68px",
+                pointerEvents: "none",
               }}
             >
-              <Plus size={24} />
-            </Box>
-            <Box
-              sx={{
-                fontSize: "10px",
-                lineHeight: 1,
-                textAlign: "center",
-                width: "100%",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                whiteSpace: "nowrap",
-                maxWidth: 44,
-              }}
-            >
-              Apps
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                }}
+              >
+                <Plus size={24} />
+              </Box>
+              <Box
+                sx={{
+                  fontSize: "10px",
+                  lineHeight: "14px",
+                  textAlign: "center",
+                  width: "100%",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                  maxWidth: 60,
+                  marginLeft: "7px",
+                  marginRight: "7px",
+                  alignItems: "center",
+                  color: "rgb(97, 97, 97)",
+                  pointerEvents: "none",
+                }}
+              >
+                Apps
+              </Box>
             </Box>
           </RailButton>
-        </Tooltip>
+        </Box>
       </Box>
 
       {/* User Avatar at bottom */}
-      <Tooltip title="Account" placement="right">
-        <IconButton sx={{ mt: "auto", mb: 1, position: "relative" }}>
+      <Box sx={{ marginTop: "auto", marginBottom: 1 }}>
+        <IconButton sx={{ position: "relative" }}>
           <Avatar
-            sx={{ width: 28, height: 28, fontSize: "12px", fontWeight: "bold" }}
+            sx={{
+              width: 32,
+              height: 32,
+              fontSize: "12px",
+              fontWeight: "bold",
+              backgroundColor: "rgb(230, 230, 230)",
+              color: "rgb(97, 97, 97)",
+            }}
           >
             TL
           </Avatar>
@@ -312,7 +426,7 @@ export default function TeamsIconRail({
             }}
           />
         </IconButton>
-      </Tooltip>
+      </Box>
     </RailContainer>
   );
 }
