@@ -71,8 +71,38 @@ export default function TeamsDashboard() {
               })}
             >
               <Routes>
-                <Route index element={<TeamsActivityView />} />
-                <Route path="activity" element={<TeamsActivityView />} />
+                <Route
+                  index
+                  element={
+                    <Stack
+                      spacing={2}
+                      sx={{
+                        alignItems: "center",
+                        mx: 3,
+                        pb: 5,
+                        pt: 2,
+                      }}
+                    >
+                      <TeamsActivityView />
+                    </Stack>
+                  }
+                />
+                <Route
+                  path="activity"
+                  element={
+                    <Stack
+                      spacing={2}
+                      sx={{
+                        alignItems: "center",
+                        mx: 3,
+                        pb: 5,
+                        pt: 2,
+                      }}
+                    >
+                      <TeamsActivityView />
+                    </Stack>
+                  }
+                />
                 <Route
                   path="chat"
                   element={
@@ -92,12 +122,102 @@ export default function TeamsDashboard() {
                     </>
                   }
                 />
-                <Route path="calendar" element={<TeamsCalendarView />} />
-                <Route path="calls" element={<div>Calls History</div>} />
-                <Route path="customers" element={<Customers />} />
-                <Route path="files" element={<div>File Manager</div>} />
-                <Route path="reports" element={<Reports />} />
-                <Route path="settings" element={<Settings />} />
+                <Route
+                  path="calendar"
+                  element={
+                    <Stack
+                      spacing={2}
+                      sx={{
+                        alignItems: "center",
+                        mx: 3,
+                        pb: 5,
+                        pt: 2,
+                      }}
+                    >
+                      <TeamsCalendarView />
+                    </Stack>
+                  }
+                />
+                <Route
+                  path="calls"
+                  element={
+                    <Stack
+                      spacing={2}
+                      sx={{
+                        alignItems: "center",
+                        mx: 3,
+                        pb: 5,
+                        pt: 2,
+                      }}
+                    >
+                      <div>Calls History</div>
+                    </Stack>
+                  }
+                />
+                <Route
+                  path="customers"
+                  element={
+                    <Stack
+                      spacing={2}
+                      sx={{
+                        alignItems: "center",
+                        mx: 3,
+                        pb: 5,
+                        pt: 2,
+                      }}
+                    >
+                      <Customers />
+                    </Stack>
+                  }
+                />
+                <Route
+                  path="files"
+                  element={
+                    <Stack
+                      spacing={2}
+                      sx={{
+                        alignItems: "center",
+                        mx: 3,
+                        pb: 5,
+                        pt: 2,
+                      }}
+                    >
+                      <div>File Manager</div>
+                    </Stack>
+                  }
+                />
+                <Route
+                  path="reports"
+                  element={
+                    <Stack
+                      spacing={2}
+                      sx={{
+                        alignItems: "center",
+                        mx: 3,
+                        pb: 5,
+                        pt: 2,
+                      }}
+                    >
+                      <Reports />
+                    </Stack>
+                  }
+                />
+                <Route
+                  path="settings"
+                  element={
+                    <Stack
+                      spacing={2}
+                      sx={{
+                        alignItems: "center",
+                        mx: 3,
+                        pb: 5,
+                        pt: 2,
+                      }}
+                    >
+                      <Settings />
+                    </Stack>
+                  }
+                />
               </Routes>
               <Outlet />
             </Box>
