@@ -105,12 +105,12 @@ const ResizeHandle = styled(Box)(({ theme }) => ({
   },
 }));
 
-export default function NewSideMenu({
-  config,
-  width = SIDEBAR_WIDTH,
-  className,
-}: SideMenuProps) {
+export default function NewSideMenu({ config, className }: SideMenuProps) {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const { isOpen } = useMenu();
+  const menuWidth = useMenuWidth();
+  const { transitionDuration, easing } = useMenuAnimation();
 
   const handleMenuItemClick = (item: any) => {
     // Handle menu item clicks if needed
