@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Box } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { Box, useMediaQuery } from "@mui/material";
+import { styled, useTheme } from "@mui/material/styles";
 import { useLocation, useNavigate } from "react-router-dom";
 import TeamsIconRail from "./TeamsIconRail";
 import TeamsSecondarySidebar from "./TeamsSecondarySidebar";
