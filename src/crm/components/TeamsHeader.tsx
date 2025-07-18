@@ -13,7 +13,7 @@ import {
   Typography,
   ClickAwayListener,
 } from "@mui/material";
-import { Search, MoreHorizontal, X, ChevronRight } from "lucide-react";
+import { Search, MoreHorizontal, X, ChevronRight, Grip } from "lucide-react";
 import { styled } from "@mui/material/styles";
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
@@ -36,7 +36,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   justifyContent: "space-between",
   alignItems: "center",
   paddingLeft: "0px",
-  paddingRight: "8px",
+  paddingRight: "20px",
   minHeight: 48,
   height: 48,
   maxHeight: "100%",
@@ -69,7 +69,7 @@ const AppLauncherButton = styled(IconButton)(({ theme }) => ({
   gridRow: "primary",
   justifyContent: "center",
   lineHeight: "20px",
-  marginLeft: "2px",
+  marginLeft: "-2px",
   marginTop: 0,
   maxWidth: "32px",
   minWidth: "32px",
@@ -299,143 +299,8 @@ const SearchPopover = styled(Paper)(({ theme }) => ({
   width: "100%",
 }));
 
-// Teams Logo SVG Component
-const TeamsLogo = () => (
-  <svg
-    width="20"
-    height="20"
-    viewBox="2 2 20 20"
-    xmlns="http://www.w3.org/2000/svg"
-    role="presentation"
-    style={{
-      marginLeft: "4px",
-      verticalAlign: "middle",
-      gridArea: "secondary",
-      gridRow: "secondary",
-      color: "rgb(91, 95, 199)",
-      fill: "rgb(91, 95, 199)",
-      fontFamily:
-        '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
-      fontSize: "20px",
-      height: "1em",
-      lineHeight: "0px",
-      textAlign: "left",
-      textWrap: "nowrap",
-      transformOrigin: "0% 50%",
-      transitionBehavior: "allow-discrete",
-      transitionDuration: "0.25s",
-      transitionProperty: "visibility, width",
-      transitionTimingFunction: "cubic-bezier(0.8, 0, 0.78, 1)",
-      userSelect: "none",
-      whiteSpace: "nowrap",
-      width: "1em",
-    }}
-  >
-    <path
-      d="M21.0344 10.0012H16.8734L15.7124 10.9402V15.5972C15.7124 17.3262 17.1134 18.7282 18.8424 18.7282C20.5724 18.7282 21.9734 17.3262 21.9734 15.5972V10.9402C21.9734 10.4222 21.5534 10.0012 21.0344 10.0012Z"
-      fill="#5059C9"
-    />
-    <path
-      d="M22 7C22 8.104 21.105 9 20 9C18.895 9 18 8.104 18 7C18 5.896 18.895 5 20 5C21.105 5 22 5.896 22 7Z"
-      fill="#5059C9"
-    />
-    <path
-      d="M9.89214 10.0046H17.0961C17.5921 10.0046 17.9941 10.4066 17.9941 10.9026V16.5946C17.9941 19.0306 16.0201 21.0046 13.5841 21.0046H13.4041C10.9681 21.0046 8.99414 19.0306 8.99414 16.5946V10.9026C8.99414 10.4066 9.39614 10.0046 9.89214 10.0046Z"
-      fill="#7B83EB"
-    />
-    <path
-      d="M16.9065 5.99999C16.9065 7.60499 15.6055 8.90699 13.9995 8.90699C12.3945 8.90699 11.0935 7.60499 11.0935 5.99999C11.0935 4.39499 12.3945 3.09299 13.9995 3.09299C15.6055 3.09299 16.9065 4.39499 16.9065 5.99999Z"
-      fill="#7B83EB"
-    />
-    <path
-      opacity="0.5"
-      fillRule="evenodd"
-      clipRule="evenodd"
-      d="M15.0001 8.6814V8.0004C15.0001 7.4504 14.5281 7.0004 13.9511 7.0004H11.2711C11.6881 8.0944 12.7391 8.8754 13.9801 8.8754C14.3401 8.8754 14.6821 8.8014 15.0001 8.6814ZM8.99414 10.9024C8.99414 10.4064 9.39614 10.0044 9.89214 10.0044H15.0001V17.8394C15.0001 18.3894 14.3821 19.0004 13.7451 19.0004H9.71514C9.26214 18.3074 8.99414 17.4834 8.99414 16.5944V10.9024Z"
-      fill="black"
-    />
-    <path
-      d="M3 18C2.45 18 2 17.55 2 17V7C2 6.45 2.45 6 3 6H13C13.55 6 14 6.45 14 7V17C14 17.55 13.55 18 13 18H3Z"
-      fill="#4B53BC"
-    />
-    <path
-      d="M11.0001 10H8.83511V15.82H7.41211V10H5.23511V8.57001H11.0001V10Z"
-      fill="white"
-    />
-  </svg>
-);
-
-// App Launcher Icon with states (filled/regular)
-const AppLauncherIcon = ({ isOpen }: { isOpen: boolean }) => (
-  <>
-    {/* Filled state when open */}
-    <svg
-      fontSize="20px"
-      fill="currentColor"
-      aria-hidden="true"
-      width="1em"
-      height="1em"
-      viewBox="0 0 20 20"
-      xmlns="http://www.w3.org/2000/svg"
-      style={{
-        display: isOpen ? "block" : "none",
-        borderColor: "rgb(36, 36, 36)",
-        color: "rgb(36, 36, 36)",
-        cursor: "default",
-        fill: "rgb(36, 36, 36)",
-        fontFamily:
-          '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
-        fontSize: "20px",
-        fontWeight: 600,
-        height: "1em",
-        lineHeight: "0px",
-        textAlign: "center",
-        textWrap: "nowrap",
-        userSelect: "none",
-        whiteSpace: "nowrap",
-        width: "1em",
-      }}
-    >
-      <path
-        d="M5.75 4a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0Zm0 6a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0ZM4 17.75a1.75 1.75 0 1 0 0-3.5 1.75 1.75 0 0 0 0 3.5ZM11.75 4a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0ZM10 11.75a1.75 1.75 0 1 0 0-3.5 1.75 1.75 0 0 0 0 3.5ZM11.75 16a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0ZM16 5.75a1.75 1.75 0 1 0 0-3.5 1.75 1.75 0 0 0 0 3.5ZM17.75 10a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0ZM16 17.75a1.75 1.75 0 1 0 0-3.5 1.75 1.75 0 0 0 0 3.5Z"
-        fill="currentColor"
-      />
-    </svg>
-    {/* Regular state when closed */}
-    <svg
-      fontSize="20px"
-      fill="currentColor"
-      aria-hidden="true"
-      width="1em"
-      height="1em"
-      viewBox="0 0 20 20"
-      xmlns="http://www.w3.org/2000/svg"
-      style={{
-        display: isOpen ? "none" : "block",
-        borderColor: "rgb(36, 36, 36)",
-        color: "rgb(36, 36, 36)",
-        cursor: "default",
-        fill: "rgb(36, 36, 36)",
-        fontFamily:
-          '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
-        fontSize: "20px",
-        fontWeight: 600,
-        height: "1em",
-        lineHeight: "0px",
-        textAlign: "center",
-        textWrap: "nowrap",
-        userSelect: "none",
-        whiteSpace: "nowrap",
-        width: "1em",
-      }}
-    >
-      <path
-        d="M5.25 4a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0Zm12 12a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0ZM16 11.25a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM17.25 4a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0ZM10 17.25a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM11.25 10a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0ZM10 5.25a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM5.25 16a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0ZM4 11.25a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5Z"
-        fill="currentColor"
-      />
-    </svg>
-  </>
-);
+// App Launcher Icon using Grip from lucide-react
+const AppLauncherIcon = () => <Grip size={20} color="rgb(36, 36, 36)" />;
 
 // Close Icon for app launcher
 const CloseIcon = () => (
@@ -731,10 +596,9 @@ export default function TeamsHeader() {
                     width: "20px",
                   }}
                 >
-                  <AppLauncherIcon isOpen={appLauncherOpen} />
+                  <AppLauncherIcon />
                 </span>
               </AppLauncherButton>
-              <TeamsLogo />
             </Box>
 
             {/* App Launcher Drawer */}
@@ -1126,7 +990,6 @@ export default function TeamsHeader() {
                               zIndex: 2,
                               backgroundColor: "transparent",
                             }}
-                            readOnly
                           />
                         </Box>
                       </Box>
@@ -1377,7 +1240,7 @@ export default function TeamsHeader() {
                 >
                   <ProfileButton
                     type="button"
-                    aria-label="Hồ sơ của bạn, trạng thái Trực tuyến"
+                    aria-label="Hồ sơ của bạn, trạng thái Tr��c tuyến"
                     role="button"
                     tabIndex={0}
                     aria-expanded="false"
