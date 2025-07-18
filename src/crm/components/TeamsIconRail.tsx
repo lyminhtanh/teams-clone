@@ -315,7 +315,11 @@ export default function TeamsIconRail({
                 width: "68px",
               }}
               aria-haspopup="menu"
-              aria-label="Menu settings"
+              aria-label={
+                hasOverflowItems
+                  ? `More apps (${overflowItems.length})`
+                  : "Menu settings"
+              }
               aria-expanded={moreMenuOpen ? "true" : undefined}
               tabIndex={0}
             >
