@@ -409,7 +409,7 @@ export default function ChatActionBar() {
                   },
                 }}
               >
-                <MenuItem onClick={handleMobileMenuClose}>
+                <MenuItem dense onClick={handleMobileMenuClose}>
                   <List size={16} style={{ marginRight: 8 }} />
                   Chi tiết cuộc họp
                 </MenuItem>
