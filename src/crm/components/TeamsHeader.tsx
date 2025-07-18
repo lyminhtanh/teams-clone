@@ -21,6 +21,7 @@ import {
   Grip,
   ChartNoAxesGantt,
   Megaphone,
+  ArrowLeft,
 } from "lucide-react";
 import { styled } from "@mui/material/styles";
 
