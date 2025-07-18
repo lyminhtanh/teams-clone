@@ -12,6 +12,8 @@ import NewCrmHeader from "./components/NewCrmHeader";
 import NewSideMenu from "./components/NewSideMenu";
 import CrmMainDashboard from "./components/CrmMainDashboard";
 import Customers from "./pages/Customers";
+import CustomersIndividual from "./pages/CustomersIndividual";
+import CustomersCorporate from "./pages/CustomersCorporate";
 import Deals from "./pages/Deals";
 import Contacts from "./pages/Contacts";
 import Tasks from "./pages/Tasks";
