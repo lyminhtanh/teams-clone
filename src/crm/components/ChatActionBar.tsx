@@ -6,7 +6,7 @@ import {
   Typography,
   Divider,
   useMediaQuery,
-  Popover,
+  Menu,
   MenuItem,
   MenuList,
 } from "@mui/material";
@@ -413,7 +413,7 @@ export default function ChatActionBar() {
 
                 <ActionButton
                   type="button"
-                  aria-label="Mở chi tiết cuộc trò chuy���n (⌃ ⌘ E)"
+                  aria-label="Mở chi tiết cuộc trò chuyện (⌃ ⌘ E)"
                   aria-keyshortcuts="⌃ ⌘ E"
                 >
                   <PanelRightOpen size={20} />
