@@ -608,34 +608,52 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
               }}
             >
               {isMobile ? (
-                <AppLauncherButton
-                  onClick={onMobileMenuToggle}
-                  aria-label="Open mobile menu"
-                >
-                  <span
-                    style={{
-                      alignItems: "center",
-                      borderColor: "rgb(36, 36, 36)",
-                      color: "rgb(36, 36, 36)",
-                      cursor: "default",
-                      display: "flex",
-                      fontFamily:
-                        '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
-                      fontSize: "20px",
-                      fontWeight: 600,
-                      height: "20px",
-                      justifyContent: "center",
-                      lineHeight: "20px",
-                      textAlign: "center",
-                      textWrap: "nowrap",
-                      userSelect: "none",
-                      whiteSpace: "nowrap",
-                      width: "20px",
-                    }}
+                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                  <AppLauncherButton
+                    onClick={onMobileMenuToggle}
+                    aria-label="Open mobile menu"
                   >
-                    <ChartNoAxesGantt size={20} color="rgb(36, 36, 36)" />
-                  </span>
-                </AppLauncherButton>
+                    <span
+                      style={{
+                        alignItems: "center",
+                        borderColor: "rgb(36, 36, 36)",
+                        color: "rgb(36, 36, 36)",
+                        cursor: "default",
+                        display: "flex",
+                        fontFamily:
+                          '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                        fontSize: "20px",
+                        fontWeight: 600,
+                        height: "20px",
+                        justifyContent: "center",
+                        lineHeight: "20px",
+                        textAlign: "center",
+                        textWrap: "nowrap",
+                        userSelect: "none",
+                        whiteSpace: "nowrap",
+                        width: "20px",
+                      }}
+                    >
+                      <ChartNoAxesGantt size={20} color="rgb(36, 36, 36)" />
+                    </span>
+                  </AppLauncherButton>
+
+                  {/* Mobile search icon - compact, no background */}
+                  <IconButton
+                    onClick={handleSearchToggle}
+                    sx={{
+                      width: 32,
+                      height: 32,
+                      padding: "4px",
+                      "&:hover": {
+                        backgroundColor: "rgba(0, 0, 0, 0.04)",
+                      },
+                    }}
+                    aria-label="Search"
+                  >
+                    <Search size={20} color="rgb(97, 97, 97)" />
+                  </IconButton>
+                </Box>
               ) : (
                 <AppLauncherButton
                   onClick={handleAppLauncherToggle}
