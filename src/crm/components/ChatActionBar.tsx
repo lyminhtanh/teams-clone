@@ -417,7 +417,7 @@ export default function ChatActionBar() {
                   <Search size={16} style={{ marginRight: 8 }} />
                   Tìm trong cuộc tr�� chuyện
                 </MenuItem>
-                <MenuItem onClick={handleMobileMenuClose}>
+                <MenuItem dense onClick={handleMobileMenuClose}>
                   <PanelRightOpen size={16} style={{ marginRight: 8 }} />
                   Mở chi tiết cuộc trò chuyện
                 </MenuItem>
