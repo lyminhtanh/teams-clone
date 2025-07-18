@@ -286,7 +286,13 @@ export default function TeamsIconRail({
             width: "100%",
           }}
         >
-          <Tooltip title="Menu Settings">
+          <Tooltip
+            title={
+              hasOverflowItems
+                ? `More apps (${overflowItems.length})`
+                : "Menu Settings"
+            }
+          >
             <RailButton
               onClick={handleMoreMenuClick}
               sx={{
