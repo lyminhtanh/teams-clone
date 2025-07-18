@@ -13,7 +13,14 @@ import {
   Typography,
   ClickAwayListener,
 } from "@mui/material";
-import { Search, MoreHorizontal, X, ChevronRight, Grip } from "lucide-react";
+import {
+  Search,
+  MoreHorizontal,
+  X,
+  ChevronRight,
+  Grip,
+  ChartNoAxesGantt,
+} from "lucide-react";
 import { styled } from "@mui/material/styles";
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
@@ -282,21 +289,23 @@ const AppLauncherDrawer = styled(Paper)(({ theme }) => ({
 }));
 
 // Search Popover styled
-const SearchPopover = styled(Paper)(({ theme }) => ({
-  position: "absolute",
-  top: "100%",
+const SearchPopover = styled(Paper, {
+  shouldForwardProp: (prop) => prop !== "isMobile",
+})<{ isMobile?: boolean }>(({ theme, isMobile }) => ({
+  position: isMobile ? "fixed" : "absolute",
+  top: isMobile ? "48px" : "100%",
   left: 0,
   right: 0,
-  marginTop: "2px",
+  marginTop: isMobile ? "0" : "2px",
   maxHeight: "400px",
   backgroundColor: "rgb(255, 255, 255)",
-  borderRadius: "4px",
+  borderRadius: isMobile ? "0" : "4px",
   boxShadow:
     "rgba(0, 0, 0, 0.12) 0px 2px 8px, rgba(0, 0, 0, 0.14) 0px 8px 16px",
   overflowX: "hidden",
   overflowY: "auto",
   zIndex: 1010,
-  width: "100%",
+  width: isMobile ? "100vw" : "100%",
 }));
 
 // App Launcher Icon using Grip from lucide-react
@@ -509,7 +518,15 @@ const recentSearches = [
   },
 ];
 
-export default function TeamsHeader() {
+interface TeamsHeaderProps {
+  isMobile?: boolean;
+  onMobileMenuToggle?: () => void;
+}
+
+export default function TeamsHeader({
+  isMobile = false,
+  onMobileMenuToggle,
+}: TeamsHeaderProps = {}) {
   const [appLauncherOpen, setAppLauncherOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
@@ -569,41 +586,72 @@ export default function TeamsHeader() {
                 whiteSpace: "nowrap",
               }}
             >
-              <AppLauncherButton
-                onClick={handleAppLauncherToggle}
-                aria-expanded={appLauncherOpen}
-                aria-label={
-                  appLauncherOpen ? "Close app launcher" : "Open app launcher"
-                }
-              >
-                <span
-                  style={{
-                    alignItems: "center",
-                    borderColor: "rgb(36, 36, 36)",
-                    color: "rgb(36, 36, 36)",
-                    cursor: "default",
-                    display: "flex",
-                    fontFamily:
-                      '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
-                    fontSize: "20px",
-                    fontWeight: 600,
-                    height: "20px",
-                    justifyContent: "center",
-                    lineHeight: "20px",
-                    textAlign: "center",
-                    textWrap: "nowrap",
-                    userSelect: "none",
-                    whiteSpace: "nowrap",
-                    width: "20px",
-                  }}
+              {isMobile ? (
+                <AppLauncherButton
+                  onClick={onMobileMenuToggle}
+                  aria-label="Open mobile menu"
                 >
-                  <AppLauncherIcon />
-                </span>
-              </AppLauncherButton>
+                  <span
+                    style={{
+                      alignItems: "center",
+                      borderColor: "rgb(36, 36, 36)",
+                      color: "rgb(36, 36, 36)",
+                      cursor: "default",
+                      display: "flex",
+                      fontFamily:
+                        '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                      fontSize: "20px",
+                      fontWeight: 600,
+                      height: "20px",
+                      justifyContent: "center",
+                      lineHeight: "20px",
+                      textAlign: "center",
+                      textWrap: "nowrap",
+                      userSelect: "none",
+                      whiteSpace: "nowrap",
+                      width: "20px",
+                    }}
+                  >
+                    <ChartNoAxesGantt size={20} color="rgb(36, 36, 36)" />
+                  </span>
+                </AppLauncherButton>
+              ) : (
+                <AppLauncherButton
+                  onClick={handleAppLauncherToggle}
+                  aria-expanded={appLauncherOpen}
+                  aria-label={
+                    appLauncherOpen ? "Close app launcher" : "Open app launcher"
+                  }
+                >
+                  <span
+                    style={{
+                      alignItems: "center",
+                      borderColor: "rgb(36, 36, 36)",
+                      color: "rgb(36, 36, 36)",
+                      cursor: "default",
+                      display: "flex",
+                      fontFamily:
+                        '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                      fontSize: "20px",
+                      fontWeight: 600,
+                      height: "20px",
+                      justifyContent: "center",
+                      lineHeight: "20px",
+                      textAlign: "center",
+                      textWrap: "nowrap",
+                      userSelect: "none",
+                      whiteSpace: "nowrap",
+                      width: "20px",
+                    }}
+                  >
+                    <AppLauncherIcon />
+                  </span>
+                </AppLauncherButton>
+              )}
             </Box>
 
             {/* App Launcher Drawer */}
-            {appLauncherOpen && (
+            {!isMobile && appLauncherOpen && (
               <AppLauncherDrawer elevation={8}>
                 {/* Header */}
                 <Box
@@ -1003,7 +1051,7 @@ export default function TeamsHeader() {
 
               {/* Search Popover */}
               {searchOpen && (
-                <SearchPopover>
+                <SearchPopover isMobile={isMobile}>
                   <Box sx={{ padding: "16px" }}>
                     {/* Search Categories */}
                     <Box sx={{ marginBottom: "16px" }}>
