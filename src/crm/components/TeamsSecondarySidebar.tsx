@@ -47,6 +47,11 @@ const SecondaryContainer = styled(Box, {
   }),
   position: "sticky",
   top: 48,
+  [theme.breakpoints.down("md")]: {
+    height: "100%",
+    position: "relative",
+    top: 0,
+  },
 }));
 
 const SectionHeader = styled(Box)(({ theme }) => ({
