@@ -13,18 +13,19 @@ import {
   Button,
 } from "@mui/material";
 import {
-  SearchRounded,
-  SettingsRounded,
-  HelpOutlineRounded,
-  NotificationsRounded,
-  MoreVertRounded,
-  AppsRounded,
-} from "@mui/icons-material";
+  Search,
+  Settings,
+  HelpCircle,
+  Bell,
+  MoreHorizontal,
+  Grid3X3,
+  Circle,
+} from "lucide-react";
 import { styled } from "@mui/material/styles";
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#2b2b2b" : "#464775",
-  color: "white",
+  backgroundColor: theme.palette.mode === "dark" ? "#2b2b2b" : "#ebeaea",
+  color: theme.palette.mode === "dark" ? "white" : "#424242",
   boxShadow: "none",
   borderBottom: `1px solid ${theme.palette.divider}`,
   position: "sticky",
@@ -45,7 +46,9 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 const SearchContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-  backgroundColor: "rgba(255, 255, 255, 0.1)",
+  backgroundColor:
+    theme.palette.mode === "dark" ? "rgba(255, 255, 255, 0.1)" : "#ffffff",
+  border: `1px solid ${theme.palette.divider}`,
   borderRadius: 4,
   width: "100%",
   maxWidth: 540,
@@ -55,7 +58,7 @@ const SearchContainer = styled(Box)(({ theme }) => ({
 
 const SearchField = styled(TextField)(({ theme }) => ({
   "& .MuiOutlinedInput-root": {
-    color: "white",
+    color: theme.palette.mode === "dark" ? "white" : "#424242",
     fontSize: "0.875rem",
     border: "none",
     "& fieldset": {
@@ -68,17 +71,21 @@ const SearchField = styled(TextField)(({ theme }) => ({
       border: "none",
     },
     "& input::placeholder": {
-      color: "rgba(255, 255, 255, 0.7)",
+      color:
+        theme.palette.mode === "dark" ? "rgba(255, 255, 255, 0.7)" : "#757575",
       opacity: 1,
     },
   },
 }));
 
 const HeaderButton = styled(IconButton)(({ theme }) => ({
-  color: "white",
+  color: theme.palette.mode === "dark" ? "white" : "#616161",
   padding: theme.spacing(0.75),
   "&:hover": {
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    backgroundColor:
+      theme.palette.mode === "dark"
+        ? "rgba(255, 255, 255, 0.1)"
+        : "rgba(0, 0, 0, 0.04)",
   },
 }));
 
@@ -89,20 +96,40 @@ export default function TeamsHeader() {
         {/* Left Section */}
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
           <HeaderButton>
-            <AppsRounded />
+            <Grid3X3 size={20} />
           </HeaderButton>
 
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{
-              fontWeight: 600,
-              fontSize: "1.125rem",
-              color: "white",
-            }}
-          >
-            Microsoft Teams
-          </Typography>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            {/* Teams Logo */}
+            <Box
+              sx={{
+                width: 20,
+                height: 20,
+                background: "linear-gradient(135deg, #5b5fc7 0%, #7b83eb 100%)",
+                borderRadius: 1,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "white",
+                fontSize: "12px",
+                fontWeight: "bold",
+              }}
+            >
+              T
+            </Box>
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{
+                fontWeight: 600,
+                fontSize: "1rem",
+                color: (theme) =>
+                  theme.palette.mode === "dark" ? "white" : "#424242",
+              }}
+            >
+              Microsoft Teams
+            </Typography>
+          </Box>
         </Box>
 
         {/* Center Section - Search */}
@@ -115,7 +142,7 @@ export default function TeamsHeader() {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <SearchRounded sx={{ color: "rgba(255, 255, 255, 0.7)" }} />
+                  <Search size={16} color={"#757575"} />
                 </InputAdornment>
               ),
             }}
@@ -125,17 +152,11 @@ export default function TeamsHeader() {
         {/* Right Section */}
         <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
           <HeaderButton>
-            <HelpOutlineRounded />
+            <Settings size={20} />
           </HeaderButton>
 
-          <Badge badgeContent={3} color="error">
-            <HeaderButton>
-              <NotificationsRounded />
-            </HeaderButton>
-          </Badge>
-
           <HeaderButton>
-            <SettingsRounded />
+            <MoreHorizontal size={20} />
           </HeaderButton>
 
           <Divider
@@ -144,19 +165,39 @@ export default function TeamsHeader() {
             sx={{
               mx: 1,
               height: 24,
-              backgroundColor: "rgba(255, 255, 255, 0.2)",
+              backgroundColor: (theme) =>
+                theme.palette.mode === "dark"
+                  ? "rgba(255, 255, 255, 0.2)"
+                  : "rgba(0, 0, 0, 0.12)",
             }}
           />
 
-          <HeaderButton>
-            <MoreVertRounded />
-          </HeaderButton>
-
-          <HeaderButton sx={{ p: 0.5, ml: 0.5 }}>
+          <HeaderButton sx={{ p: 0.5, ml: 0.5, position: "relative" }}>
             <Avatar
-              sx={{ width: 28, height: 28 }}
-              src="https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/62be5649228c59d8da1b0e2e/1069c4dc-ca51-4ade-89f5-497d300f5004/128"
-            />
+              sx={{
+                width: 28,
+                height: 28,
+                fontSize: "12px",
+                fontWeight: "bold",
+              }}
+            >
+              TL
+            </Avatar>
+            {/* Status indicator */}
+            <Box
+              sx={{
+                position: "absolute",
+                bottom: 2,
+                right: 2,
+                width: 8,
+                height: 8,
+                borderRadius: "50%",
+                backgroundColor: "#92c353",
+                border: "2px solid white",
+              }}
+            >
+              <Circle size={4} fill="#92c353" color="#92c353" />
+            </Box>
           </HeaderButton>
         </Box>
       </StyledToolbar>
