@@ -285,8 +285,8 @@ export default function TeamsIconRail({
             alignItems: "center",
             width: "100%",
           }}
-        >
-                    <Tooltip title={hasOverflowItems ? `More apps (${overflowItems.length})` : "Menu Settings"}>
+                >
+          <Tooltip title={hasOverflowItems ? `More apps (${overflowItems.length})` : "Menu Settings"}>
             <Badge
               badgeContent={hasOverflowItems ? overflowItems.length : null}
               color="primary"
