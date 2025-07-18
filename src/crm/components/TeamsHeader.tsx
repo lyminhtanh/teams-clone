@@ -565,6 +565,7 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
       if (event.key === "Escape") {
         setAppLauncherOpen(false);
         setSearchOpen(false);
+        setMobileSearchExpanded(false);
       }
     };
 
