@@ -588,6 +588,9 @@ export default function TeamsIconRail({
           <Typography variant="caption" display="block" color="text.secondary">
             • Coverage: {menuStats.enabledPercentage}%
           </Typography>
+          <Typography variant="caption" display="block" color="text.secondary">
+            • Visible: {visibleItems.length}, Hidden: {overflowItems.length}
+          </Typography>
         </Box>
       </Menu>
 
