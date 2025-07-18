@@ -986,7 +986,7 @@ export default function TeamsHeader() {
                               paddingRight: "2px",
                               paddingTop: "8px",
                               textWrap: "nowrap",
-                              userSelect: "none",
+                              userSelect: "text",
                               whiteSpace: "nowrap",
                               width: "100%",
                               zIndex: 2,
