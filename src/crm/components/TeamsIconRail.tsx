@@ -37,6 +37,12 @@ const RailContainer = styled(Box)(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
   fontFamily:
     '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+  [theme.breakpoints.down("md")]: {
+    height: "100%",
+    position: "relative",
+    top: 0,
+    marginTop: 0,
+  },
 }));
 
 const RailButton = styled(IconButton, {
