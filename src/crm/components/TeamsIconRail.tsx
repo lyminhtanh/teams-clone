@@ -165,7 +165,7 @@ export default function TeamsIconRail({
           width: "100%",
         }}
       >
-        {enabledMenuItems.map((item) => {
+        {visibleItems.map((item) => {
           const IconComponent = item.icon;
           return (
             <Box
