@@ -388,7 +388,7 @@ export const defaultMenuItems: MenuItem[] = [
   },
   {
     id: "tools",
-    icon: Tool,
+    icon: Wrench,
     label: "Tools",
     badge: null,
     category: "utilities",
