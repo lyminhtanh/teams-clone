@@ -1047,7 +1047,7 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
                 <button type="submit" hidden style={{ display: "none" }} />
               </Box>
 
-                            {/* Search Popover */}
+              {/* Search Popover */}
               {searchOpen && (
                 <>
                   {isMobile && (
@@ -1065,106 +1065,107 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
                     />
                   )}
                   <SearchPopover isMobile={isMobile}>
-                  <Box sx={{ padding: "16px" }}>
-                    {/* Search Categories */}
-                    <Box sx={{ marginBottom: "16px" }}>
-                      <Box
-                        sx={{ display: "flex", gap: "8px", flexWrap: "wrap" }}
-                      >
-                        {searchCategories.map((category) => (
-                          <Chip
-                            key={category}
-                            label={category}
-                            size="small"
-                            sx={{
-                              backgroundColor: "rgb(245, 245, 245)",
-                              color: "rgb(36, 36, 36)",
-                              border: "1px solid rgb(224, 224, 224)",
-                              "&:hover": {
-                                backgroundColor: "rgb(240, 240, 240)",
-                              },
-                            }}
-                          />
-                        ))}
-                      </Box>
-                    </Box>
-
-                    {/* Recent Searches */}
-                    <Typography
-                      variant="subtitle2"
-                      sx={{
-                        color: "rgb(97, 97, 97)",
-                        fontSize: "12px",
-                        fontWeight: 600,
-                        marginBottom: "8px",
-                        textTransform: "uppercase",
-                      }}
-                    >
-                      Thứ được đề xuất
-                    </Typography>
-
-                    <List sx={{ padding: 0 }}>
-                      {recentSearches.map((search, index) => (
-                        <ListItem
-                          key={index}
-                          sx={{
-                            padding: "8px 0",
-                            cursor: "pointer",
-                            "&:hover": {
-                              backgroundColor: "rgba(0, 0, 0, 0.04)",
-                            },
-                          }}
+                    <Box sx={{ padding: "16px" }}>
+                      {/* Search Categories */}
+                      <Box sx={{ marginBottom: "16px" }}>
+                        <Box
+                          sx={{ display: "flex", gap: "8px", flexWrap: "wrap" }}
                         >
-                          <ListItemIcon sx={{ minWidth: "40px" }}>
-                            <Box
+                          {searchCategories.map((category) => (
+                            <Chip
+                              key={category}
+                              label={category}
+                              size="small"
                               sx={{
-                                width: "28px",
-                                height: "28px",
-                                borderRadius: "50%",
-                                backgroundColor:
-                                  search.type === "TL"
-                                    ? "rgb(235, 153, 153)"
-                                    : "rgb(153, 153, 235)",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                color: "white",
-                                fontSize: "12px",
-                                fontWeight: 600,
-                              }}
-                            >
-                              {search.type}
-                            </Box>
-                          </ListItemIcon>
-                          <ListItemText
-                            primary={search.content}
-                            secondary={search.user}
-                            sx={{
-                              "& .MuiListItemText-primary": {
-                                fontSize: "14px",
+                                backgroundColor: "rgb(245, 245, 245)",
                                 color: "rgb(36, 36, 36)",
-                                fontWeight: 400,
-                              },
-                              "& .MuiListItemText-secondary": {
-                                fontSize: "12px",
-                                color: "rgb(97, 97, 97)",
-                              },
-                            }}
-                          />
-                          <Typography
-                            variant="caption"
+                                border: "1px solid rgb(224, 224, 224)",
+                                "&:hover": {
+                                  backgroundColor: "rgb(240, 240, 240)",
+                                },
+                              }}
+                            />
+                          ))}
+                        </Box>
+                      </Box>
+
+                      {/* Recent Searches */}
+                      <Typography
+                        variant="subtitle2"
+                        sx={{
+                          color: "rgb(97, 97, 97)",
+                          fontSize: "12px",
+                          fontWeight: 600,
+                          marginBottom: "8px",
+                          textTransform: "uppercase",
+                        }}
+                      >
+                        Thứ được đề xuất
+                      </Typography>
+
+                      <List sx={{ padding: 0 }}>
+                        {recentSearches.map((search, index) => (
+                          <ListItem
+                            key={index}
                             sx={{
-                              color: "rgb(97, 97, 97)",
-                              fontSize: "12px",
+                              padding: "8px 0",
+                              cursor: "pointer",
+                              "&:hover": {
+                                backgroundColor: "rgba(0, 0, 0, 0.04)",
+                              },
                             }}
                           >
-                            {search.time}
-                          </Typography>
-                        </ListItem>
-                      ))}
-                    </List>
-                  </Box>
-                </SearchPopover>
+                            <ListItemIcon sx={{ minWidth: "40px" }}>
+                              <Box
+                                sx={{
+                                  width: "28px",
+                                  height: "28px",
+                                  borderRadius: "50%",
+                                  backgroundColor:
+                                    search.type === "TL"
+                                      ? "rgb(235, 153, 153)"
+                                      : "rgb(153, 153, 235)",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  color: "white",
+                                  fontSize: "12px",
+                                  fontWeight: 600,
+                                }}
+                              >
+                                {search.type}
+                              </Box>
+                            </ListItemIcon>
+                            <ListItemText
+                              primary={search.content}
+                              secondary={search.user}
+                              sx={{
+                                "& .MuiListItemText-primary": {
+                                  fontSize: "14px",
+                                  color: "rgb(36, 36, 36)",
+                                  fontWeight: 400,
+                                },
+                                "& .MuiListItemText-secondary": {
+                                  fontSize: "12px",
+                                  color: "rgb(97, 97, 97)",
+                                },
+                              }}
+                            />
+                            <Typography
+                              variant="caption"
+                              sx={{
+                                color: "rgb(97, 97, 97)",
+                                fontSize: "12px",
+                              }}
+                            >
+                              {search.time}
+                            </Typography>
+                          </ListItem>
+                        ))}
+                      </List>
+                    </Box>
+                  </SearchPopover>
+                </>
               )}
             </SearchContainer>
           </CenterSection>
