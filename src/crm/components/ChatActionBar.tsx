@@ -423,6 +423,7 @@ export default function ChatActionBar() {
                 </MenuItem>
                 {tabs.map((tab) => (
                   <MenuItem
+                    dense
                     key={tab.id}
                     onClick={() => {
                       setActiveTab(tab.id);
