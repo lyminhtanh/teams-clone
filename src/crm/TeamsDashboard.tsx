@@ -10,6 +10,7 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import TeamsHeader from "./components/TeamsHeader";
 import TeamsSidebar from "./components/TeamsSidebar";
+import ChatActionBar from "./components/ChatActionBar";
 import CrmMainDashboard from "./components/CrmMainDashboard";
 import TeamsCalendarView from "./components/TeamsCalendarView";
 import TeamsActivityView from "./components/TeamsActivityView";
