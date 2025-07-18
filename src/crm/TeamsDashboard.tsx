@@ -12,6 +12,7 @@ import TeamsHeader from "./components/TeamsHeader";
 import TeamsSidebar from "./components/TeamsSidebar";
 import CrmMainDashboard from "./components/CrmMainDashboard";
 import TeamsCalendarView from "./components/TeamsCalendarView";
+import TeamsActivityView from "./components/TeamsActivityView";
 import Customers from "./pages/Customers";
 import CustomersIndividual from "./pages/CustomersIndividual";
 import CustomersCorporate from "./pages/CustomersCorporate";
@@ -76,8 +77,8 @@ export default function TeamsDashboard() {
                 }}
               >
                 <Routes>
-                  <Route index element={<CrmMainDashboard />} />
-                  <Route path="activity" element={<div>Activity Feed</div>} />
+                  <Route index element={<TeamsActivityView />} />
+                  <Route path="activity" element={<TeamsActivityView />} />
                   <Route path="chat" element={<div>Chat Interface</div>} />
                   <Route path="calendar" element={<TeamsCalendarView />} />
                   <Route path="calls" element={<div>Calls History</div>} />
