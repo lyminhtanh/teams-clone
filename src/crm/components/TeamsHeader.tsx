@@ -544,6 +544,15 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
     if (isMobile && !mobileSearchExpanded) {
       // On mobile, first click expands the search bar
       setMobileSearchExpanded(true);
+      // Auto-focus the input after expansion
+      setTimeout(() => {
+        const searchInput = document.querySelector(
+          'input[type="search"]',
+        ) as HTMLInputElement;
+        if (searchInput) {
+          searchInput.focus();
+        }
+      }, 100);
     } else {
       // Second click or desktop behavior opens the search popover
       setSearchOpen(!searchOpen);
@@ -1250,7 +1259,7 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
                 <HeaderButton
                   type="button"
                   aria-haspopup="menu"
-                  aria-label="Cài đặt và tùy ch����n khác"
+                  aria-label="Cài đặt và tùy ch���n khác"
                 >
                   <span
                     style={{
