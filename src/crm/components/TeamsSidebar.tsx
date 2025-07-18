@@ -17,13 +17,17 @@ export default function TeamsSidebar() {
   const [activeSection, setActiveSection] = useState("dashboard");
   const { isOpen } = useMenu();
 
+  const { toggleMenu, openMenu, closeMenu } = useMenu();
+
   const handleSectionChange = (sectionId: string) => {
     if (activeSection === sectionId && isOpen) {
       // If clicking the same section and sidebar is open, close it
       setActiveSection("");
+      closeMenu();
     } else {
       // Otherwise, open the new section
       setActiveSection(sectionId);
+      openMenu();
     }
   };
 
