@@ -658,9 +658,13 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
                         backgroundColor: "rgba(0, 0, 0, 0.04)",
                       },
                     }}
-                    aria-label="Search"
+                    aria-label={mobileSearchExpanded ? "Back" : "Search"}
                   >
-                    <Search size={20} color="rgb(97, 97, 97)" />
+                    {mobileSearchExpanded ? (
+                      <ArrowLeft size={20} color="rgb(97, 97, 97)" />
+                    ) : (
+                      <Search size={20} color="rgb(97, 97, 97)" />
+                    )}
                   </IconButton>
                 </Box>
               ) : (
