@@ -4,8 +4,10 @@ import React, {
   useState,
   useCallback,
   ReactNode,
+  useEffect,
 } from "react";
 import { MenuContextType } from "../types/menuTypes";
+import { useResponsiveMenu } from "../hooks/useResponsiveMenu";
 
 const MenuContext = createContext<MenuContextType | undefined>(undefined);
 
