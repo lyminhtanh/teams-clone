@@ -24,9 +24,9 @@ const SIDEBAR_WIDTH = 320;
 const SIDEBAR_COLLAPSED_WIDTH = 0;
 
 const StyledDrawer = styled(Drawer, {
-  shouldForwardProp: (prop) => prop !== "isOpen",
-})<{ isOpen: boolean }>(({ theme, isOpen }) => ({
-  width: isOpen ? SIDEBAR_WIDTH : SIDEBAR_COLLAPSED_WIDTH,
+  shouldForwardProp: (prop) => prop !== "isOpen" && prop !== "menuWidth",
+})<{ isOpen: boolean; menuWidth: number }>(({ theme, isOpen, menuWidth }) => ({
+  width: isOpen ? menuWidth : SIDEBAR_COLLAPSED_WIDTH,
   flexShrink: 0,
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
@@ -34,7 +34,7 @@ const StyledDrawer = styled(Drawer, {
   }),
 
   "& .MuiDrawer-paper": {
-    width: isOpen ? SIDEBAR_WIDTH : SIDEBAR_COLLAPSED_WIDTH,
+    width: isOpen ? menuWidth : SIDEBAR_COLLAPSED_WIDTH,
     boxSizing: "border-box",
     backgroundColor: theme.palette.background.paper,
     borderRight: `1px solid ${theme.palette.divider}`,
@@ -42,7 +42,7 @@ const StyledDrawer = styled(Drawer, {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
-    transform: isOpen ? "translateX(0)" : `translateX(-${SIDEBAR_WIDTH}px)`,
+    transform: isOpen ? "translateX(0)" : `translateX(-${menuWidth}px)`,
     position: "sticky",
     top: 48, // Height of the header
     height: "calc(100vh - 48px)",
