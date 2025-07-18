@@ -21,14 +21,16 @@ export function MenuProvider({ children }: MenuProviderProps) {
   const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
   const [activeItem, setActiveItem] = useState<string | null>(null);
 
-  // Auto-manage menu state based on screen size
+  // Auto-manage menu state based on screen size for Teams layout
   useEffect(() => {
     if (responsive.isMobile) {
       setIsOpen(false);
-    } else if (responsive.isDesktop && !isOpen) {
-      setIsOpen(true);
+    } else if (responsive.isDesktop) {
+      // For Teams layout, default to closed state on desktop
+      // Users can manually open sections they want
+      setIsOpen(false);
     }
-  }, [responsive.isMobile, responsive.isDesktop, isOpen]);
+  }, [responsive.isMobile, responsive.isDesktop]);
 
   const toggleMenu = useCallback(() => {
     setIsOpen((prev) => !prev);
