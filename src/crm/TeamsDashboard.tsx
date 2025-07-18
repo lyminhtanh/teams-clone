@@ -4,10 +4,12 @@ import type {} from "@mui/x-date-pickers/themeAugmentation";
 import type {} from "@mui/x-charts/themeAugmentation";
 import type {} from "@mui/x-data-grid-pro/themeAugmentation";
 import type {} from "@mui/x-tree-view/themeAugmentation";
-import { alpha } from "@mui/material/styles";
+import { alpha, useTheme } from "@mui/material/styles";
+import { useMediaQuery, Drawer, IconButton, Backdrop } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
+import { ChartNoAxesGantt } from "lucide-react";
 import TeamsHeader from "./components/TeamsHeader";
 import TeamsSidebar from "./components/TeamsSidebar";
 import ChatActionBar from "./components/ChatActionBar";
@@ -41,18 +43,61 @@ const xThemeComponents = {
 };
 
 export default function TeamsDashboard() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+
+  const handleMobileMenuToggle = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  const handleMobileMenuClose = () => {
+    setMobileMenuOpen(false);
+  };
+
   return (
     <AppTheme themeComponents={xThemeComponents}>
       <MenuProvider>
         <CssBaseline enableColorScheme />
         <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
           {/* Teams Header */}
-          <TeamsHeader />
+          <TeamsHeader
+            isMobile={isMobile}
+            onMobileMenuToggle={handleMobileMenuToggle}
+          />
 
           {/* Main Layout */}
           <Box sx={{ display: "flex", flex: 1, overflow: "hidden" }}>
-            {/* Teams Sidebar */}
-            <TeamsSidebar />
+            {/* Desktop Sidebar */}
+            {!isMobile && <TeamsSidebar />}
+
+            {/* Mobile Floating Sidebar */}
+            {isMobile && (
+              <>
+                <Backdrop
+                  open={mobileMenuOpen}
+                  onClick={handleMobileMenuClose}
+                  sx={{ zIndex: theme.zIndex.drawer - 1 }}
+                />
+                <Drawer
+                  anchor="right"
+                  open={mobileMenuOpen}
+                  onClose={handleMobileMenuClose}
+                  variant="temporary"
+                  sx={{
+                    "& .MuiDrawer-paper": {
+                      top: "48px",
+                      height: "calc(100vh - 48px)",
+                      width: "auto",
+                      border: "none",
+                      boxShadow: theme.shadows[8],
+                    },
+                  }}
+                >
+                  <TeamsSidebar />
+                </Drawer>
+              </>
+            )}
 
             {/* Main content */}
             <Box
