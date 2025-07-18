@@ -11,6 +11,7 @@ import Stack from "@mui/material/Stack";
 import TeamsHeader from "./components/TeamsHeader";
 import TeamsSidebar from "./components/TeamsSidebar";
 import CrmMainDashboard from "./components/CrmMainDashboard";
+import TeamsCalendarView from "./components/TeamsCalendarView";
 import Customers from "./pages/Customers";
 import CustomersIndividual from "./pages/CustomersIndividual";
 import CustomersCorporate from "./pages/CustomersCorporate";
@@ -75,79 +76,14 @@ export default function TeamsDashboard() {
               >
                 <Routes>
                   <Route index element={<CrmMainDashboard />} />
-                  <Route path="customers/*" element={<Customers />} />
-                  <Route
-                    path="customers/individual"
-                    element={<CustomersIndividual />}
-                  />
-                  <Route
-                    path="customers/corporate"
-                    element={<CustomersCorporate />}
-                  />
-                  <Route path="deals/*" element={<Deals />} />
-                  <Route
-                    path="deals/analytics"
-                    element={<div>Sales Analytics Page</div>}
-                  />
-                  <Route
-                    path="deals/forecasting"
-                    element={<div>Sales Forecasting Page</div>}
-                  />
-                  <Route path="contacts" element={<Contacts />} />
-                  <Route path="tasks/*" element={<Tasks />} />
-                  <Route
-                    path="tasks/calendar"
-                    element={<div>Calendar Page</div>}
-                  />
-                  <Route
-                    path="tasks/emails"
-                    element={<div>Email Management Page</div>}
-                  />
-                  <Route
-                    path="tasks/reminders"
-                    element={<div>Reminders Page</div>}
-                  />
-                  <Route path="reports" element={<Reports />} />
-                  <Route path="settings/*" element={<Settings />} />
-                  <Route
-                    path="settings/general"
-                    element={<div>General Settings Page</div>}
-                  />
-                  <Route
-                    path="settings/security"
-                    element={<div>Security Settings Page</div>}
-                  />
-                  <Route
-                    path="settings/billing"
-                    element={<div>Billing & Plans Page</div>}
-                  />
-                  <Route
-                    path="settings/integrations"
-                    element={<div>Integrations Page</div>}
-                  />
-                  <Route path="help/*" element={<div>Help Section</div>} />
-                  <Route
-                    path="help/docs"
-                    element={<div>Documentation Page</div>}
-                  />
-                  <Route
-                    path="help/support"
-                    element={<div>Contact Support Page</div>}
-                  />
-                  <Route
-                    path="help/feedback"
-                    element={<div>Send Feedback Page</div>}
-                  />
-                  <Route
-                    path="help/bugs"
-                    element={<div>Report Bug Page</div>}
-                  />
-
-                  {/* Teams-style pages */}
+                  <Route path="activity" element={<div>Activity Feed</div>} />
                   <Route path="chat" element={<div>Chat Interface</div>} />
-                  <Route path="calendar" element={<div>Calendar View</div>} />
+                  <Route path="calendar" element={<TeamsCalendarView />} />
                   <Route path="calls" element={<div>Calls History</div>} />
+                  <Route path="customers" element={<Customers />} />
                   <Route path="files" element={<div>File Manager</div>} />
+                  <Route path="reports" element={<Reports />} />
+                  <Route path="settings" element={<Settings />} />
                 </Routes>
                 <Outlet />
               </Stack>
