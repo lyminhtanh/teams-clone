@@ -88,6 +88,16 @@
   animation: teams-slide-in 0.25s ease-out;
 }
 
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
 /* Teams-style loading shimmer */
 @keyframes teams-shimmer {
   0% {
