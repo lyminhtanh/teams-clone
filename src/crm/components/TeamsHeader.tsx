@@ -1252,7 +1252,7 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
                         whiteSpace: "nowrap",
                       }}
                     >
-                      <MoreHorizontal size={20} />
+                      <Megaphone size={20} />
                     </span>
                   </span>
                 </HeaderButton>
