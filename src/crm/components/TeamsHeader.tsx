@@ -906,40 +906,20 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
             )}
           </LeftSection>
 
-                    {/* Center Section - Search */}
+          {/* Center Section - Search */}
           <CenterSection ref={searchRef}>
             {!isMobile || mobileSearchExpanded ? (
               <SearchContainer onClick={handleSearchToggle}>
-              <Box
-                component="form"
-                role="search"
-                sx={{
-                  alignItems: "center",
-                  borderRadius: "4px",
-                  color: "rgb(66, 66, 66)",
-                  display: "flex",
-                  fontFamily:
-                    '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
-                  textAlign: "left",
-                  textWrap: "nowrap",
-                  userSelect: "none",
-                  whiteSpace: "nowrap",
-                  width: "100%",
-                }}
-              >
-                <SearchButton aria-hidden="true" type="button" tabIndex={-1}>
-                  <Search size={20} />
-                </SearchButton>
                 <Box
+                  component="form"
+                  role="search"
                   sx={{
-                    borderColor: "rgb(36, 36, 36)",
-                    color: "rgb(36, 36, 36)",
+                    alignItems: "center",
+                    borderRadius: "4px",
+                    color: "rgb(66, 66, 66)",
                     display: "flex",
                     fontFamily:
                       '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
-                    height: "100%",
-                    overflowX: "hidden",
-                    overflowY: "auto",
                     textAlign: "left",
                     textWrap: "nowrap",
                     userSelect: "none",
@@ -947,6 +927,9 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
                     width: "100%",
                   }}
                 >
+                  <SearchButton aria-hidden="true" type="button" tabIndex={-1}>
+                    <Search size={20} />
+                  </SearchButton>
                   <Box
                     sx={{
                       borderColor: "rgb(36, 36, 36)",
@@ -954,6 +937,7 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
                       display: "flex",
                       fontFamily:
                         '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                      height: "100%",
                       overflowX: "hidden",
                       overflowY: "auto",
                       textAlign: "left",
@@ -964,18 +948,14 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
                     }}
                   >
                     <Box
-                      role="presentation"
                       sx={{
-                        alignItems: "center",
                         borderColor: "rgb(36, 36, 36)",
                         color: "rgb(36, 36, 36)",
                         display: "flex",
-                        flexBasis: "0px",
-                        flexGrow: 1,
                         fontFamily:
                           '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
-                        justifyContent: "center",
-                        position: "relative",
+                        overflowX: "hidden",
+                        overflowY: "auto",
                         textAlign: "left",
                         textWrap: "nowrap",
                         userSelect: "none",
@@ -984,13 +964,18 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
                       }}
                     >
                       <Box
+                        role="presentation"
                         sx={{
+                          alignItems: "center",
                           borderColor: "rgb(36, 36, 36)",
                           color: "rgb(36, 36, 36)",
                           display: "flex",
+                          flexBasis: "0px",
+                          flexGrow: 1,
                           fontFamily:
                             '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
-                          height: "100%",
+                          justifyContent: "center",
+                          position: "relative",
                           textAlign: "left",
                           textWrap: "nowrap",
                           userSelect: "none",
@@ -1002,12 +987,10 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
                           sx={{
                             borderColor: "rgb(36, 36, 36)",
                             color: "rgb(36, 36, 36)",
+                            display: "flex",
                             fontFamily:
                               '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
-                            overflowX: "auto",
-                            overflowY: "hidden",
-                            position: "relative",
-                            scrollbarWidth: "none",
+                            height: "100%",
                             textAlign: "left",
                             textWrap: "nowrap",
                             userSelect: "none",
@@ -1015,162 +998,205 @@ export default function TeamsHeader(props: TeamsHeaderProps = {}) {
                             width: "100%",
                           }}
                         >
-                          <input
-                            aria-autocomplete="list"
-                            aria-expanded="false"
-                            aria-haspopup="listbox"
-                            aria-required="false"
-                            autoComplete="off"
-                            maxLength={150}
-                            placeholder="Tìm kiếm (⌥ ⌘ E)"
-                            role="combobox"
-                            type="search"
-                            spellCheck="false"
-                            value={searchValue}
-                            onChange={(e) => setSearchValue(e.target.value)}
-                            style={{
-                              appearance: "textfield",
-                              border: "none",
+                          <Box
+                            sx={{
+                              borderColor: "rgb(36, 36, 36)",
                               color: "rgb(36, 36, 36)",
-                              cursor: "text",
-                              display: "flex",
                               fontFamily:
                                 '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
-                              height: "100%",
-                              lineHeight: "16.1px",
-                              outline: "none",
-                              outlineOffset: "-2px",
-                              overflowX: "clip",
-                              overflowY: "clip",
-                              paddingBottom: "8px",
-                              paddingLeft: "8px",
-                              paddingRight: "2px",
-                              paddingTop: "8px",
+                              overflowX: "auto",
+                              overflowY: "hidden",
+                              position: "relative",
+                              scrollbarWidth: "none",
+                              textAlign: "left",
                               textWrap: "nowrap",
-                              userSelect: "text",
+                              userSelect: "none",
                               whiteSpace: "nowrap",
                               width: "100%",
-                              zIndex: 2,
-                              backgroundColor: "transparent",
                             }}
-                          />
+                          >
+                            <input
+                              aria-autocomplete="list"
+                              aria-expanded="false"
+                              aria-haspopup="listbox"
+                              aria-required="false"
+                              autoComplete="off"
+                              maxLength={150}
+                              placeholder="Tìm kiếm (⌥ ⌘ E)"
+                              role="combobox"
+                              type="search"
+                              spellCheck="false"
+                              value={searchValue}
+                              onChange={(e) => setSearchValue(e.target.value)}
+                              style={{
+                                appearance: "textfield",
+                                border: "none",
+                                color: "rgb(36, 36, 36)",
+                                cursor: "text",
+                                display: "flex",
+                                fontFamily:
+                                  '-apple-system, "system-ui", "Segoe UI", system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif',
+                                height: "100%",
+                                lineHeight: "16.1px",
+                                outline: "none",
+                                outlineOffset: "-2px",
+                                overflowX: "clip",
+                                overflowY: "clip",
+                                paddingBottom: "8px",
+                                paddingLeft: "8px",
+                                paddingRight: "2px",
+                                paddingTop: "8px",
+                                textWrap: "nowrap",
+                                userSelect: "text",
+                                whiteSpace: "nowrap",
+                                width: "100%",
+                                zIndex: 2,
+                                backgroundColor: "transparent",
+                              }}
+                            />
+                          </Box>
                         </Box>
                       </Box>
                     </Box>
                   </Box>
+                  <button type="submit" hidden style={{ display: "none" }} />
                 </Box>
-                <button type="submit" hidden style={{ display: "none" }} />
-              </Box>
 
-              {/* Search Popover */}
-              {searchOpen && (
-                <>
-                  <SearchPopover isMobile={isMobile}>
-                    <Box
-                      sx={{ padding: "16px", height: "100%", overflow: "auto" }}
-                    >
-                      {/* Search Categories */}
-                      <Box sx={{ marginBottom: "16px" }}>
-                        <Box
-                          sx={{ display: "flex", gap: "8px", flexWrap: "wrap" }}
-                        >
-                          {searchCategories.map((category) => (
-                            <Chip
-                              key={category}
-                              label={category}
-                              size="small"
-                              sx={{
-                                backgroundColor: "rgb(245, 245, 245)",
-                                color: "rgb(36, 36, 36)",
-                                border: "1px solid rgb(224, 224, 224)",
-                                "&:hover": {
-                                  backgroundColor: "rgb(240, 240, 240)",
-                                },
-                              }}
-                            />
-                          ))}
-                        </Box>
-                      </Box>
-
-                      {/* Recent Searches */}
-                      <Typography
-                        variant="subtitle2"
+                {/* Search Popover */}
+                {searchOpen && (
+                  <>
+                    <SearchPopover isMobile={isMobile}>
+                      <Box
                         sx={{
-                          color: "rgb(97, 97, 97)",
-                          fontSize: "12px",
-                          fontWeight: 600,
-                          marginBottom: "8px",
-                          textTransform: "uppercase",
+                          padding: "16px",
+                          height: "100%",
+                          overflow: "auto",
                         }}
                       >
-                        Thứ được đề xuất
-                      </Typography>
-
-                      <List sx={{ padding: 0 }}>
-                        {recentSearches.map((search, index) => (
-                          <ListItem
-                            key={index}
+                        {/* Search Categories */}
+                        <Box sx={{ marginBottom: "16px" }}>
+                          <Box
                             sx={{
-                              padding: "8px 0",
-                              cursor: "pointer",
-                              "&:hover": {
-                                backgroundColor: "rgba(0, 0, 0, 0.04)",
-                              },
+                              display: "flex",
+                              gap: "8px",
+                              flexWrap: "wrap",
                             }}
                           >
-                            <ListItemIcon sx={{ minWidth: "40px" }}>
-                              <Box
+                            {searchCategories.map((category) => (
+                              <Chip
+                                key={category}
+                                label={category}
+                                size="small"
                                 sx={{
-                                  width: "28px",
-                                  height: "28px",
-                                  borderRadius: "50%",
-                                  backgroundColor:
-                                    search.type === "TL"
-                                      ? "rgb(235, 153, 153)"
-                                      : "rgb(153, 153, 235)",
-                                  display: "flex",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                                  color: "white",
-                                  fontSize: "12px",
-                                  fontWeight: 600,
-                                }}
-                              >
-                                {search.type}
-                              </Box>
-                            </ListItemIcon>
-                            <ListItemText
-                              primary={search.content}
-                              secondary={search.user}
-                              sx={{
-                                "& .MuiListItemText-primary": {
-                                  fontSize: "14px",
+                                  backgroundColor: "rgb(245, 245, 245)",
                                   color: "rgb(36, 36, 36)",
-                                  fontWeight: 400,
-                                },
-                                "& .MuiListItemText-secondary": {
-                                  fontSize: "12px",
-                                  color: "rgb(97, 97, 97)",
-                                },
-                              }}
-                            />
-                            <Typography
-                              variant="caption"
+                                  border: "1px solid rgb(224, 224, 224)",
+                                  "&:hover": {
+                                    backgroundColor: "rgb(240, 240, 240)",
+                                  },
+                                }}
+                              />
+                            ))}
+                          </Box>
+                        </Box>
+
+                        {/* Recent Searches */}
+                        <Typography
+                          variant="subtitle2"
+                          sx={{
+                            color: "rgb(97, 97, 97)",
+                            fontSize: "12px",
+                            fontWeight: 600,
+                            marginBottom: "8px",
+                            textTransform: "uppercase",
+                          }}
+                        >
+                          Thứ được đề xuất
+                        </Typography>
+
+                        <List sx={{ padding: 0 }}>
+                          {recentSearches.map((search, index) => (
+                            <ListItem
+                              key={index}
                               sx={{
-                                color: "rgb(97, 97, 97)",
-                                fontSize: "12px",
+                                padding: "8px 0",
+                                cursor: "pointer",
+                                "&:hover": {
+                                  backgroundColor: "rgba(0, 0, 0, 0.04)",
+                                },
                               }}
                             >
-                              {search.time}
-                            </Typography>
-                          </ListItem>
-                        ))}
-                      </List>
-                    </Box>
-                  </SearchPopover>
-                </>
-              )}
-            </SearchContainer>
+                              <ListItemIcon sx={{ minWidth: "40px" }}>
+                                <Box
+                                  sx={{
+                                    width: "28px",
+                                    height: "28px",
+                                    borderRadius: "50%",
+                                    backgroundColor:
+                                      search.type === "TL"
+                                        ? "rgb(235, 153, 153)"
+                                        : "rgb(153, 153, 235)",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    color: "white",
+                                    fontSize: "12px",
+                                    fontWeight: 600,
+                                  }}
+                                >
+                                  {search.type}
+                                </Box>
+                              </ListItemIcon>
+                              <ListItemText
+                                primary={search.content}
+                                secondary={search.user}
+                                sx={{
+                                  "& .MuiListItemText-primary": {
+                                    fontSize: "14px",
+                                    color: "rgb(36, 36, 36)",
+                                    fontWeight: 400,
+                                  },
+                                  "& .MuiListItemText-secondary": {
+                                    fontSize: "12px",
+                                    color: "rgb(97, 97, 97)",
+                                  },
+                                }}
+                              />
+                              <Typography
+                                variant="caption"
+                                sx={{
+                                  color: "rgb(97, 97, 97)",
+                                  fontSize: "12px",
+                                }}
+                              >
+                                {search.time}
+                              </Typography>
+                            </ListItem>
+                          ))}
+                        </List>
+                      </Box>
+                    </SearchPopover>
+                  </>
+                )}
+              </SearchContainer>
+            ) : (
+              // Mobile compact search - just search icon
+              <IconButton
+                onClick={handleSearchToggle}
+                sx={{
+                  width: 32,
+                  height: 32,
+                  borderRadius: "4px",
+                  backgroundColor: "rgb(250, 250, 250)",
+                  border: "1px solid rgb(224, 224, 224)",
+                  "&:hover": {
+                    backgroundColor: "rgba(0, 0, 0, 0.04)",
+                  },
+                }}
+              >
+                <Search size={20} color="rgb(97, 97, 97)" />
+              </IconButton>
+            )}
           </CenterSection>
 
           {/* Right Section */}
