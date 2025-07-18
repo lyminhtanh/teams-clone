@@ -388,10 +388,10 @@ export default function ChatActionBar() {
                 aria-label="Xem thêm tùy chọn"
                 onClick={handleMobileMenuOpen}
               >
-                                <Megaphone size={20} />
+                <Megaphone size={20} />
               </ActionButton>
 
-                            <Menu
+              <Menu
                 open={mobileMenuOpen}
                 anchorEl={mobileMenuAnchorEl}
                 onClose={handleMobileMenuClose}
@@ -405,35 +405,34 @@ export default function ChatActionBar() {
                 }}
                 slotProps={{
                   paper: {
-                    sx: { minWidth: 180 }
-                  }
+                    sx: { minWidth: 180 },
+                  },
                 }}
               >
-                  <MenuItem onClick={handleMobileMenuClose}>
-                    <List size={16} style={{ marginRight: 8 }} />
-                    Chi tiết cuộc họp
+                <MenuItem onClick={handleMobileMenuClose}>
+                  <List size={16} style={{ marginRight: 8 }} />
+                  Chi tiết cuộc họp
+                </MenuItem>
+                <MenuItem onClick={handleMobileMenuClose}>
+                  <Search size={16} style={{ marginRight: 8 }} />
+                  Tìm trong cuộc tr�� chuyện
+                </MenuItem>
+                <MenuItem onClick={handleMobileMenuClose}>
+                  <PanelRightOpen size={16} style={{ marginRight: 8 }} />
+                  Mở chi tiết cuộc trò chuyện
+                </MenuItem>
+                {tabs.map((tab) => (
+                  <MenuItem
+                    key={tab.id}
+                    onClick={() => {
+                      setActiveTab(tab.id);
+                      handleMobileMenuClose();
+                    }}
+                  >
+                    {tab.label}
                   </MenuItem>
-                  <MenuItem onClick={handleMobileMenuClose}>
-                    <Search size={16} style={{ marginRight: 8 }} />
-                    Tìm trong cuộc tr�� chuyện
-                  </MenuItem>
-                  <MenuItem onClick={handleMobileMenuClose}>
-                    <PanelRightOpen size={16} style={{ marginRight: 8 }} />
-                    Mở chi tiết cuộc trò chuyện
-                  </MenuItem>
-                  {tabs.map((tab) => (
-                    <MenuItem
-                      key={tab.id}
-                      onClick={() => {
-                        setActiveTab(tab.id);
-                        handleMobileMenuClose();
-                      }}
-                    >
-                      {tab.label}
-                    </MenuItem>
-                  ))}
-                </MenuList>
-              </Popover>
+                ))}
+              </Menu>
             </Box>
           )}
         </ActionsContainer>
