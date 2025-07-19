@@ -4,6 +4,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import TeamsDashboard from "./crm/TeamsDashboard";
+import { TeamsDashboard as NewTeamsDashboard } from "./components/teams";
 
 function NotFound() {
   return (
