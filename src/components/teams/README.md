@@ -18,16 +18,25 @@ function App() {
 
 ```
 teams/
-├── components/           # Core UI components
+├── ui/                  # 🎨 Atomic UI Design System
+│   ├── buttons/                 # Button atoms (ActionButton, PrimaryButton, BackButton)
+│   ├── indicators/              # Badge and status atoms (Badge, LiveIndicator)
+│   ├── typography/              # Text atoms (Title with ellipsis support)
+│   ├── tabs/                    # Tab navigation atoms (Tab, TabList)
+│   ├── layout/                  # Layout container atoms (ActionBar, ActionBarRow, ActionBarSection)
+│   ├── menus/                   # Menu atoms (MoreMenu, ActionMenu)
+│   ├── index.ts                 # Main UI exports
+│   └── README.md                # UI Design System Documentation
+├── components/          # Core UI components (built with atomic components)
 │   ├── TeamsHeader.tsx          # Top navigation bar
 │   ├── TeamsSidebar.tsx         # Main sidebar container
 │   ├── TeamsSecondarySidebar.tsx # Expandable secondary sidebar
 │   ├── TeamsIconRail.tsx        # Left icon navigation rail
-│   ├── ChatActionBar.tsx        # Chat-specific action bar
+│   ├── ChatActionBar.tsx        # Chat-specific action bar (refactored with atomic components)
 │   └── MenuConfigDialog.tsx     # Menu configuration dialog
 ├── views/               # Main view components
 │   ├── TeamsActivityView.tsx    # Activity feed view
-│   └── TeamsCalendarView.tsx    # Calendar view
+���   └── TeamsCalendarView.tsx    # Calendar view
 ├── context/             # React contexts
 │   └── MenuContext.tsx          # Menu state management
 ├── hooks/               # Custom hooks
