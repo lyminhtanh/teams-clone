@@ -106,10 +106,12 @@ const TitleText = styled(Typography, {
   overflow: "hidden",
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
+  maxWidth: isMobile ? "200px" : "300px",
   "@media (max-width: 640px)": {
     paddingTop: "3px",
     fontSize: "14px",
     lineHeight: "20px",
+    maxWidth: "150px",
   },
 }));
 
