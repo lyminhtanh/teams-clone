@@ -47,7 +47,7 @@ teams/
 ├── types/               # TypeScript types
 │   └── menuTypes.ts             # Menu-related types
 ├── styles/              # CSS styling
-│   ├── teamsEnhanced.css        # Enhanced styling
+│   ├��─ teamsEnhanced.css        # Enhanced styling
 │   └── teamsExact.css           # Exact Teams styling
 ├── TeamsDashboard.tsx   # Main dashboard component
 ├── index.ts             # Public API exports
@@ -63,8 +63,72 @@ teams/
 - **🔷 TypeScript**: Full type safety with comprehensive interfaces
 - **🎨 Material-UI**: Built on top of MUI components with custom styling
 - **🔄 Context Management**: Efficient state management
-- **�� Accessibility**: ARIA compliant and keyboard navigable
+- **♿ Accessibility**: ARIA compliant and keyboard navigable
 - **🧩 Component Composition**: Build complex UIs from simple atomic components
+
+## 🎨 UI Design System
+
+The Teams components are built on top of a comprehensive **Atomic UI Design System** that provides reusable, composable components. See the [UI Design System Documentation](./ui/README.md) for detailed information.
+
+### Quick UI Examples
+
+```tsx
+// Import atomic components
+import {
+  ActionBar,
+  ActionBarRow,
+  ActionBarSection,
+  ActionButton,
+  PrimaryButton,
+  BackButton,
+  Title,
+  Tab,
+  TabList,
+  Badge,
+  MoreMenu,
+} from "components/teams/ui";
+
+// Build a complete action bar
+function CustomActionBar() {
+  return (
+    <ActionBar variant="elevated" size="normal" sticky>
+      <ActionBarRow justify="between" align="center">
+        <ActionBarSection variant="start" flex={1}>
+          <BackButton onClick={handleBack} />
+          <Title variant="compact" showTooltip>
+            Meeting Title
+          </Title>
+        </ActionBarSection>
+
+        <ActionBarSection variant="end">
+          <PrimaryButton color="teams">Join</PrimaryButton>
+          <ActionButton icon={Search} label="Search" />
+          <MoreMenu items={menuItems} />
+        </ActionBarSection>
+      </ActionBarRow>
+
+      <ActionBarRow>
+        <TabList spacing="normal">
+          <Tab active badge={5}>
+            Chat
+          </Tab>
+          <Tab showLive>Files</Tab>
+          <Tab>Summary</Tab>
+        </TabList>
+      </ActionBarRow>
+    </ActionBar>
+  );
+}
+```
+
+### Available Atomic Components
+
+- **Buttons**: `ActionButton`, `PrimaryButton`, `BackButton`
+- **Indicators**: `Badge` (count, dot, live variants)
+- **Typography**: `Title` (with ellipsis and tooltip support)
+- **Tabs**: `Tab`, `TabList` (with badge and live indicator support)
+- **Layout**: `ActionBar`, `ActionBarRow`, `ActionBarSection`
+- **Menus**: `MoreMenu` (three-dot overflow menu)
 
 ## 🔧 Components
 
