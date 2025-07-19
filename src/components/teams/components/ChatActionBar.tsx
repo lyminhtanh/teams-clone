@@ -10,6 +10,7 @@ import {
   MenuItem,
   MenuList,
   Tooltip,
+  Badge,
 } from "@mui/material";
 import {
   Calendar,
@@ -46,11 +47,13 @@ const ActionBarContent = styled(Box)(({ theme }) => ({
   lineHeight: "20px",
 }));
 
-const TopRow = styled(Box)(({ theme }) => ({
+const TopRow = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "isMobile",
+})<{ isMobile?: boolean }>(({ theme, isMobile }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  marginBottom: "8px",
+  marginBottom: isMobile ? "4px" : "8px",
 }));
 
 const LeftSection = styled(Box)(({ theme }) => ({
@@ -86,11 +89,13 @@ const CompactTitle = styled(Typography)(({ theme }) => ({
   minWidth: 0,
 }));
 
-const TabsRow = styled(Box)(({ theme }) => ({
+const TabsRow = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "isMobile",
+})<{ isMobile?: boolean }>(({ theme, isMobile }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  marginLeft: "44px", // Align with title (back button width + margin)
+  marginLeft: isMobile ? "44px" : "44px", // Align with title (back button width + margin)
 }));
 
 const TabsContainer = styled(Box)(({ theme }) => ({
@@ -138,6 +143,16 @@ const MainButton = styled(Button)(({ theme }) => ({
   },
 }));
 
+const ActionButton = styled(IconButton)(({ theme }) => ({
+  color: "rgb(97, 97, 97)",
+  height: "32px",
+  width: "32px",
+  padding: "4px",
+  "&:hover": {
+    backgroundColor: "rgba(0, 0, 0, 0.04)",
+  },
+}));
+
 const CompactMoreButton = styled(IconButton)(({ theme }) => ({
   color: "rgb(97, 97, 97)",
   height: "32px",
@@ -148,9 +163,56 @@ const CompactMoreButton = styled(IconButton)(({ theme }) => ({
   },
 }));
 
+const TabBadge = styled(Box)(({ theme }) => ({
+  position: "absolute",
+  top: "-2px",
+  right: "-8px",
+  backgroundColor: "rgb(196, 49, 75)",
+  color: "white",
+  borderRadius: "10px",
+  fontSize: "10px",
+  fontWeight: 600,
+  minWidth: "16px",
+  height: "16px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  padding: "0 4px",
+}));
+
+const LiveDot = styled(Box)(({ theme }) => ({
+  position: "absolute",
+  top: "2px",
+  right: "-4px",
+  width: "8px",
+  height: "8px",
+  borderRadius: "50%",
+  backgroundColor: "rgb(196, 49, 75)",
+  animation: "pulse 2s infinite",
+  "@keyframes pulse": {
+    "0%": {
+      transform: "scale(0.95)",
+      boxShadow: "0 0 0 0 rgba(196, 49, 75, 0.7)",
+    },
+    "70%": {
+      transform: "scale(1)",
+      boxShadow: "0 0 0 10px rgba(196, 49, 75, 0)",
+    },
+    "100%": {
+      transform: "scale(0.95)",
+      boxShadow: "0 0 0 0 rgba(196, 49, 75, 0)",
+    },
+  },
+}));
+
+const TabWrapper = styled(Box)(({ theme }) => ({
+  position: "relative",
+  display: "inline-block",
+}));
+
 const tabs = [
-  { id: "chat", label: "Trò chuyện", active: true },
-  { id: "shared", label: "Đã chia sẻ", active: false },
+  { id: "chat", label: "Trò chuyện", active: true, badge: 5 },
+  { id: "shared", label: "Đã chia sẻ", active: false, live: true },
   { id: "recap", label: "Tóm tắt", active: false },
 ];
 
@@ -190,6 +252,12 @@ export default function ChatActionBar() {
     null,
   );
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  // Desktop: show first 3 actions directly, rest in more menu
+  const maxVisibleActions = 3;
+  const visibleActions = actionItems.slice(0, maxVisibleActions);
+  const hiddenActions = actionItems.slice(maxVisibleActions);
 
   const handleMoreMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMoreMenuAnchorEl(event.currentTarget);
@@ -209,8 +277,8 @@ export default function ChatActionBar() {
   return (
     <ActionBarContainer>
       <ActionBarContent>
-        {/* Top Row: Back + Title + Main Button + More Menu */}
-        <TopRow>
+        {/* Top Row: Back + Title + Actions */}
+        <TopRow isMobile={isMobile}>
           <LeftSection>
             <BackButton onClick={handleBackClick} aria-label="Quay lại">
               <ArrowLeft size={20} />
@@ -230,58 +298,96 @@ export default function ChatActionBar() {
           <RightActions>
             <MainButton variant="contained">Tham gia</MainButton>
 
-            <Tooltip title="Xem thêm tùy chọn" placement="bottom" arrow>
-              <CompactMoreButton
-                aria-haspopup="menu"
-                aria-expanded={moreMenuOpen}
-                onClick={handleMoreMenuOpen}
-              >
-                <MoreHorizontal size={20} />
-              </CompactMoreButton>
-            </Tooltip>
+            {/* Desktop: Show individual action icons */}
+            {!isMobile && (
+              <>
+                {visibleActions.map((action) => {
+                  const IconComponent = action.icon;
+                  return (
+                    <Tooltip
+                      key={action.id}
+                      title={action.label}
+                      placement="bottom"
+                      arrow
+                    >
+                      <ActionButton
+                        aria-label={action.ariaLabel}
+                        aria-keyshortcuts={action.keyshortcuts}
+                      >
+                        <IconComponent size={20} />
+                      </ActionButton>
+                    </Tooltip>
+                  );
+                })}
+              </>
+            )}
 
-            <Menu
-              open={moreMenuOpen}
-              anchorEl={moreMenuAnchorEl}
-              onClose={handleMoreMenuClose}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "right",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              slotProps={{
-                paper: {
-                  sx: { minWidth: 200 },
-                },
-              }}
-            >
-              {actionItems.map((action) => {
-                const IconComponent = action.icon;
-                return (
-                  <MenuItem key={action.id} dense onClick={handleMoreMenuClose}>
-                    <IconComponent size={16} style={{ marginRight: 8 }} />
-                    {action.label}
-                  </MenuItem>
-                );
-              })}
-            </Menu>
+            {/* Show more menu if there are hidden actions (desktop) or on mobile */}
+            {((!isMobile && hiddenActions.length > 0) || isMobile) && (
+              <>
+                <Tooltip title="Xem thêm tùy chọn" placement="bottom" arrow>
+                  <CompactMoreButton
+                    aria-haspopup="menu"
+                    aria-expanded={moreMenuOpen}
+                    onClick={handleMoreMenuOpen}
+                  >
+                    <MoreHorizontal size={20} />
+                  </CompactMoreButton>
+                </Tooltip>
+
+                <Menu
+                  open={moreMenuOpen}
+                  anchorEl={moreMenuAnchorEl}
+                  onClose={handleMoreMenuClose}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "right",
+                  }}
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  slotProps={{
+                    paper: {
+                      sx: { minWidth: 200 },
+                    },
+                  }}
+                >
+                  {(isMobile ? actionItems : hiddenActions).map((action) => {
+                    const IconComponent = action.icon;
+                    return (
+                      <MenuItem
+                        key={action.id}
+                        dense
+                        onClick={handleMoreMenuClose}
+                      >
+                        <IconComponent size={16} style={{ marginRight: 8 }} />
+                        {action.label}
+                      </MenuItem>
+                    );
+                  })}
+                </Menu>
+              </>
+            )}
           </RightActions>
         </TopRow>
 
         {/* Bottom Row: Tabs */}
-        <TabsRow>
+        <TabsRow isMobile={isMobile}>
           <TabsContainer>
             {tabs.map((tab) => (
-              <CompactTab
-                key={tab.id}
-                active={activeTab === tab.id}
-                onClick={() => setActiveTab(tab.id)}
-              >
-                {tab.label}
-              </CompactTab>
+              <TabWrapper key={tab.id}>
+                <CompactTab
+                  active={activeTab === tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                >
+                  {tab.label}
+                </CompactTab>
+                {tab.badge && tab.badge > 0 && (
+                  <TabBadge>{tab.badge > 99 ? "99+" : tab.badge}</TabBadge>
+                )}
+                {tab.live && <LiveDot />}
+              </TabWrapper>
             ))}
           </TabsContainer>
         </TabsRow>
