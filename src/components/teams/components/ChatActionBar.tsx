@@ -102,7 +102,7 @@ const TitleText = styled(Typography, {
   fontWeight: 700,
   fontSize: isMobile ? "12px" : "18px",
   lineHeight: isMobile ? "16px" : "26px",
-  marginLeft: "2px",
+  padding: isMobile ? "0 10px 0 2px" : "0 20px 0 2px",
   overflow: "hidden",
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
