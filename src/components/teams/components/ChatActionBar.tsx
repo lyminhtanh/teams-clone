@@ -244,6 +244,20 @@ const ParticipantButton = styled(Button)(({ theme }) => ({
   },
 }));
 
+const MobileBackButton = styled(IconButton)(({ theme }) => ({
+  color: "rgb(87, 90, 178)",
+  fontSize: "20px",
+  fontWeight: 600,
+  height: "32px",
+  width: "32px",
+  minWidth: "32px",
+  padding: "6px",
+  marginRight: "8px",
+  "&:hover": {
+    backgroundColor: "rgba(87, 90, 178, 0.04)",
+  },
+}));
+
 const tabs = [
   { id: "chat", label: "Trò chuyện", active: true },
   { id: "shared", label: "Đã chia sẻ", active: false },
