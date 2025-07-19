@@ -419,49 +419,68 @@ export default function ChatActionBar() {
         >
           {!isMobile ? (
             <>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  marginRight: "8px",
-                }}
-              />
+              {/* Visible action buttons */}
+              {visibleActions.map((action) => {
+                const IconComponent = action.icon;
+                return (
+                  <ActionButton
+                    key={action.id}
+                    type="button"
+                    aria-label={action.ariaLabel}
+                    aria-keyshortcuts={action.keyshortcuts}
+                  >
+                    <IconComponent size={20} />
+                  </ActionButton>
+                );
+              })}
 
-              <ActionButton type="button" aria-label="Chi tiết cuộc họp">
-                <List size={20} />
-              </ActionButton>
+              {/* More menu if there are hidden actions */}
+              {hiddenActions.length > 0 && (
+                <Box sx={{ position: "relative" }}>
+                  <ActionButton
+                    type="button"
+                    aria-haspopup="menu"
+                    aria-label="Xem thêm tùy chọn trò chuyện"
+                    aria-expanded={moreMenuOpen}
+                    onClick={handleMoreMenuOpen}
+                  >
+                    <MoreHorizontal size={20} />
+                  </ActionButton>
 
-              <Box
-                role="presentation"
-                aria-label="Tính năng Ngăn bên"
-                sx={{ display: "flex" }}
-              >
-                <ActionButton
-                  type="button"
-                  aria-label="Tìm trong cuộc trò chuyện (⌘ F)"
-                  aria-keyshortcuts="⌘ F"
-                >
-                  <Search size={20} />
-                </ActionButton>
-
-                <ActionButton
-                  type="button"
-                  aria-label="Mở chi tiết cuộc trò chuyện (⌃ ⌘ E)"
-                  aria-keyshortcuts="⌃ ⌘ E"
-                >
-                  <PanelRightOpen size={20} />
-                </ActionButton>
-              </Box>
-
-              <Box sx={{ position: "relative" }}>
-                <ActionButton
-                  type="button"
-                  aria-haspopup="menu"
-                  aria-label="Xem thêm tùy chọn trò chuyện"
-                >
-                  <MoreHorizontal size={20} />
-                </ActionButton>
-              </Box>
+                  <Menu
+                    open={moreMenuOpen}
+                    anchorEl={moreMenuAnchorEl}
+                    onClose={handleMoreMenuClose}
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "right",
+                    }}
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    slotProps={{
+                      paper: {
+                        sx: { minWidth: 200 },
+                      },
+                    }}
+                  >
+                    {hiddenActions.map((action) => {
+                      const IconComponent = action.icon;
+                      return (
+                        <MenuItem
+                          key={action.id}
+                          dense
+                          onClick={handleMoreMenuClose}
+                        >
+                          <IconComponent size={16} style={{ marginRight: 8 }} />
+                          {action.label}
+                        </MenuItem>
+                      );
+                    })}
+                  </Menu>
+                </Box>
+              )}
             </>
           ) : (
             <Box sx={{ position: "relative" }}>
@@ -469,6 +488,7 @@ export default function ChatActionBar() {
                 type="button"
                 aria-haspopup="menu"
                 aria-label="Xem thêm tùy chọn"
+                aria-expanded={mobileMenuOpen}
                 onClick={handleMobileMenuOpen}
               >
                 <MoreHorizontal size={20} />
@@ -492,18 +512,20 @@ export default function ChatActionBar() {
                   },
                 }}
               >
-                <MenuItem dense onClick={handleMobileMenuClose}>
-                  <List size={16} style={{ marginRight: 8 }} />
-                  Chi tiết cuộc họp
-                </MenuItem>
-                <MenuItem dense onClick={handleMobileMenuClose}>
-                  <Search size={16} style={{ marginRight: 8 }} />
-                  Tìm trong cuộc trò chuyện
-                </MenuItem>
-                <MenuItem dense onClick={handleMobileMenuClose}>
-                  <PanelRightOpen size={16} style={{ marginRight: 8 }} />
-                  Mở chi tiết cuộc trò chuyện
-                </MenuItem>
+                {actionItems.map((action) => {
+                  const IconComponent = action.icon;
+                  return (
+                    <MenuItem
+                      key={action.id}
+                      dense
+                      onClick={handleMobileMenuClose}
+                    >
+                      <IconComponent size={16} style={{ marginRight: 8 }} />
+                      {action.label}
+                    </MenuItem>
+                  );
+                })}
+                <Divider />
                 {tabs.map((tab) => (
                   <MenuItem
                     dense
