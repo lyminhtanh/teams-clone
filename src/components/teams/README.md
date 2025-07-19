@@ -36,7 +36,7 @@ teams/
 │   └── MenuConfigDialog.tsx     # Menu configuration dialog
 ├── views/               # Main view components
 │   ├── TeamsActivityView.tsx    # Activity feed view
-���   └── TeamsCalendarView.tsx    # Calendar view
+│   └── TeamsCalendarView.tsx    # Calendar view
 ├── context/             # React contexts
 │   └── MenuContext.tsx          # Menu state management
 ├── hooks/               # Custom hooks
@@ -56,13 +56,15 @@ teams/
 
 ## 🎯 Key Features
 
-- **Responsive Design**: Works on desktop, tablet, and mobile
-- **Configurable Menu**: Drag-and-drop menu customization
-- **Teams-like UI**: Exact Microsoft Teams styling and behavior
-- **TypeScript**: Full type safety
-- **Material-UI**: Built on top of MUI components
-- **Context Management**: Efficient state management
-- **Accessibility**: ARIA compliant and keyboard navigable
+- **🎨 Atomic UI Design System**: Reusable atomic components following design principles
+- **📱 Responsive Design**: Works on desktop, tablet, and mobile
+- **⚙️ Configurable Menu**: Drag-and-drop menu customization
+- **🎯 Teams-like UI**: Exact Microsoft Teams styling and behavior
+- **🔷 TypeScript**: Full type safety with comprehensive interfaces
+- **🎨 Material-UI**: Built on top of MUI components with custom styling
+- **🔄 Context Management**: Efficient state management
+- **�� Accessibility**: ARIA compliant and keyboard navigable
+- **🧩 Component Composition**: Build complex UIs from simple atomic components
 
 ## 🔧 Components
 
