@@ -805,7 +805,7 @@ export default function TeamsSecondarySidebar({
 
   return (
     <SecondaryContainer isVisible={isOpen}>
-      {renderContent()}
+      // {renderContent()}
     </SecondaryContainer>
   );
 }
