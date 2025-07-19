@@ -346,12 +346,13 @@ export default function ChatActionBar() {
               <TitleSection isMobile={false}>
                 <TitleContainer>
                   <Tooltip
-                    title="Hop dong chu dau tu tu"
+                    title="Hop dong chu dau tu tu Hop dong chu dau tu tuHop dong chu dau tu tu"
                     placement="bottom-start"
                     arrow
                   >
                     <TitleText component="h2" isMobile={false}>
-                      Hop dong chu dau tu tu
+                      Hop dong chu dau tu tu Hop dong chu dau tu tuHop dong chu
+                      dau tu tu
                     </TitleText>
                   </Tooltip>
                 </TitleContainer>
