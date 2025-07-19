@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import TeamsDashboard from "./crm/TeamsDashboard";
 import { TeamsDashboard as NewTeamsDashboard } from "./components/teams";
 import "./components/teams/styles/teamsEnhanced.css";
 import "./components/teams/styles/teamsExact.css";
@@ -34,8 +33,7 @@ export default function App() {
     <BrowserRouter>
       <CssBaseline enableColorScheme />
       <Routes>
-        <Route path="/teams/*" element={<NewTeamsDashboard />} />
-        <Route path="/*" element={<TeamsDashboard />} />
+        <Route path="/*" element={<NewTeamsDashboard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
