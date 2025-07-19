@@ -264,10 +264,43 @@ const tabs = [
   { id: "recap", label: "Tóm tắt", active: false },
 ];
 
+const actionItems = [
+  {
+    id: "details",
+    icon: List,
+    label: "Chi tiết cuộc họp",
+    ariaLabel: "Chi tiết cuộc họp",
+  },
+  {
+    id: "search",
+    icon: Search,
+    label: "Tìm trong cuộc trò chuyện",
+    ariaLabel: "Tìm trong cuộc trò chuyện (⌘ F)",
+    keyshortcuts: "⌘ F",
+  },
+  {
+    id: "panel",
+    icon: PanelRightOpen,
+    label: "Mở chi tiết cuộc trò chuyện",
+    ariaLabel: "Mở chi tiết cuộc trò chuyện (⌃ ⌘ E)",
+    keyshortcuts: "⌃ ⌘ E",
+  },
+  {
+    id: "users",
+    icon: Users,
+    label: "Thành viên",
+    ariaLabel: "Xem thành viên",
+  },
+  { id: "add", icon: Plus, label: "Thêm mới", ariaLabel: "Thêm mới" },
+];
+
 export default function ChatActionBar() {
   const [activeTab, setActiveTab] = useState("chat");
   const [mobileMenuAnchorEl, setMobileMenuAnchorEl] =
     useState<null | HTMLElement>(null);
+  const [moreMenuAnchorEl, setMoreMenuAnchorEl] = useState<null | HTMLElement>(
+    null,
+  );
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
