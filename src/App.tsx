@@ -5,6 +5,8 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import TeamsDashboard from "./crm/TeamsDashboard";
 import { TeamsDashboard as NewTeamsDashboard } from "./components/teams";
+import "./components/teams/styles/teamsEnhanced.css";
+import "./components/teams/styles/teamsExact.css";
 
 function NotFound() {
   return (
