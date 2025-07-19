@@ -81,16 +81,16 @@ export default function TeamsSidebar({
 
   return (
     <SidebarContainer>
-      // <TeamsIconRail
-      //   activeSection={activeSection}
-      //   onSectionChange={handleSectionChange}
-      // />
-      // {showSecondarySidebar && (
-      //   <TeamsSecondarySidebar
-      //     activeSection={activeSection}
-      //     onMobileClose={onMobileClose}
-      //   />
-      // )}
+      <TeamsIconRail
+        activeSection={activeSection}
+        onSectionChange={handleSectionChange}
+      />
+      {showSecondarySidebar && (
+        <TeamsSecondarySidebar
+          activeSection={activeSection}
+          onMobileClose={onMobileClose}
+        />
+      )}
     </SidebarContainer>
   );
 }
