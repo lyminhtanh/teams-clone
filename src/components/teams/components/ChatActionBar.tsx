@@ -444,15 +444,17 @@ export default function ChatActionBar() {
               {/* More menu if there are hidden actions */}
               {hiddenActions.length > 0 && (
                 <Box sx={{ position: "relative" }}>
-                  <ActionButton
-                    type="button"
-                    aria-haspopup="menu"
-                    aria-label="Xem thêm tùy chọn trò chuyện"
-                    aria-expanded={moreMenuOpen}
-                    onClick={handleMoreMenuOpen}
-                  >
-                    <MoreHorizontal size={20} />
-                  </ActionButton>
+                  <Tooltip title="Xem thêm tùy chọn" placement="bottom" arrow>
+                    <ActionButton
+                      type="button"
+                      aria-haspopup="menu"
+                      aria-label="Xem thêm tùy chọn trò chuyện"
+                      aria-expanded={moreMenuOpen}
+                      onClick={handleMoreMenuOpen}
+                    >
+                      <MoreHorizontal size={20} />
+                    </ActionButton>
+                  </Tooltip>
 
                   <Menu
                     open={moreMenuOpen}
