@@ -345,20 +345,33 @@ export default function ChatActionBar() {
               </LogoContainer>
               <TitleSection isMobile={false}>
                 <TitleContainer>
-                  <TitleText component="h2" isMobile={false}>
-                    Hop dong chu dau tu tu
-                  </TitleText>
+                  <Tooltip
+                    title="Hop dong chu dau tu tu"
+                    placement="bottom-start"
+                    arrow
+                  >
+                    <TitleText component="h2" isMobile={false}>
+                      Hop dong chu dau tu tu
+                    </TitleText>
+                  </Tooltip>
                 </TitleContainer>
               </TitleSection>
             </Box>
           ) : (
-            <TitleText
-              component="h2"
-              isMobile={true}
-              sx={{ fontSize: "20px", fontWeight: 700 }}
-            >
-              Chat
-            </TitleText>
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <MobileBackButton onClick={handleBackClick} aria-label="Quay lại">
+                <ArrowLeft size={20} />
+              </MobileBackButton>
+              <Tooltip title="Chat" placement="bottom-start" arrow>
+                <TitleText
+                  component="h2"
+                  isMobile={true}
+                  sx={{ fontSize: "20px", fontWeight: 700 }}
+                >
+                  Chat
+                </TitleText>
+              </Tooltip>
+            </Box>
           )}
         </LeftSection>
 
