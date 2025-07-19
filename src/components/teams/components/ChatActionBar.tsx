@@ -424,14 +424,20 @@ export default function ChatActionBar() {
               {visibleActions.map((action) => {
                 const IconComponent = action.icon;
                 return (
-                  <ActionButton
+                  <Tooltip
                     key={action.id}
-                    type="button"
-                    aria-label={action.ariaLabel}
-                    aria-keyshortcuts={action.keyshortcuts}
+                    title={action.label}
+                    placement="bottom"
+                    arrow
                   >
-                    <IconComponent size={20} />
-                  </ActionButton>
+                    <ActionButton
+                      type="button"
+                      aria-label={action.ariaLabel}
+                      aria-keyshortcuts={action.keyshortcuts}
+                    >
+                      <IconComponent size={20} />
+                    </ActionButton>
+                  </Tooltip>
                 );
               })}
 
