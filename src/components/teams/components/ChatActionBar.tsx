@@ -312,7 +312,26 @@ export default function ChatActionBar() {
     setMobileMenuAnchorEl(null);
   };
 
+  const handleMoreMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setMoreMenuAnchorEl(event.currentTarget);
+  };
+
+  const handleMoreMenuClose = () => {
+    setMoreMenuAnchorEl(null);
+  };
+
+  const handleBackClick = () => {
+    // Handle back navigation
+    console.log("Back button clicked");
+  };
+
   const mobileMenuOpen = Boolean(mobileMenuAnchorEl);
+  const moreMenuOpen = Boolean(moreMenuAnchorEl);
+
+  // Desktop: show first 3 actions directly, rest in more menu
+  const maxVisibleActions = 3;
+  const visibleActions = actionItems.slice(0, maxVisibleActions);
+  const hiddenActions = actionItems.slice(maxVisibleActions);
 
   return (
     <ActionBarContainer>
