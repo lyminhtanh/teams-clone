@@ -38,6 +38,9 @@ import {
   Info,
   ChevronDown,
   ChevronRight,
+  TestTube,
+  Smartphone,
+  Monitor,
 } from "lucide-react";
 import {
   MenuItem,
