@@ -14,9 +14,15 @@ const PWAInstallPrompt: React.FC = () => {
     }
   }, [isInstallable, isInstalled]);
 
-  const handleInstall = async () => {
-    await installApp();
-    setShowPrompt(false);
+    const handleInstall = async () => {
+    console.log("PWA Install button clicked");
+    try {
+      await installApp();
+      setShowPrompt(false);
+    } catch (error) {
+      console.error("Install failed:", error);
+      // Keep the prompt open if install failed
+    }
   };
 
   const handleDismiss = () => {
