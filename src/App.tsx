@@ -33,7 +33,7 @@ export default function App() {
     <BrowserRouter>
       <CssBaseline enableColorScheme />
       <Routes>
-        <Route path="/*" element={<NewTeamsDashboard />} />
+        <Route path="/*" element={<EnhancedTeamsDashboard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
