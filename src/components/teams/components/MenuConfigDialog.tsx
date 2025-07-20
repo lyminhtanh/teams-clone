@@ -93,6 +93,19 @@ export default function MenuConfigDialog({
   );
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
 
+  // Interface Mode Context
+  const {
+    canaryFlagEnabled,
+    selectedMode,
+    activeMode,
+    detectedMode,
+    setCanaryFlagEnabled,
+    setSelectedMode,
+    isCanaryActive,
+  } = useInterfaceMode();
+
+  const deviceInfo = getDeviceInfo();
+
   // Update local state when props change
   useEffect(() => {
     setLocalMenuItems(menuItems);
