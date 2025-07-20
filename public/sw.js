@@ -9,9 +9,25 @@ const urlsToCache = [
 // Install event
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(urlsToCache);
-    }),
+    caches.open(CACHE_NAME).then(async (cache) => {
+      // Cache files individually with error handling
+      const cachePromises = urlsToCache.map(async (url) => {
+        try {
+          const response = await fetch(url);
+          if (response.ok) {
+            await cache.put(url, response.clone());
+            console.log(`Successfully cached: ${url}`);
+          } else {
+            console.warn(`Failed to cache ${url}: ${response.status} ${response.statusText}`);
+          }
+        } catch (error) {
+          console.warn(`Failed to fetch ${url}:`, error);
+        }
+      });
+      
+      await Promise.all(cachePromises);
+      console.log('Service Worker installation complete');
+    })
   );
 });
 
@@ -21,7 +37,7 @@ self.addEventListener("fetch", (event) => {
     caches.match(event.request).then((response) => {
       // Return cached version or fetch from network
       return response || fetch(event.request);
-    }),
+    })
   );
 });
 
@@ -34,8 +50,8 @@ self.addEventListener("activate", (event) => {
           if (cacheName !== CACHE_NAME) {
             return caches.delete(cacheName);
           }
-        }),
+        })
       );
-    }),
+    })
   );
 });
