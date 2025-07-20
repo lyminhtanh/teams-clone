@@ -61,8 +61,9 @@ export default defineConfig({
       }
     })
   ],
-  server: {
+    server: {
     cors: true,
+    host: true,
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
