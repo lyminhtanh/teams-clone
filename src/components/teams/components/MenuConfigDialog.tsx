@@ -546,6 +546,304 @@ export default function MenuConfigDialog({
               </Box>
             </Box>
           </TabPanel>
+
+          <TabPanel value={activeTab} index={3}>
+            {/* Interface Mode View */}
+            <Box sx={{ p: 3 }}>
+              {/* Canary Flag Warning */}
+              {isCanaryActive && (
+                <Alert
+                  severity="warning"
+                  sx={{ mb: 3 }}
+                  icon={<TestTube size={20} />}
+                >
+                  <Typography variant="body2" fontWeight={600}>
+                    CANARY MODE ACTIVE
+                  </Typography>
+                  <Typography variant="body2">
+                    Interface mode override is enabled. The app is using{" "}
+                    {activeMode.toUpperCase()} interface instead of the detected{" "}
+                    {detectedMode.toUpperCase()} mode.
+                  </Typography>
+                </Alert>
+              )}
+
+              {/* Device Information */}
+              <Paper sx={{ p: 3, mb: 3, backgroundColor: "grey.50" }}>
+                <Typography
+                  variant="h6"
+                  sx={{ mb: 2, display: "flex", alignItems: "center", gap: 1 }}
+                >
+                  <Monitor size={20} />
+                  Device Information
+                </Typography>
+                <Box
+                  sx={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr 1fr",
+                    gap: 2,
+                  }}
+                >
+                  <Box>
+                    <Typography variant="body2" color="text.secondary">
+                      Device Type
+                    </Typography>
+                    <Typography variant="body1" fontWeight={500}>
+                      {deviceInfo.deviceType.toUpperCase()}
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <Typography variant="body2" color="text.secondary">
+                      PWA Mode
+                    </Typography>
+                    <Typography variant="body1" fontWeight={500}>
+                      {deviceInfo.isPWA ? "Yes" : "No"}
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <Typography variant="body2" color="text.secondary">
+                      Detected Mode
+                    </Typography>
+                    <Typography variant="body1" fontWeight={500}>
+                      {detectedMode.toUpperCase()}
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <Typography variant="body2" color="text.secondary">
+                      Active Mode
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      fontWeight={500}
+                      color={isCanaryActive ? "warning.main" : "primary.main"}
+                    >
+                      {activeMode.toUpperCase()}
+                    </Typography>
+                  </Box>
+                </Box>
+              </Paper>
+
+              {/* Canary Flag Control */}
+              <Paper sx={{ p: 3, mb: 3 }}>
+                <Typography
+                  variant="h6"
+                  sx={{ mb: 2, display: "flex", alignItems: "center", gap: 1 }}
+                >
+                  <TestTube size={20} />
+                  Canary Flag Controls
+                </Typography>
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{ mb: 2 }}
+                >
+                  Enable interface mode override to test different mobile
+                  interfaces regardless of your device type.
+                </Typography>
+
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={canaryFlagEnabled}
+                      onChange={(e) => setCanaryFlagEnabled(e.target.checked)}
+                      color="warning"
+                    />
+                  }
+                  label={
+                    <Box>
+                      <Typography variant="body2" fontWeight={500}>
+                        Enable Interface Mode Override
+                      </Typography>
+                      <Typography variant="caption" color="text.secondary">
+                        Override automatic device detection
+                      </Typography>
+                    </Box>
+                  }
+                />
+              </Paper>
+
+              {/* Interface Mode Selection */}
+              {canaryFlagEnabled && (
+                <Paper sx={{ p: 3, mb: 3 }}>
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      mb: 2,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 1,
+                    }}
+                  >
+                    <Smartphone size={20} />
+                    Interface Mode Selection
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    sx={{ mb: 3 }}
+                  >
+                    Choose which interface mode to use. This will override the
+                    automatic detection.
+                  </Typography>
+
+                  <Box
+                    sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+                  >
+                    {[
+                      {
+                        value: "default" as InterfaceMode,
+                        label: "Default Mode",
+                        description:
+                          "Use automatic device detection (normal behavior)",
+                        icon: Monitor,
+                      },
+                      {
+                        value: "ios" as InterfaceMode,
+                        label: "iOS Mode",
+                        description:
+                          "Force iOS-style interface with KonstaUI iOS theme",
+                        icon: Smartphone,
+                      },
+                      {
+                        value: "android" as InterfaceMode,
+                        label: "Android Mode",
+                        description:
+                          "Force Android-style interface with KonstaUI Material theme",
+                        icon: Smartphone,
+                      },
+                    ].map((mode) => (
+                      <Paper
+                        key={mode.value}
+                        sx={{
+                          p: 2,
+                          cursor: "pointer",
+                          border: selectedMode === mode.value ? 2 : 1,
+                          borderColor:
+                            selectedMode === mode.value
+                              ? "primary.main"
+                              : "divider",
+                          backgroundColor:
+                            selectedMode === mode.value
+                              ? "primary.50"
+                              : "transparent",
+                          "&:hover": {
+                            backgroundColor:
+                              selectedMode === mode.value
+                                ? "primary.100"
+                                : "grey.50",
+                          },
+                        }}
+                        onClick={() => setSelectedMode(mode.value)}
+                      >
+                        <Box
+                          sx={{
+                            display: "flex",
+                            alignItems: "flex-start",
+                            gap: 2,
+                          }}
+                        >
+                          <Box
+                            sx={{
+                              p: 1,
+                              borderRadius: 1,
+                              backgroundColor:
+                                selectedMode === mode.value
+                                  ? "primary.main"
+                                  : "grey.200",
+                              color:
+                                selectedMode === mode.value
+                                  ? "white"
+                                  : "text.secondary",
+                            }}
+                          >
+                            <mode.icon size={20} />
+                          </Box>
+                          <Box sx={{ flex: 1 }}>
+                            <Box
+                              sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: 1,
+                                mb: 0.5,
+                              }}
+                            >
+                              <Typography variant="body1" fontWeight={600}>
+                                {mode.label}
+                              </Typography>
+                              {selectedMode === mode.value && (
+                                <Chip
+                                  label="SELECTED"
+                                  size="small"
+                                  color="primary"
+                                  sx={{ fontSize: "0.625rem", height: 20 }}
+                                />
+                              )}
+                            </Box>
+                            <Typography variant="body2" color="text.secondary">
+                              {mode.description}
+                            </Typography>
+                          </Box>
+                        </Box>
+                      </Paper>
+                    ))}
+                  </Box>
+                </Paper>
+              )}
+
+              {/* Current Status */}
+              <Paper
+                sx={{
+                  p: 3,
+                  backgroundColor: isCanaryActive ? "warning.50" : "success.50",
+                }}
+              >
+                <Typography
+                  variant="h6"
+                  sx={{ mb: 2, display: "flex", alignItems: "center", gap: 1 }}
+                >
+                  <Info size={20} />
+                  Current Status
+                </Typography>
+                <Box
+                  sx={{
+                    display: "grid",
+                    gridTemplateColumns: "auto 1fr",
+                    gap: 1,
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography variant="body2" fontWeight={500}>
+                    Mode Override:
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color={canaryFlagEnabled ? "warning.main" : "success.main"}
+                  >
+                    {canaryFlagEnabled ? "ENABLED" : "DISABLED"}
+                  </Typography>
+
+                  <Typography variant="body2" fontWeight={500}>
+                    Selected Mode:
+                  </Typography>
+                  <Typography variant="body2">
+                    {selectedMode.toUpperCase()}
+                  </Typography>
+
+                  <Typography variant="body2" fontWeight={500}>
+                    Active Interface:
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    fontWeight={600}
+                    color={isCanaryActive ? "warning.main" : "primary.main"}
+                  >
+                    {activeMode.toUpperCase()}
+                    {isCanaryActive && " (OVERRIDE)"}
+                  </Typography>
+                </Box>
+              </Paper>
+            </Box>
+          </TabPanel>
         </Box>
       </DialogContent>
 
