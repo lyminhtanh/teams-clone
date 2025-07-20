@@ -75,6 +75,9 @@ const TeamsInterface: React.FC<TeamsDashboardProps> = ({ themeComponents }) => {
 
         {/* Interface Content */}
         {renderInterface()}
+
+        {/* PWA Install Prompt */}
+        <PWAInstallPrompt />
       </Box>
     </MenuProvider>
   );
