@@ -230,6 +230,22 @@ export default function MenuConfigDialog({
           <Tab label="By Category" />
           <Tab label="All Items" />
           <Tab label="Preview" />
+          <Tab
+            label={
+              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                <TestTube size={16} />
+                Interface Mode
+                {canaryFlagEnabled && (
+                  <Chip
+                    label="BETA"
+                    size="small"
+                    color="warning"
+                    sx={{ fontSize: "0.625rem", height: 16 }}
+                  />
+                )}
+              </Box>
+            }
+          />
         </Tabs>
       </Box>
 
