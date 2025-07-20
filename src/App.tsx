@@ -4,7 +4,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import EnhancedTeamsDashboard from "./components/teams/EnhancedTeamsDashboard";
-import PWAInstallPrompt from "./components/PWAInstallPrompt";
 import "./components/teams/styles/teamsEnhanced.css";
 import "./components/teams/styles/teamsExact.css";
 function NotFound() {
@@ -36,7 +35,6 @@ export default function App() {
         <Route path="/*" element={<EnhancedTeamsDashboard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <PWAInstallPrompt />
     </BrowserRouter>
   );
 }
