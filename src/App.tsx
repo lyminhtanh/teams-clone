@@ -36,6 +36,7 @@ export default function App() {
         <Route path="/*" element={<EnhancedTeamsDashboard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <PWAInstallPrompt />
     </BrowserRouter>
   );
 }
