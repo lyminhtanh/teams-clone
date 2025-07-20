@@ -10,6 +10,7 @@ import TeamsDashboard from "./TeamsDashboard";
 import AndroidTeamsDashboard from "./android/AndroidTeamsDashboard";
 import IOSTeamsDashboard from "./ios/IOSTeamsDashboard";
 import { Badge, Box } from "@mui/material";
+import PWAInstallPrompt from "../PWAInstallPrompt";
 
 interface TeamsDashboardProps {
   themeComponents?: any;
