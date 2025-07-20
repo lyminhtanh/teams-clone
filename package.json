@@ -36,6 +36,7 @@
     "@vitejs/plugin-react": "latest",
     "prettier": "3.5.3",
     "typescript": "latest",
-    "vite": "latest"
+    "vite": "latest",
+    "vite-plugin-pwa": "^1.0.0"
   }
 }

@@ -6,7 +6,20 @@ import Box from "@mui/material/Box";
 import EnhancedTeamsDashboard from "./components/teams/EnhancedTeamsDashboard";
 import "./components/teams/styles/teamsEnhanced.css";
 import "./components/teams/styles/teamsExact.css";
+// Add this to your main.jsx or App.jsx
+import { registerSW } from 'virtual:pwa-register'
 
+// Register service worker
+if ('serviceWorker' in navigator) {
+  registerSW({
+    onNeedRefresh() {
+      console.log('New content available, please refresh.');
+    },
+    onOfflineReady() {
+      console.log('App ready to work offline.');
+    },
+  })
+}
 function NotFound() {
   return (
     <Box
