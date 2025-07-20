@@ -8,11 +8,12 @@ export default defineConfig({
   plugins: [
     react(), 
     tailwindcss(),
-            VitePWA({
+                VitePWA({
       registerType: 'autoUpdate',
       devOptions: {
-        enabled: true
+        enabled: false
       },
+      injectRegister: 'auto',
       filename: 'sw.js',
       manifestFilename: 'manifest.webmanifest',
       workbox: {
