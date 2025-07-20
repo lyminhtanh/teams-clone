@@ -48,6 +48,8 @@ import {
   menuCategories,
   defaultMenuItems,
 } from "../data/menuItems";
+import { useInterfaceMode } from "../context/InterfaceModeContext";
+import { InterfaceMode, getDeviceInfo } from "../../../utils/deviceDetection";
 
 interface MenuConfigDialogProps {
   open: boolean;
