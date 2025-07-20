@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import {
   App,
-  View,
+  
   Page,
   Navbar,
   NavbarBackLink,
@@ -40,7 +40,7 @@ const IOSTeamsDashboard: React.FC = () => {
 
   return (
     <App theme="ios" className="h-screen">
-      <View>
+      
         <Page>
           <Navbar
             title="Teams"
@@ -83,7 +83,7 @@ const IOSTeamsDashboard: React.FC = () => {
             ))}
           </Tabbar>
         </Page>
-      </View>
+      
     </App>
   );
 };
